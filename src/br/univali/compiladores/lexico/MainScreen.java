@@ -83,6 +83,13 @@ public class MainScreen extends javax.swing.JFrame
         btOpen.setFocusable(false);
         btOpen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btOpen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btOpen.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btOpenActionPerformed(evt);
+            }
+        });
         jtbToolBar.add(btOpen);
 
         btSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
@@ -281,6 +288,11 @@ public class MainScreen extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btAboutActionPerformed
         JOptionPane.showMessageDialog(null, "Desenvolvido por:\nBianka Passos\nJuliana Sanguinetto");
     }//GEN-LAST:event_btAboutActionPerformed
+
+    private void btOpenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btOpenActionPerformed
+    {//GEN-HEADEREND:event_btOpenActionPerformed
+        fileName = control.openFile(jtaEdit, jtaMessage, this);
+    }//GEN-LAST:event_btOpenActionPerformed
 
     /**
      * @param args the command line arguments

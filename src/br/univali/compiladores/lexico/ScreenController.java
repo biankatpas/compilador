@@ -1,7 +1,10 @@
 package br.univali.compiladores.lexico;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -121,10 +124,24 @@ public class ScreenController
         return file.exists();
     }
     
-    public String openFile(JTextArea jtaEdit)
+    public String openFile(JTextArea jtaEdit, JTextArea jtaMessage, JFrame jf)
     {
         String fileName = "";
-        //informar o nm do arquivo p abrir escrever ele no jta e limpra a area de mensagem
+        try
+        {
+            fileName = JOptionPane.showInputDialog("Nome do arquivo:");
+            fileName+=".djt";
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            jtaEdit.setText(br.readLine());
+            jtaMessage.setText("");
+            jf.setTitle("Compilador - " + fileName);
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return fileName;
     }
 }
