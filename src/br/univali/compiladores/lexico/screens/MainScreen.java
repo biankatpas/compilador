@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.univali.compiladores.lexico;
+package br.univali.compiladores.lexico.screens;
 
 /**
  *
  * @author biankatpas
  */
-public class Screen extends javax.swing.JFrame {
+public class MainScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form Screen
      */
-    public Screen() {
+    public MainScreen() {
         initComponents();
     }
 
@@ -52,6 +47,7 @@ public class Screen extends javax.swing.JFrame {
         jmiSave = new javax.swing.JMenuItem();
         jmiSaveAs = new javax.swing.JMenuItem();
         jmiExit = new javax.swing.JMenuItem();
+        jmiAbout = new javax.swing.JMenuItem();
         jmEdit = new javax.swing.JMenu();
         jmiCopy = new javax.swing.JMenuItem();
         jmiPaste = new javax.swing.JMenuItem();
@@ -59,8 +55,7 @@ public class Screen extends javax.swing.JFrame {
         jmCompile = new javax.swing.JMenu();
         jmiCompile = new javax.swing.JMenuItem();
         jmiRun = new javax.swing.JMenuItem();
-        jmHelp = new javax.swing.JMenu();
-        jmiAbout = new javax.swing.JMenuItem();
+        jmAbout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Compilador");
@@ -156,6 +151,10 @@ public class Screen extends javax.swing.JFrame {
         jmiExit.setText("Sair");
         jmFile.add(jmiExit);
 
+        jmiAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/help.png"))); // NOI18N
+        jmiAbout.setText("Sobre");
+        jmFile.add(jmiAbout);
+
         jmbMenuBar.add(jmFile);
 
         jmEdit.setText("Edição");
@@ -186,13 +185,8 @@ public class Screen extends javax.swing.JFrame {
 
         jmbMenuBar.add(jmCompile);
 
-        jmHelp.setText("Ajuda");
-
-        jmiAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/help.png"))); // NOI18N
-        jmiAbout.setText("Sobre");
-        jmHelp.add(jmiAbout);
-
-        jmbMenuBar.add(jmHelp);
+        jmAbout.setText("Sobre");
+        jmbMenuBar.add(jmAbout);
 
         setJMenuBar(jmbMenuBar);
 
@@ -238,20 +232,21 @@ public class Screen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Screen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Screen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Screen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Screen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Screen().setVisible(true);
+                new MainScreen().setVisible(true);
             }
         });
     }
@@ -267,10 +262,10 @@ public class Screen extends javax.swing.JFrame {
     private javax.swing.JButton btRun;
     private javax.swing.JButton btSave;
     private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JMenu jmAbout;
     private javax.swing.JMenu jmCompile;
     private javax.swing.JMenu jmEdit;
     private javax.swing.JMenu jmFile;
-    private javax.swing.JMenu jmHelp;
     private javax.swing.JMenuBar jmbMenuBar;
     private javax.swing.JMenuItem jmiAbout;
     private javax.swing.JMenuItem jmiCompile;
