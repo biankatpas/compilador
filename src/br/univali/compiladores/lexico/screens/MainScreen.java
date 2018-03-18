@@ -256,26 +256,26 @@ public class MainScreen extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNewActionPerformed
-        control.newFile(jtaEdit, jtaMessage, this, fileName);
+        fileName = control.newFile(jtaEdit, jtaMessage, this, fileName);
     }//GEN-LAST:event_jmiNewActionPerformed
 
     private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
-        control.newFile(jtaEdit, jtaMessage, this, fileName);
+        fileName = control.newFile(jtaEdit, jtaMessage, this, fileName);
     }//GEN-LAST:event_btNewActionPerformed
 
     private void jmiSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiSaveActionPerformed
     {//GEN-HEADEREND:event_jmiSaveActionPerformed
-        control.save(fileName, jtaEdit);
+        fileName = control.save(fileName, jtaEdit, this);
     }//GEN-LAST:event_jmiSaveActionPerformed
 
     private void jmiSaveAsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiSaveAsActionPerformed
     {//GEN-HEADEREND:event_jmiSaveAsActionPerformed
-        control.saveAs(jtaEdit);
+        fileName = control.saveAs(jtaEdit, fileName, this);
     }//GEN-LAST:event_jmiSaveAsActionPerformed
 
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btSaveActionPerformed
     {//GEN-HEADEREND:event_btSaveActionPerformed
-        control.save(fileName, jtaEdit);
+        fileName = control.save(fileName, jtaEdit, this);
     }//GEN-LAST:event_btSaveActionPerformed
 
     /**

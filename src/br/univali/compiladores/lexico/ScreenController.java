@@ -17,7 +17,7 @@ import javax.swing.JTextArea;
 public class ScreenController
 {
 
-    public void newFile(JTextArea jtaEdit, JTextArea jtaMessage, JFrame jf, String fileName)
+    public String newFile(JTextArea jtaEdit, JTextArea jtaMessage, JFrame jf, String fileName)
     {
         if (jtaEdit.getText().equals(""))
         {
@@ -29,24 +29,26 @@ public class ScreenController
         {
             Object[] options = {"Sim", "Não", "Cancelar"};
             int op = JOptionPane.showOptionDialog(null, fileName + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
-            if (op == 1)
+            if (op == 1) //dont save file
             {
                 fileName = "sem nome.djt";
                 jtaEdit.setText("");
                 jtaMessage.setText("");
                 jf.setTitle("Compilador - [sem nome.djt]");
-            }else if (op == 0)
+            }else if (op == 0) //save file
                     {
-                       save(fileName, jtaEdit);
+                       save(fileName, jtaEdit, jf);
                        fileName = "sem nome.djt";
                        jtaEdit.setText("");
                        jtaMessage.setText("");
                        jf.setTitle("Compilador - [sem nome.djt]");
                     }
         }
+        
+        return fileName;
     }
     
-    public void save(String fileName, JTextArea jta)
+    public String save(String fileName, JTextArea jta, JFrame jf)
     {
         try
         {   
@@ -63,17 +65,20 @@ public class ScreenController
                 bw.newLine();
             }
             bw.close();
+            jf.setTitle("Compilador - "+fileName);
         } catch (IOException ex)
         {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return fileName;
     }
     
-    public void saveAs(JTextArea jta)
+    public String saveAs(JTextArea jta, String fileName, JFrame jf)
     {
         try
         {
-            String fileName = JOptionPane.showInputDialog("Nome do arquivo:");
+            fileName = JOptionPane.showInputDialog("Nome do arquivo:");
             fileName+=".djt";
             BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
             Scanner reader = new Scanner(jta.getText());
@@ -83,10 +88,18 @@ public class ScreenController
                 bw.newLine();
             }
             bw.close();
+            jf.setTitle("Compilador - " + fileName);
         }catch (IOException ex)
         {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return fileName;
     }
 
+    public String openFile(JTextArea jtaEdit)
+    {
+        String fileName = "";
+        return fileName;
+    }
 }
