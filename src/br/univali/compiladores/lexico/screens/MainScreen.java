@@ -1,15 +1,19 @@
 package br.univali.compiladores.lexico.screens;
 
+import br.univali.compiladores.lexico.ScreenController;
+
 /**
  *
  * @author biankatpas
  */
-public class MainScreen extends javax.swing.JFrame {
+public class MainScreen extends javax.swing.JFrame
+{
 
-    /**
+     /**
      * Creates new form Screen
      */
-    public MainScreen() {
+    public MainScreen()
+    {
         initComponents();
     }
 
@@ -20,7 +24,8 @@ public class MainScreen extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jtbToolBar = new javax.swing.JToolBar();
         btNew = new javax.swing.JButton();
@@ -66,6 +71,13 @@ public class MainScreen extends javax.swing.JFrame {
         btNew.setFocusable(false);
         btNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btNew.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btNew.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btNewActionPerformed(evt);
+            }
+        });
         jtbToolBar.add(btNew);
 
         btOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/open.png"))); // NOI18N
@@ -78,6 +90,13 @@ public class MainScreen extends javax.swing.JFrame {
         btSave.setFocusable(false);
         btSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btSaveActionPerformed(evt);
+            }
+        });
         jtbToolBar.add(btSave);
         jtbToolBar.add(jsToolBarSeparator1);
 
@@ -133,6 +152,13 @@ public class MainScreen extends javax.swing.JFrame {
 
         jmiNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/new.png"))); // NOI18N
         jmiNew.setText("Novo");
+        jmiNew.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiNewActionPerformed(evt);
+            }
+        });
         jmFile.add(jmiNew);
 
         jmiOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/open.png"))); // NOI18N
@@ -141,10 +167,24 @@ public class MainScreen extends javax.swing.JFrame {
 
         jmiSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         jmiSave.setText("Salvar");
+        jmiSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiSaveActionPerformed(evt);
+            }
+        });
         jmFile.add(jmiSave);
 
         jmiSaveAs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save-as.png"))); // NOI18N
         jmiSaveAs.setText("Salvar como...");
+        jmiSaveAs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiSaveAsActionPerformed(evt);
+            }
+        });
         jmFile.add(jmiSaveAs);
 
         jmiExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
@@ -215,37 +255,70 @@ public class MainScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jmiNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNewActionPerformed
+        control.newFile(jtaEdit, jtaMessage, this, fileName);
+    }//GEN-LAST:event_jmiNewActionPerformed
+
+    private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
+        control.newFile(jtaEdit, jtaMessage, this, fileName);
+    }//GEN-LAST:event_btNewActionPerformed
+
+    private void jmiSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiSaveActionPerformed
+    {//GEN-HEADEREND:event_jmiSaveActionPerformed
+        control.save(fileName, jtaEdit);
+    }//GEN-LAST:event_jmiSaveActionPerformed
+
+    private void jmiSaveAsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiSaveAsActionPerformed
+    {//GEN-HEADEREND:event_jmiSaveAsActionPerformed
+        control.saveAs(jtaEdit);
+    }//GEN-LAST:event_jmiSaveAsActionPerformed
+
+    private void btSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btSaveActionPerformed
+    {//GEN-HEADEREND:event_btSaveActionPerformed
+        control.save(fileName, jtaEdit);
+    }//GEN-LAST:event_btSaveActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new MainScreen().setVisible(true);
             }
         });
@@ -287,4 +360,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTextArea jtaMessage;
     private javax.swing.JToolBar jtbToolBar;
     // End of variables declaration//GEN-END:variables
+    private ScreenController control = new ScreenController();
+    private String fileName = "sem nome.djt";
 }
