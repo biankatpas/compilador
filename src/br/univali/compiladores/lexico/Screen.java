@@ -27,18 +27,19 @@ public class Screen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jsMenuSeparator = new javax.swing.JSeparator();
         jtbToolBar = new javax.swing.JToolBar();
-        jbNew = new javax.swing.JButton();
-        jbOpen = new javax.swing.JButton();
-        jbSave = new javax.swing.JButton();
+        btNew = new javax.swing.JButton();
+        btOpen = new javax.swing.JButton();
+        btSave = new javax.swing.JButton();
         jsToolBarSeparator1 = new javax.swing.JToolBar.Separator();
-        jbCut = new javax.swing.JButton();
-        jbCopy = new javax.swing.JButton();
-        jbPaste = new javax.swing.JButton();
+        btCut = new javax.swing.JButton();
+        btCopy = new javax.swing.JButton();
+        btPaste = new javax.swing.JButton();
         jsToolBarSeparator2 = new javax.swing.JToolBar.Separator();
-        jbCompile = new javax.swing.JButton();
-        jbRun = new javax.swing.JButton();
+        btCompile = new javax.swing.JButton();
+        btRun = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        btAbout = new javax.swing.JButton();
         jspEdit = new javax.swing.JScrollPane();
         jtaEdit = new javax.swing.JTextArea();
         jspMessage = new javax.swing.JScrollPane();
@@ -66,55 +67,62 @@ public class Screen extends javax.swing.JFrame {
 
         jtbToolBar.setFloatable(false);
 
-        jbNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/new.png"))); // NOI18N
-        jbNew.setFocusable(false);
-        jbNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jbNew.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jtbToolBar.add(jbNew);
+        btNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/new.png"))); // NOI18N
+        btNew.setFocusable(false);
+        btNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btNew.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbToolBar.add(btNew);
 
-        jbOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/open.png"))); // NOI18N
-        jbOpen.setFocusable(false);
-        jbOpen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jbOpen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jtbToolBar.add(jbOpen);
+        btOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/open.png"))); // NOI18N
+        btOpen.setFocusable(false);
+        btOpen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btOpen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbToolBar.add(btOpen);
 
-        jbSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
-        jbSave.setFocusable(false);
-        jbSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jbSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jtbToolBar.add(jbSave);
+        btSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
+        btSave.setFocusable(false);
+        btSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbToolBar.add(btSave);
         jtbToolBar.add(jsToolBarSeparator1);
 
-        jbCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cut.png"))); // NOI18N
-        jbCut.setFocusable(false);
-        jbCut.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jbCut.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jtbToolBar.add(jbCut);
+        btCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cut.png"))); // NOI18N
+        btCut.setFocusable(false);
+        btCut.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btCut.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbToolBar.add(btCut);
 
-        jbCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/copy.png"))); // NOI18N
-        jbCopy.setFocusable(false);
-        jbCopy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jbCopy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jtbToolBar.add(jbCopy);
+        btCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/copy.png"))); // NOI18N
+        btCopy.setFocusable(false);
+        btCopy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btCopy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbToolBar.add(btCopy);
 
-        jbPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paste.png"))); // NOI18N
-        jbPaste.setFocusable(false);
-        jbPaste.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jbPaste.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jtbToolBar.add(jbPaste);
+        btPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paste.png"))); // NOI18N
+        btPaste.setFocusable(false);
+        btPaste.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btPaste.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbToolBar.add(btPaste);
         jtbToolBar.add(jsToolBarSeparator2);
 
-        jbCompile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/compile.png"))); // NOI18N
-        jbCompile.setFocusable(false);
-        jbCompile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jbCompile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jtbToolBar.add(jbCompile);
+        btCompile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/compile.png"))); // NOI18N
+        btCompile.setFocusable(false);
+        btCompile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btCompile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbToolBar.add(btCompile);
 
-        jbRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
-        jbRun.setFocusable(false);
-        jbRun.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jbRun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jtbToolBar.add(jbRun);
+        btRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
+        btRun.setFocusable(false);
+        btRun.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btRun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbToolBar.add(btRun);
+        jtbToolBar.add(jSeparator1);
+
+        btAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/help.png"))); // NOI18N
+        btAbout.setFocusable(false);
+        btAbout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btAbout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jtbToolBar.add(btAbout);
 
         jtaEdit.setColumns(20);
         jtaEdit.setLineWrap(true);
@@ -192,20 +200,15 @@ public class Screen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jtbToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 1007, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jsMenuSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
             .addComponent(jspEdit)
             .addComponent(jspMessage)
             .addComponent(jsTextAreaSeparator)
+            .addComponent(jtbToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jsMenuSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtbToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jtbToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jspEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
@@ -254,14 +257,16 @@ public class Screen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jbCompile;
-    private javax.swing.JButton jbCopy;
-    private javax.swing.JButton jbCut;
-    private javax.swing.JButton jbNew;
-    private javax.swing.JButton jbOpen;
-    private javax.swing.JButton jbPaste;
-    private javax.swing.JButton jbRun;
-    private javax.swing.JButton jbSave;
+    private javax.swing.JButton btAbout;
+    private javax.swing.JButton btCompile;
+    private javax.swing.JButton btCopy;
+    private javax.swing.JButton btCut;
+    private javax.swing.JButton btNew;
+    private javax.swing.JButton btOpen;
+    private javax.swing.JButton btPaste;
+    private javax.swing.JButton btRun;
+    private javax.swing.JButton btSave;
+    private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JMenu jmCompile;
     private javax.swing.JMenu jmEdit;
     private javax.swing.JMenu jmFile;
@@ -278,7 +283,6 @@ public class Screen extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiRun;
     private javax.swing.JMenuItem jmiSave;
     private javax.swing.JMenuItem jmiSaveAs;
-    private javax.swing.JSeparator jsMenuSeparator;
     private javax.swing.JSeparator jsTextAreaSeparator;
     private javax.swing.JToolBar.Separator jsToolBarSeparator1;
     private javax.swing.JToolBar.Separator jsToolBarSeparator2;

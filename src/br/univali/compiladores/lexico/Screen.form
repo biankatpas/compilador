@@ -147,23 +147,16 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Component id="jtbToolBar" min="-2" pref="1007" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jsMenuSeparator" pref="1" max="32767" attributes="0"/>
-          </Group>
           <Component id="jspEdit" alignment="0" max="32767" attributes="0"/>
           <Component id="jspMessage" alignment="0" max="32767" attributes="0"/>
           <Component id="jsTextAreaSeparator" alignment="0" max="32767" attributes="0"/>
+          <Component id="jtbToolBar" alignment="0" pref="1014" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jsMenuSeparator" min="-2" pref="10" max="-2" attributes="0"/>
-                  <Component id="jtbToolBar" min="-2" pref="25" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jtbToolBar" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jspEdit" min="-2" pref="487" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
@@ -176,8 +169,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JSeparator" name="jsMenuSeparator">
-    </Component>
     <Container class="javax.swing.JToolBar" name="jtbToolBar">
       <Properties>
         <Property name="floatable" type="boolean" value="false"/>
@@ -185,7 +176,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jbNew">
+        <Component class="javax.swing.JButton" name="btNew">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/new.png"/>
@@ -195,7 +186,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jbOpen">
+        <Component class="javax.swing.JButton" name="btOpen">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/open.png"/>
@@ -205,7 +196,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jbSave">
+        <Component class="javax.swing.JButton" name="btSave">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/save.png"/>
@@ -217,7 +208,7 @@
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jsToolBarSeparator1">
         </Component>
-        <Component class="javax.swing.JButton" name="jbCut">
+        <Component class="javax.swing.JButton" name="btCut">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/cut.png"/>
@@ -227,7 +218,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jbCopy">
+        <Component class="javax.swing.JButton" name="btCopy">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/copy.png"/>
@@ -237,7 +228,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jbPaste">
+        <Component class="javax.swing.JButton" name="btPaste">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/paste.png"/>
@@ -249,7 +240,7 @@
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jsToolBarSeparator2">
         </Component>
-        <Component class="javax.swing.JButton" name="jbCompile">
+        <Component class="javax.swing.JButton" name="btCompile">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/compile.png"/>
@@ -259,10 +250,22 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jbRun">
+        <Component class="javax.swing.JButton" name="btRun">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/run.png"/>
+            </Property>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator1">
+        </Component>
+        <Component class="javax.swing.JButton" name="btAbout">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/help.png"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
