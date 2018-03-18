@@ -128,15 +128,19 @@ public class Screen extends javax.swing.JFrame {
 
         jmFile.setText("Arquivo");
 
+        jmiNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/new.png"))); // NOI18N
         jmiNew.setText("Novo");
         jmFile.add(jmiNew);
 
+        jmiOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/open.png"))); // NOI18N
         jmiOpen.setText("Abrir");
         jmFile.add(jmiOpen);
 
+        jmiSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         jmiSave.setText("Salvar");
         jmFile.add(jmiSave);
 
+        jmiSaveAs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         jmiSaveAs.setText("Salvar como...");
         jmFile.add(jmiSaveAs);
 
@@ -147,12 +151,15 @@ public class Screen extends javax.swing.JFrame {
 
         jmEdit.setText("Edição");
 
+        jmiCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/copy.png"))); // NOI18N
         jmiCopy.setText("Copiar");
         jmEdit.add(jmiCopy);
 
+        jmiPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paste.png"))); // NOI18N
         jmiPaste.setText("Colar");
         jmEdit.add(jmiPaste);
 
+        jmiCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cut.png"))); // NOI18N
         jmiCut.setText("Recortar");
         jmEdit.add(jmiCut);
 
@@ -160,9 +167,11 @@ public class Screen extends javax.swing.JFrame {
 
         jmCompile.setText("Compilação");
 
+        jmiCompile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/compile.png"))); // NOI18N
         jmiCompile.setText("Compilar");
         jmCompile.add(jmiCompile);
 
+        jmiRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
         jmiRun.setText("Executar");
         jmCompile.add(jmiRun);
 
