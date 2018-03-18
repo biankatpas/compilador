@@ -140,10 +140,11 @@ public class Screen extends javax.swing.JFrame {
         jmiSave.setText("Salvar");
         jmFile.add(jmiSave);
 
-        jmiSaveAs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
+        jmiSaveAs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save-as.png"))); // NOI18N
         jmiSaveAs.setText("Salvar como...");
         jmFile.add(jmiSaveAs);
 
+        jmiExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         jmiExit.setText("Sair");
         jmFile.add(jmiExit);
 
@@ -179,6 +180,7 @@ public class Screen extends javax.swing.JFrame {
 
         jmHelp.setText("Ajuda");
 
+        jmiAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/help.png"))); // NOI18N
         jmiAbout.setText("Sobre");
         jmHelp.add(jmiAbout);
 
