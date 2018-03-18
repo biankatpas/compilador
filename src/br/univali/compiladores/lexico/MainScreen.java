@@ -176,6 +176,13 @@ public class MainScreen extends javax.swing.JFrame
 
         jmiOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/open.png"))); // NOI18N
         jmiOpen.setText("Abrir");
+        jmiOpen.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiOpenActionPerformed(evt);
+            }
+        });
         jmFile.add(jmiOpen);
 
         jmiSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
@@ -293,6 +300,12 @@ public class MainScreen extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btOpenActionPerformed
         fileName = control.openFile(jtaEdit, jtaMessage, this);
     }//GEN-LAST:event_btOpenActionPerformed
+
+    private void jmiOpenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiOpenActionPerformed
+    {//GEN-HEADEREND:event_jmiOpenActionPerformed
+        // TODO add your handling code here:
+        fileName = control.openFile(jtaEdit, jtaMessage, this);
+    }//GEN-LAST:event_jmiOpenActionPerformed
 
     /**
      * @param args the command line arguments
