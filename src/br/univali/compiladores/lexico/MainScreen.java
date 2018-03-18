@@ -1,6 +1,7 @@
-package br.univali.compiladores.lexico.screens;
+package br.univali.compiladores.lexico;
 
 import br.univali.compiladores.lexico.ScreenController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,7 +53,6 @@ public class MainScreen extends javax.swing.JFrame
         jmiSave = new javax.swing.JMenuItem();
         jmiSaveAs = new javax.swing.JMenuItem();
         jmiExit = new javax.swing.JMenuItem();
-        jmiAbout = new javax.swing.JMenuItem();
         jmEdit = new javax.swing.JMenu();
         jmiCopy = new javax.swing.JMenuItem();
         jmiPaste = new javax.swing.JMenuItem();
@@ -60,7 +60,6 @@ public class MainScreen extends javax.swing.JFrame
         jmCompile = new javax.swing.JMenu();
         jmiCompile = new javax.swing.JMenuItem();
         jmiRun = new javax.swing.JMenuItem();
-        jmAbout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Compilador");
@@ -136,6 +135,13 @@ public class MainScreen extends javax.swing.JFrame
         btAbout.setFocusable(false);
         btAbout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btAbout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btAbout.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btAboutActionPerformed(evt);
+            }
+        });
         jtbToolBar.add(btAbout);
 
         jtaEdit.setColumns(20);
@@ -191,10 +197,6 @@ public class MainScreen extends javax.swing.JFrame
         jmiExit.setText("Sair");
         jmFile.add(jmiExit);
 
-        jmiAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/help.png"))); // NOI18N
-        jmiAbout.setText("Sobre");
-        jmFile.add(jmiAbout);
-
         jmbMenuBar.add(jmFile);
 
         jmEdit.setText("Edição");
@@ -224,9 +226,6 @@ public class MainScreen extends javax.swing.JFrame
         jmCompile.add(jmiRun);
 
         jmbMenuBar.add(jmCompile);
-
-        jmAbout.setText("Sobre");
-        jmbMenuBar.add(jmAbout);
 
         setJMenuBar(jmbMenuBar);
 
@@ -277,6 +276,11 @@ public class MainScreen extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btSaveActionPerformed
         fileName = control.save(fileName, jtaEdit, this);
     }//GEN-LAST:event_btSaveActionPerformed
+
+    private void btAboutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btAboutActionPerformed
+    {//GEN-HEADEREND:event_btAboutActionPerformed
+        JOptionPane.showMessageDialog(null, "Desenvolvido por:\nBianka Passos\nJuliana Sanguinetto");
+    }//GEN-LAST:event_btAboutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,12 +339,10 @@ public class MainScreen extends javax.swing.JFrame
     private javax.swing.JButton btRun;
     private javax.swing.JButton btSave;
     private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JMenu jmAbout;
     private javax.swing.JMenu jmCompile;
     private javax.swing.JMenu jmEdit;
     private javax.swing.JMenu jmFile;
     private javax.swing.JMenuBar jmbMenuBar;
-    private javax.swing.JMenuItem jmiAbout;
     private javax.swing.JMenuItem jmiCompile;
     private javax.swing.JMenuItem jmiCopy;
     private javax.swing.JMenuItem jmiCut;

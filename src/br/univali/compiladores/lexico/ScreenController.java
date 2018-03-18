@@ -1,6 +1,7 @@
 package br.univali.compiladores.lexico;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -54,8 +55,12 @@ public class ScreenController
         {   
             if (fileName.equalsIgnoreCase("sem nome.djt"))
             {
-                 fileName = JOptionPane.showInputDialog("Nome do arquivo:");
-                 fileName+=".djt";
+                 String message = "Nome do arquivo: ";
+                 do{
+                    fileName = JOptionPane.showInputDialog(message);
+                    fileName+=".djt";
+                    if(exists(fileName)) message = "O arquivo já existe. Informe um novo nome.";
+                 }while(exists(fileName));
             }
             BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
             Scanner reader = new Scanner(jta.getText());
@@ -78,8 +83,13 @@ public class ScreenController
     {
         try
         {
-            fileName = JOptionPane.showInputDialog("Nome do arquivo:");
-            fileName+=".djt";
+            String message = "Nome do arquivo: ";
+            do{
+                 fileName = JOptionPane.showInputDialog(message);
+                 fileName+=".djt";
+                 if(exists(fileName)) message = "O arquivo já existe. Informe um novo nome.";
+            }while(exists(fileName));
+           
             BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
             Scanner reader = new Scanner(jta.getText());
             while(reader.hasNextLine())
@@ -96,10 +106,25 @@ public class ScreenController
         
         return fileName;
     }
-
+    
+    public boolean isEdited(JTextArea jta, String fileName)
+    {
+        boolean edited = false;
+        //abre o arquivo e comparada kd linha com as linhas do text area, se alguma linha mudou break e return true
+        
+        return edited;
+    }
+    
+    public boolean exists(String fileName)
+    {
+        File file = new File(fileName);
+        return file.exists();
+    }
+    
     public String openFile(JTextArea jtaEdit)
     {
         String fileName = "";
+        //informar o nm do arquivo p abrir escrever ele no jta e limpra a area de mensagem
         return fileName;
     }
 }
