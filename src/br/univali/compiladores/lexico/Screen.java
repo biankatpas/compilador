@@ -39,6 +39,11 @@ public class Screen extends javax.swing.JFrame {
         jsToolBarSeparator2 = new javax.swing.JToolBar.Separator();
         jbCompile = new javax.swing.JButton();
         jbRun = new javax.swing.JButton();
+        jspEdit = new javax.swing.JScrollPane();
+        jtaEdit = new javax.swing.JTextArea();
+        jspMessage = new javax.swing.JScrollPane();
+        jtaMessage = new javax.swing.JTextArea();
+        jsTextAreaSeparator = new javax.swing.JSeparator();
         jmbMenuBar = new javax.swing.JMenuBar();
         jmFile = new javax.swing.JMenu();
         jmiNew = new javax.swing.JMenuItem();
@@ -111,6 +116,16 @@ public class Screen extends javax.swing.JFrame {
         jbRun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jtbToolBar.add(jbRun);
 
+        jtaEdit.setColumns(20);
+        jtaEdit.setLineWrap(true);
+        jtaEdit.setRows(5);
+        jspEdit.setViewportView(jtaEdit);
+
+        jtaMessage.setColumns(20);
+        jtaMessage.setLineWrap(true);
+        jtaMessage.setRows(5);
+        jspMessage.setViewportView(jtaMessage);
+
         jmFile.setText("Arquivo");
 
         jmiNew.setText("Novo");
@@ -170,6 +185,9 @@ public class Screen extends javax.swing.JFrame {
                 .addComponent(jtbToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 1007, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jsMenuSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
+            .addComponent(jspEdit)
+            .addComponent(jspMessage)
+            .addComponent(jsTextAreaSeparator)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +195,13 @@ public class Screen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jsMenuSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtbToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 420, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jspEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(jsTextAreaSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jspMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -244,8 +268,13 @@ public class Screen extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiSave;
     private javax.swing.JMenuItem jmiSaveAs;
     private javax.swing.JSeparator jsMenuSeparator;
+    private javax.swing.JSeparator jsTextAreaSeparator;
     private javax.swing.JToolBar.Separator jsToolBarSeparator1;
     private javax.swing.JToolBar.Separator jsToolBarSeparator2;
+    private javax.swing.JScrollPane jspEdit;
+    private javax.swing.JScrollPane jspMessage;
+    private javax.swing.JTextArea jtaEdit;
+    private javax.swing.JTextArea jtaMessage;
     private javax.swing.JToolBar jtbToolBar;
     // End of variables declaration//GEN-END:variables
 }
