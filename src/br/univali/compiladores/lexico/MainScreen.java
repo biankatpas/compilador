@@ -66,6 +66,7 @@ public class MainScreen extends javax.swing.JFrame
         jtbToolBar.setFloatable(false);
 
         btNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/new.png"))); // NOI18N
+        btNew.setToolTipText("Novo");
         btNew.setFocusable(false);
         btNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btNew.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -79,6 +80,7 @@ public class MainScreen extends javax.swing.JFrame
         jtbToolBar.add(btNew);
 
         btOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/open.png"))); // NOI18N
+        btOpen.setToolTipText("Abrir");
         btOpen.setFocusable(false);
         btOpen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btOpen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -92,6 +94,7 @@ public class MainScreen extends javax.swing.JFrame
         jtbToolBar.add(btOpen);
 
         btSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
+        btSave.setToolTipText("Salvar");
         btSave.setFocusable(false);
         btSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -106,6 +109,7 @@ public class MainScreen extends javax.swing.JFrame
         jtbToolBar.add(jsToolBarSeparator1);
 
         btCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cut.png"))); // NOI18N
+        btCut.setToolTipText("Recortar");
         btCut.setFocusable(false);
         btCut.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCut.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -119,6 +123,7 @@ public class MainScreen extends javax.swing.JFrame
         jtbToolBar.add(btCut);
 
         btCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/copy.png"))); // NOI18N
+        btCopy.setToolTipText("Copiar");
         btCopy.setFocusable(false);
         btCopy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCopy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -132,6 +137,7 @@ public class MainScreen extends javax.swing.JFrame
         jtbToolBar.add(btCopy);
 
         btPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paste.png"))); // NOI18N
+        btPaste.setToolTipText("Colar");
         btPaste.setFocusable(false);
         btPaste.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btPaste.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -146,12 +152,14 @@ public class MainScreen extends javax.swing.JFrame
         jtbToolBar.add(jsToolBarSeparator2);
 
         btCompile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/compile.png"))); // NOI18N
+        btCompile.setToolTipText("Compilar");
         btCompile.setFocusable(false);
         btCompile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCompile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jtbToolBar.add(btCompile);
 
         btRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
+        btRun.setToolTipText("Executar");
         btRun.setFocusable(false);
         btRun.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btRun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -159,6 +167,7 @@ public class MainScreen extends javax.swing.JFrame
         jtbToolBar.add(jSeparator1);
 
         btAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/help.png"))); // NOI18N
+        btAbout.setToolTipText("Sobre");
         btAbout.setFocusable(false);
         btAbout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btAbout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
