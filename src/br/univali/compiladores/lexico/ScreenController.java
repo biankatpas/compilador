@@ -183,4 +183,24 @@ public class ScreenController
         }
         return fileName;
     }
+    
+    public void about()
+    {
+        JOptionPane.showMessageDialog(null, "Desenvolvido por:\nBianka Passos\nJuliana Sanguinetto");
+    }
+    
+    public void cut(JTextArea jta)
+    {
+        jta.cut();
+    }
+    
+    public void copy(JTextArea jta)
+    {
+        jta.copy();
+    }
+    
+    public void paste(JTextArea jta)
+    {
+        jta.paste();
+    }
 }

@@ -1,6 +1,5 @@
 package br.univali.compiladores.lexico;
 
-import br.univali.compiladores.lexico.ScreenController;
 import javax.swing.JOptionPane;
 
 /**
@@ -110,18 +109,39 @@ public class MainScreen extends javax.swing.JFrame
         btCut.setFocusable(false);
         btCut.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCut.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btCut.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btCutActionPerformed(evt);
+            }
+        });
         jtbToolBar.add(btCut);
 
         btCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/copy.png"))); // NOI18N
         btCopy.setFocusable(false);
         btCopy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCopy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btCopy.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btCopyActionPerformed(evt);
+            }
+        });
         jtbToolBar.add(btCopy);
 
         btPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paste.png"))); // NOI18N
         btPaste.setFocusable(false);
         btPaste.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btPaste.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btPaste.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btPasteActionPerformed(evt);
+            }
+        });
         jtbToolBar.add(btPaste);
         jtbToolBar.add(jsToolBarSeparator2);
 
@@ -217,14 +237,35 @@ public class MainScreen extends javax.swing.JFrame
 
         jmiCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/copy.png"))); // NOI18N
         jmiCopy.setText("Copiar");
+        jmiCopy.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiCopyActionPerformed(evt);
+            }
+        });
         jmEdit.add(jmiCopy);
 
         jmiPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paste.png"))); // NOI18N
         jmiPaste.setText("Colar");
+        jmiPaste.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiPasteActionPerformed(evt);
+            }
+        });
         jmEdit.add(jmiPaste);
 
         jmiCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cut.png"))); // NOI18N
         jmiCut.setText("Recortar");
+        jmiCut.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiCutActionPerformed(evt);
+            }
+        });
         jmEdit.add(jmiCut);
 
         jmbMenuBar.add(jmEdit);
@@ -293,7 +334,7 @@ public class MainScreen extends javax.swing.JFrame
 
     private void btAboutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btAboutActionPerformed
     {//GEN-HEADEREND:event_btAboutActionPerformed
-        JOptionPane.showMessageDialog(null, "Desenvolvido por:\nBianka Passos\nJuliana Sanguinetto");
+        control.about();
     }//GEN-LAST:event_btAboutActionPerformed
 
     private void btOpenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btOpenActionPerformed
@@ -306,6 +347,36 @@ public class MainScreen extends javax.swing.JFrame
         // TODO add your handling code here:
         fileName = control.openFile(jtaEdit, jtaMessage, this);
     }//GEN-LAST:event_jmiOpenActionPerformed
+
+    private void jmiCopyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiCopyActionPerformed
+    {//GEN-HEADEREND:event_jmiCopyActionPerformed
+        control.copy(jtaEdit);
+    }//GEN-LAST:event_jmiCopyActionPerformed
+
+    private void jmiPasteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiPasteActionPerformed
+    {//GEN-HEADEREND:event_jmiPasteActionPerformed
+        control.paste(jtaEdit);
+    }//GEN-LAST:event_jmiPasteActionPerformed
+
+    private void jmiCutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiCutActionPerformed
+    {//GEN-HEADEREND:event_jmiCutActionPerformed
+        control.cut(jtaEdit);
+    }//GEN-LAST:event_jmiCutActionPerformed
+
+    private void btCutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btCutActionPerformed
+    {//GEN-HEADEREND:event_btCutActionPerformed
+        control.cut(jtaEdit);
+    }//GEN-LAST:event_btCutActionPerformed
+
+    private void btCopyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btCopyActionPerformed
+    {//GEN-HEADEREND:event_btCopyActionPerformed
+        control.copy(jtaEdit);
+    }//GEN-LAST:event_btCopyActionPerformed
+
+    private void btPasteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btPasteActionPerformed
+    {//GEN-HEADEREND:event_btPasteActionPerformed
+        control.paste(jtaEdit);
+    }//GEN-LAST:event_btPasteActionPerformed
 
     /**
      * @param args the command line arguments
