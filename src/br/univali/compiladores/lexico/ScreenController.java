@@ -50,7 +50,28 @@ public class ScreenController {
             }
 
         } else {
-            isEdited(jtaEdit, fileName);
+            if (isEdited(jtaEdit, fileName) == true) {
+                Object[] options
+                        = {
+                            "Sim", "Não", "Cancelar"
+                        };
+                int op = JOptionPane.showOptionDialog(null, fileName + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
+                /*  if (op == 1) //dont save file
+                {
+                    fileName = "sem nome.djt";
+                    jtaEdit.setText("");
+                    jtaMessage.setText("");
+                    jf.setTitle("Compilador - [sem nome.djt]");
+                } else */
+                if (op == 0) //save file
+                {
+                    save(fileName, jtaEdit, jf);
+                    // fileName = "sem nome.djt";
+                    jtaEdit.setText("");
+                    jtaMessage.setText("");
+                    //  jf.setTitle("Compilador - [sem nome.djt]");
+                }
+            }
         }
         return fileName;
     }
@@ -122,29 +143,36 @@ public class ScreenController {
             originalFileLines.add(linha);
             while (linha != null) {
                 linha = lerArq.readLine();
-                originalFileLines.add(linha);
             }
             arq.close();
+            //originalFileLines.remove(originalFileLines.size()-1);
 
-            for (int i = 0; i < originalFileLines.size(); i++) {
+            /*   for (int i = 0; i < originalFileLines.size(); i++) {
                 System.out.println(originalFileLines.get(i));
-            }
-
+            }*/
             while (reader.hasNextLine()) {
                 jtaLines.add(reader.nextLine());
+
             }
 
+            /*   for(int i=0; i< jtaLines.size(); i++){
+                System.out.println("jta: " + jtaLines.get(i));
+            }*/
             if (originalFileLines.size() != jtaLines.size()) {
+                //  System.out.println("diferentes: true" );
                 return true;
             } else {
 
                 for (int i = 0; i < originalFileLines.size(); i++) {
                     if (!originalFileLines.get(i).equals(jtaLines.get(i))) {
+                        // System.out.println("diferentes: true 2" );
                         return true;
+
                     }
                 }
             }
-            
+            //  System.out.println("diferentes: false" );
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -160,6 +188,9 @@ public class ScreenController {
 
     public String openFile(JTextArea jtaEdit, JTextArea jtaMessage, JFrame jf) {
         String fileName = "";
+        /* if (isEdited(jtaEdit, fileName) == true) {
+                save(fileName, jtaEdit, jf);
+            }*/
         try {
             fileName = JOptionPane.showInputDialog("Nome do arquivo:");
             fileName += ".djt";
