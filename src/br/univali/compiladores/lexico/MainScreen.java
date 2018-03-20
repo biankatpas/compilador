@@ -297,10 +297,24 @@ public class MainScreen extends javax.swing.JFrame
 
         jmiCompile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/compile.png"))); // NOI18N
         jmiCompile.setText("Compilar");
+        jmiCompile.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiCompileActionPerformed(evt);
+            }
+        });
         jmCompile.add(jmiCompile);
 
         jmiRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
         jmiRun.setText("Executar");
+        jmiRun.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiRunActionPerformed(evt);
+            }
+        });
         jmCompile.add(jmiRun);
 
         jmbMenuBar.add(jmCompile);
@@ -337,7 +351,7 @@ public class MainScreen extends javax.swing.JFrame
     }//GEN-LAST:event_jmiNewActionPerformed
 
     private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
-        fileName = control.newFile(jtaEdit, jtaMessage, this, fileName);
+        jmiNewActionPerformed(evt);
     }//GEN-LAST:event_btNewActionPerformed
 
     private void jmiSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiSaveActionPerformed
@@ -352,7 +366,7 @@ public class MainScreen extends javax.swing.JFrame
 
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btSaveActionPerformed
     {//GEN-HEADEREND:event_btSaveActionPerformed
-        fileName = control.save(fileName, jtaEdit, this);
+        jmiSaveActionPerformed(evt);
     }//GEN-LAST:event_btSaveActionPerformed
 
     private void btAboutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btAboutActionPerformed
@@ -362,13 +376,12 @@ public class MainScreen extends javax.swing.JFrame
 
     private void btOpenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btOpenActionPerformed
     {//GEN-HEADEREND:event_btOpenActionPerformed
-        fileName = control.openFile(jtaEdit, jtaMessage, this);
+        jmiOpenActionPerformed(evt);
     }//GEN-LAST:event_btOpenActionPerformed
 
     private void jmiOpenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiOpenActionPerformed
     {//GEN-HEADEREND:event_jmiOpenActionPerformed
-        // TODO add your handling code here:
-        fileName = control.openFile(jtaEdit, jtaMessage, this);
+        fileName = control.openFile(jtaEdit, jtaMessage, fileName, this);
     }//GEN-LAST:event_jmiOpenActionPerformed
 
     private void jmiCopyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiCopyActionPerformed
@@ -388,28 +401,38 @@ public class MainScreen extends javax.swing.JFrame
 
     private void btCutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btCutActionPerformed
     {//GEN-HEADEREND:event_btCutActionPerformed
-        control.cut(jtaEdit);
+        jmiCutActionPerformed(evt);
     }//GEN-LAST:event_btCutActionPerformed
 
     private void btCopyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btCopyActionPerformed
     {//GEN-HEADEREND:event_btCopyActionPerformed
-        control.copy(jtaEdit);
+        jmiCopyActionPerformed(evt);
     }//GEN-LAST:event_btCopyActionPerformed
 
     private void btPasteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btPasteActionPerformed
     {//GEN-HEADEREND:event_btPasteActionPerformed
-        control.paste(jtaEdit);
+        jmiPasteActionPerformed(evt);
     }//GEN-LAST:event_btPasteActionPerformed
 
     private void btRunActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btRunActionPerformed
     {//GEN-HEADEREND:event_btRunActionPerformed
-        JOptionPane.showMessageDialog(null, "TODO");
+        jmiRunActionPerformed(evt);
     }//GEN-LAST:event_btRunActionPerformed
 
     private void btCompileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btCompileActionPerformed
     {//GEN-HEADEREND:event_btCompileActionPerformed
-        control.compile(jtaEdit, jtaMessage);
+        jmiCompileActionPerformed(evt);
     }//GEN-LAST:event_btCompileActionPerformed
+
+    private void jmiCompileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiCompileActionPerformed
+    {//GEN-HEADEREND:event_jmiCompileActionPerformed
+        control.compile(jtaEdit, jtaMessage);
+    }//GEN-LAST:event_jmiCompileActionPerformed
+
+    private void jmiRunActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiRunActionPerformed
+    {//GEN-HEADEREND:event_jmiRunActionPerformed
+        JOptionPane.showMessageDialog(null, "TODO");
+    }//GEN-LAST:event_jmiRunActionPerformed
 
     /**
      * @param args the command line arguments

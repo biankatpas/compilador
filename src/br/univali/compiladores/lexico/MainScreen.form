@@ -115,6 +115,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Compilar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCompileActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiRun">
               <Properties>
@@ -123,6 +126,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Executar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiRunActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

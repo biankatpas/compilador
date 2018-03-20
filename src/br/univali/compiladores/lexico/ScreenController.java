@@ -20,17 +20,23 @@ import javax.swing.JTextArea;
  *
  * @author biankatpas
  */
-public class ScreenController {
+public class ScreenController
+{
 
-    public String newFile(JTextArea jtaEdit, JTextArea jtaMessage, JFrame jf, String fileName) {
-        if (fileName.equals("sem nome.djt")) {
-            if ("".equals(jtaEdit.getText())) {
+    public String newFile(JTextArea jtaEdit, JTextArea jtaMessage, JFrame jf, String fileName)
+    {
+        if (fileName.equals("sem nome.djt"))
+        {
+            if ("".equals(jtaEdit.getText()))
+            {
                 fileName = "sem nome.djt";
                 jf.setTitle("Compilador - [sem nome.djt]");
                 jtaMessage.setText("");
-            } else {
+            } else
+            {
                 Object[] options
-                        = {
+                        =
+                        {
                             "Sim", "Não", "Cancelar"
                         };
                 int op = JOptionPane.showOptionDialog(null, fileName + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
@@ -50,20 +56,24 @@ public class ScreenController {
                 }
             }
 
-        } else {
-            if (isEdited(jtaEdit, fileName) == true) {
+        } else
+        {
+            if (isEdited(jtaEdit, fileName) == true)
+            {
                 Object[] options
-                        = {
+                        =
+                        {
                             "Sim", "Não", "Cancelar"
                         };
                 int op = JOptionPane.showOptionDialog(null, fileName + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
-                if (op == 0) {//save file
+                if (op == 0)
+                {//save file
                     save(fileName, jtaEdit, jf);
                     fileName = "sem nome.djt";
                     jtaEdit.setText("");
                     jtaMessage.setText("");
                     jf.setTitle("Compilador - [sem nome.djt]");
-                }else if (op == 1) //dont save file
+                } else if (op == 1) //dont save file
                 {
                     fileName = "sem nome.djt";
                     jtaEdit.setText("");
@@ -75,62 +85,76 @@ public class ScreenController {
         return fileName;
     }
 
-    public String save(String fileName, JTextArea jta, JFrame jf) {
-        try {
-            if (fileName.equalsIgnoreCase("sem nome.djt")) {
+    public String save(String fileName, JTextArea jta, JFrame jf)
+    {
+        try
+        {
+            if (fileName.equalsIgnoreCase("sem nome.djt"))
+            {
                 String message = "Nome do arquivo: ";
-                do {
+                do
+                {
                     fileName = JOptionPane.showInputDialog(message);
                     fileName += ".djt";
-                    if (exists(fileName)) {
+                    if (exists(fileName))
+                    {
                         message = "O arquivo já existe. Informe um novo nome.";
                     }
                 } while (exists(fileName));
             }
             BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
             Scanner reader = new Scanner(jta.getText());
-            while (reader.hasNextLine()) {
+            while (reader.hasNextLine())
+            {
                 bw.write(reader.nextLine());
                 bw.newLine();
             }
             bw.close();
             jf.setTitle("Compilador - " + fileName);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return fileName;
     }
 
-    public String saveAs(JTextArea jta, String fileName, JFrame jf) {
-        try {
+    public String saveAs(JTextArea jta, String fileName, JFrame jf)
+    {
+        try
+        {
             String message = "Nome do arquivo: ";
-            do {
+            do
+            {
                 fileName = JOptionPane.showInputDialog(message);
                 fileName += ".djt";
-                if (exists(fileName)) {
+                if (exists(fileName))
+                {
                     message = "O arquivo já existe. Informe um novo nome.";
                 }
             } while (exists(fileName));
 
             BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
             Scanner reader = new Scanner(jta.getText());
-            while (reader.hasNextLine()) {
+            while (reader.hasNextLine())
+            {
                 bw.write(reader.nextLine());
                 bw.newLine();
             }
             bw.close();
             jf.setTitle("Compilador - " + fileName);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return fileName;
     }
 
-  //TODO: fazer e colocar essa verificacao nas outras funcoes
-    public boolean isEdited(JTextArea jta, String fileName) {
-        try {
+    public boolean isEdited(JTextArea jta, String fileName)
+    {
+        try
+        {
 
             FileReader arq = new FileReader(fileName);
             BufferedReader lerArq = new BufferedReader(arq);
@@ -140,86 +164,174 @@ public class ScreenController {
 
             String linha = lerArq.readLine();
             originalFileLines.add(linha);
-            while (linha != null) {
+            while (linha != null)
+            {
                 linha = lerArq.readLine();
             }
             arq.close();
-            while (reader.hasNextLine()) {
+            while (reader.hasNextLine())
+            {
                 jtaLines.add(reader.nextLine());
             }
 
-            if (originalFileLines.size() != jtaLines.size()) {
+            if (originalFileLines.size() != jtaLines.size())
+            {
                 return true;
-            } else {
+            } else
+            {
 
-                for (int i = 0; i < originalFileLines.size(); i++) {
-                    if (!originalFileLines.get(i).equals(jtaLines.get(i))) {
+                for (int i = 0; i < originalFileLines.size(); i++)
+                {
+                    if (!originalFileLines.get(i).equals(jtaLines.get(i)))
+                    {
                         return true;
                     }
                 }
             }
-            
-        } catch (FileNotFoundException ex) {
+
+        } catch (FileNotFoundException ex)
+        {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    public boolean exists(String fileName) {
+    public boolean exists(String fileName)
+    {
         File file = new File(fileName);
         return file.exists();
     }
 
-    public String openFile(JTextArea jtaEdit, JTextArea jtaMessage, JFrame jf) {
-        String fileName = "";
-       //  if (isEdited(jtaEdit, fileName) == true) {
-       //      System.out.println("oi");
-             //   save(fileName, jtaEdit, jf);
-         //   }
-        try {
-            fileName = JOptionPane.showInputDialog("Nome do arquivo:");
-            fileName += ".djt";
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            jtaEdit.setText(br.readLine());
-            jtaMessage.setText("");
-            jf.setTitle("Compilador - " + fileName);
-        } catch (FileNotFoundException ex) {
+    public String openFile(JTextArea jtaEdit, JTextArea jtaMessage, String fileName, JFrame jf)
+    {
+        String newFileName = fileName;
+        try
+        {
+            if (fileName.equals("sem nome.djt"))
+            {
+                if ("".equals(jtaEdit.getText()))
+                {
+                    newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
+                    newFileName += ".djt";
+                    BufferedReader br = new BufferedReader(new FileReader(newFileName));
+                    jtaEdit.setText(br.readLine());
+                    jtaMessage.setText("");
+                    jf.setTitle("Compilador - " + newFileName);
+                } else
+                {
+                    Object[] options
+                            =
+                            {
+                                "Sim", "Não", "Cancelar"
+                            };
+                    int op = JOptionPane.showOptionDialog(null, fileName + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
+                    if (op == 1) //dont save file
+                    {
+                        newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
+                        newFileName += ".djt";
+                        BufferedReader br = new BufferedReader(new FileReader(newFileName));
+                        jtaEdit.setText(br.readLine());
+                        jtaMessage.setText("");
+                        jf.setTitle("Compilador - " + newFileName);
+                    } else if (op == 0) //save file
+                    {
+                        save(fileName, jtaEdit, jf);
+                        newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
+                        newFileName += ".djt";
+                        BufferedReader br = new BufferedReader(new FileReader(newFileName));
+                        jtaEdit.setText(br.readLine());
+                        jtaMessage.setText("");
+                        jf.setTitle("Compilador - " + newFileName);
+                    }
+                }
+            } else
+            {
+                if (isEdited(jtaEdit, fileName) == true)
+                {
+                    Object[] options
+                            =
+                            {
+                                "Sim", "Não", "Cancelar"
+                            };
+                    int op = JOptionPane.showOptionDialog(null, fileName + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
+                    if (op == 0) //save file
+                    {
+                        save(fileName, jtaEdit, jf);
+                        newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
+                        newFileName += ".djt";
+                        BufferedReader br = new BufferedReader(new FileReader(newFileName));
+                        jtaEdit.setText(br.readLine());
+                        jtaMessage.setText("");
+                        jf.setTitle("Compilador - " + newFileName);
+                    } else if (op == 1) //dont save file
+                    {
+                        newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
+                        newFileName += ".djt";
+                        BufferedReader br = new BufferedReader(new FileReader(newFileName));
+                        jtaEdit.setText(br.readLine());
+                        jtaMessage.setText("");
+                        jf.setTitle("Compilador - " + newFileName);
+                    }
+                } else
+                {
+                    newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
+                    newFileName += ".djt";
+                    BufferedReader br = new BufferedReader(new FileReader(newFileName));
+                    jtaEdit.setText(br.readLine());
+                    jtaMessage.setText("");
+                    jf.setTitle("Compilador - " + newFileName);
+                }
+            }
+
+        } catch (FileNotFoundException ex)
+        {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return fileName;
+        return newFileName;
     }
 
-    public void about() {
+    public void about()
+    {
         JOptionPane.showMessageDialog(null, "Desenvolvido por:\nBianka Passos\nJuliana Sanguinetto");
     }
 
-    public void cut(JTextArea jta) {
+    public void cut(JTextArea jta)
+    {
         jta.cut();
     }
 
-    public void copy(JTextArea jta) {
+    public void copy(JTextArea jta)
+    {
         jta.copy();
     }
 
-    public void paste(JTextArea jta) {
+    public void paste(JTextArea jta)
+    {
         jta.paste();
     }
-    
-    public void compile(JTextArea jtaEdit, JTextArea jtaMessage){
+
+    public void compile(JTextArea jtaEdit, JTextArea jtaMessage)
+    {
         Parser p = new Parser();
-        if (!jtaEdit.getText().equals("")){
+        if (!jtaEdit.getText().equals(""))
+        {
             String output = "";
             jtaMessage.setText("");
             List<Message> parserOutput = p.lexicalAnalizer(jtaEdit.getText());
-            
-            for (int i = 0; i < parserOutput.size(); i++) {
-                if (parserOutput.get(i).isError()) {
+
+            for (int i = 0; i < parserOutput.size(); i++)
+            {
+                if (parserOutput.get(i).isError())
+                {
                     output += parserOutput.get(i).getMessage() + "\n";
-                } else {
+                } else
+                {
                     output += parserOutput.get(i).getMessage() + "\n";
                 }
             }
