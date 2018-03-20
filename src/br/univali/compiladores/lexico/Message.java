@@ -6,7 +6,7 @@ package br.univali.compiladores.lexico;
  */
 public class Message
 {
-     private int Type;
+    private int Type;
     private String message;
     private boolean error;
 
