@@ -109,7 +109,7 @@ public class ScreenController {
     }
 
     //TODO: fazer e colocar essa verificacao nas outras funcoes
-    public void isEdited(JTextArea jta, String fileName) {
+    public boolean isEdited(JTextArea jta, String fileName) {
         try {
 
             FileReader arq = new FileReader(fileName);
@@ -133,16 +133,24 @@ public class ScreenController {
             while (reader.hasNextLine()) {
                 jtaLines.add(reader.nextLine());
             }
-            for (int i = 0; i < originalFileLines.size(); i++) {
-                for (int j = 0; j < jtaLines.size(); j++) {
-//                System.out.println(jtaLines.get(i));  
+
+            if (originalFileLines.size() != jtaLines.size()) {
+                return true;
+            } else {
+
+                for (int i = 0; i < originalFileLines.size(); i++) {
+                    if (!originalFileLines.get(i).equals(jtaLines.get(i))) {
+                        return true;
+                    }
                 }
             }
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
     }
 
     public boolean exists(String fileName) {
