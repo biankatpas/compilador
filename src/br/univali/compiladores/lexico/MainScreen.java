@@ -156,6 +156,13 @@ public class MainScreen extends javax.swing.JFrame
         btCompile.setFocusable(false);
         btCompile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCompile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btCompile.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btCompileActionPerformed(evt);
+            }
+        });
         jtbToolBar.add(btCompile);
 
         btRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
@@ -163,6 +170,13 @@ public class MainScreen extends javax.swing.JFrame
         btRun.setFocusable(false);
         btRun.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btRun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btRun.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btRunActionPerformed(evt);
+            }
+        });
         jtbToolBar.add(btRun);
         jtbToolBar.add(jSeparator1);
 
@@ -386,6 +400,16 @@ public class MainScreen extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btPasteActionPerformed
         control.paste(jtaEdit);
     }//GEN-LAST:event_btPasteActionPerformed
+
+    private void btRunActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btRunActionPerformed
+    {//GEN-HEADEREND:event_btRunActionPerformed
+        JOptionPane.showMessageDialog(null, "TODO");
+    }//GEN-LAST:event_btRunActionPerformed
+
+    private void btCompileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btCompileActionPerformed
+    {//GEN-HEADEREND:event_btCompileActionPerformed
+        control.compile(jtaEdit, jtaMessage);
+    }//GEN-LAST:event_btCompileActionPerformed
 
     /**
      * @param args the command line arguments

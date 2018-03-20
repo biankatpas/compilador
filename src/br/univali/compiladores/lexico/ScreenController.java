@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,7 +120,7 @@ public class ScreenController {
         return fileName;
     }
 
-    //TODO: fazer e colocar essa verificacao nas outras funcoes
+  //TODO: fazer e colocar essa verificacao nas outras funcoes
     public boolean isEdited(JTextArea jta, String fileName) {
         try {
 
@@ -138,15 +139,18 @@ public class ScreenController {
             while (reader.hasNextLine()) {
                 jtaLines.add(reader.nextLine());
             }
+
             if (originalFileLines.size() != jtaLines.size()) {
                 return true;
             } else {
+
                 for (int i = 0; i < originalFileLines.size(); i++) {
                     if (!originalFileLines.get(i).equals(jtaLines.get(i))) {
                         return true;
                     }
                 }
             }
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -195,5 +199,23 @@ public class ScreenController {
 
     public void paste(JTextArea jta) {
         jta.paste();
+    }
+    
+    public void compile(JTextArea jtaEdit, JTextArea jtaMessage){
+        Parser p = new Parser();
+        if (!jtaEdit.getText().equals("")){
+            String output = "";
+            jtaMessage.setText("");
+            List<Message> parserOutput = p.lexicalAnalizer(jtaEdit.getText());
+            
+            for (int i = 0; i < parserOutput.size(); i++) {
+                if (parserOutput.get(i).isError()) {
+                    output += parserOutput.get(i).getMessage() + "\n";
+                } else {
+                    output += parserOutput.get(i).getMessage() + "\n";
+                }
+            }
+            jtaMessage.setText(output);
+        }
     }
 }
