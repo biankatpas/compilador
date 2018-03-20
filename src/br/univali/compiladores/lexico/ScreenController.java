@@ -134,18 +134,22 @@ public class ScreenController
         try
         {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
-            Scanner reader = new Scanner(jta.getText());
-            ArrayList<String> jtaLines = new ArrayList<>();
+          //  Scanner reader = new Scanner(jta.getText());
+           // ArrayList<String> jtaLines = new ArrayList<>();
             ArrayList<String> originalFileLines = new ArrayList<>();
-            while (reader.hasNextLine())
-                    jtaLines.add(reader.nextLine());
-            while ((br.readLine()) != null) 
+           // while (reader.hasNextLine())
+           //         jtaLines.add(reader.nextLine());
+            while ((br.readLine()) != null) {
                     originalFileLines.add(br.readLine());
-            for(int i = 0;i<originalFileLines.size();i++)
+                    System.out.println(originalFileLines.size());
+                    System.out.println(br.readLine());
+            } br.close();
+            for(int i = 0;i<originalFileLines.size();i++){
+                
 //            for(int i = 0;i<jtaLines.size();i++)
-            {
-//                System.out.println(jtaLines.get(i));
-                System.out.println(originalFileLines.get(i));
+           // {
+//                System.out.println(jtaLines.get(i));  
+                
             }
 
         } catch (FileNotFoundException ex)
