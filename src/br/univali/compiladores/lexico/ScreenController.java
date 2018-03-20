@@ -57,10 +57,18 @@ public class ScreenController {
                             "Sim", "Não", "Cancelar"
                         };
                 int op = JOptionPane.showOptionDialog(null, fileName + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
-                if (op == 0) {
+                if (op == 0) {//save file
                     save(fileName, jtaEdit, jf);
+                    fileName = "sem nome.djt";
                     jtaEdit.setText("");
                     jtaMessage.setText("");
+                    jf.setTitle("Compilador - [sem nome.djt]");
+                }else if (op == 1) //dont save file
+                {
+                    fileName = "sem nome.djt";
+                    jtaEdit.setText("");
+                    jtaMessage.setText("");
+                    jf.setTitle("Compilador - [sem nome.djt]");
                 }
             }
         }
