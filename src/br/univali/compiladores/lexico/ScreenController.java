@@ -144,13 +144,13 @@ public class ScreenController
                     System.out.println(originalFileLines.size());
                     System.out.println(br.readLine());
             } br.close();
-            for(int i = 0;i<originalFileLines.size();i++){
+      //      for(int i = 0;i<originalFileLines.size();i++){
                 
 //            for(int i = 0;i<jtaLines.size();i++)
            // {
 //                System.out.println(jtaLines.get(i));  
                 
-            }
+        //    }
 
         } catch (FileNotFoundException ex)
         {
