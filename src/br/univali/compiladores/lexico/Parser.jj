@@ -1,0 +1,265 @@
+options{
+    STATIC = false;
+    IGNORE_CASE = true;
+}
+
+PARSER_BEGIN(Parser)
+package br.univali.compiladores.lexico;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.StringReader;
+
+public class Parser {
+        final static List<Message> output = new ArrayList<Message>();
+
+        public Parser() {
+
+        };
+
+        public List<Message> lexicalAnalizer(String code){
+            Parser lexicalParser = new Parser();
+            
+            try{
+                lexicalParser = new Parser(new StringReader(code));
+                lexicalParser.program();
+            } catch(Exception e){
+                //output.add(new Message(e.toString(), true));
+            }
+            
+            List<Message> auxList = new ArrayList<Message>(output);
+            output.clear();
+            return auxList;
+        }
+
+	static public String im(int x) {
+		int k;
+		String s;
+		s = tokenImage[x];
+		k = s.lastIndexOf("\"");
+		try {
+			s = s.substring(1, k);
+		} catch (StringIndexOutOfBoundsException e) {
+
+		}
+		return s;
+	}
+}
+PARSER_END(Parser)
+
+TOKEN_MGR_DECLS : {
+    int countLexError = 0;
+
+    public int foundLexError() {
+        return countLexError;
+    }   
+}
+
+JAVACODE void program() {
+	Token t;
+        String tokenType = "";
+
+	do {
+		t = getNextToken();
+		Token st = t;
+		while ( st.specialToken != null) {
+                    st = st.specialToken;
+		}
+                
+
+		do {
+                switch (t.kind) {
+                    case ParserConstants.INDENTIFICADOR_INVALIDO:
+                        output.add(new Message("Error: Identificador Invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        break;
+                    case ParserConstants.SIMBOLO_INVALIDO:
+                        output.add(new Message("Error: Simbolo Invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        break;
+                    case ParserConstants.CONSTANTE_NUM_INTEIRA_INVALIDA:
+                        output.add(new Message("Error: Constante numerica inteira invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        break;
+                    case ParserConstants.CONSTANTE_NUM_REAL_INVALIDA:
+                        output.add(new Message("Error: Constante numerica real invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        break;
+                    case ParserConstants.STRING_INVALIDA:
+                        output.add(new Message("Error: Constante literal invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        break;
+                    default:
+                        if (t.kind >= ParserConstants.PURPOSE && t.kind <= ParserConstants.FALSE) {
+                            tokenType = "<PALAVRAS_RESERVADAS>";
+                        } else if (t.kind >= ParserConstants.DOT && t.kind <= ParserConstants.CLOSEPARENTHESIS) {
+                            tokenType = "<SIMBOLOS_ESPECIAIS>";
+                        } else {
+                            tokenType = im(st.kind);
+                        }
+
+                        String outputString = "Line: " + st.beginLine + "\u005ctColumn: " + st.beginColumn + "\u005ct" + st.image + " \u005ct" + tokenType + "\u005ct" + t.kind;
+
+                        /* Filtro para não tratar EOF */
+                        if (t.kind != ParserConstants.EOF) {
+                            output.add(new Message(outputString, false));
+                        }
+                        break;
+
+                }
+                st = st.next;
+
+            } while (st != t.next);
+
+        } while (t.kind != ParserConstants.EOF);
+
+}
+
+//CHARACTERS TO SCAPE
+SKIP : {
+    " "
+	| "\t"
+        | "\n"
+        | "\r"
+        | "\f"
+}
+
+SKIP : {
+    "/*": multilinecomment
+}
+
+SKIP : {
+    "//": singlelinecomment
+}
+
+<multilinecomment> SKIP : {
+	"*/": DEFAULT
+	| <~[]>
+}
+
+<singlelinecomment> SKIP : {
+	<["\n", "\r"]> : DEFAULT
+	| <~[]>
+}
+
+//INTEGER / FLOAT TOKENS
+TOKEN : {
+    <CONSTANTE_NUM_INTEIRA: <DIGIT>(<DIGIT>)?(<DIGIT>)?>
+	| <CONSTANTE_NUM_REAL: <DIGIT>(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?<DOT><DIGIT>(<DIGIT>)?>
+	| <#DIGIT: ["0"-"9"]>
+}
+
+//RESERVED WORDS
+TOKEN : {
+    <PURPOSE: "purpose">
+	| <PROGRAM: "program">
+        | <DEFINE: "define">
+	| <CONSTANT: "constant">
+	| <IS: "is">
+	| <NOT: "not">
+	| <CHAR: "char">
+	| <BOOLEAN: "boolean">
+	| <INT: "integer">
+        | <REAL: "float">  
+	| <EXECUTE: "execute">
+	| <SET: "set">
+	| <TO: "to">
+	| <GET: "get">
+	| <PUT: "put">
+	| <LOOP: "loop">
+	| <WHILE: "while">
+	| <TRUE: "true">
+	| <DO: "do">
+	| <FALSE: "false">
+}
+
+
+//SPECIAL SYMBOLS
+TOKEN : {
+    <DOT: ".">
+	| < OPENBRACKET: "[">
+	| < CLOSEBRACKET: "]">
+	| < COMMA: ",">
+	| < OPENBRACE: "{">
+	| < CLOSEBRACE: "}">
+	| < PLUS: "+">
+	| < MINUS: "-">
+	| < MULTIPLY: "*">
+	| < FRACTION: "/">
+	| < PERCENT: "%">
+        | < EQUALS: "=">
+	| < EXCLAMATION: "!">
+	| < GREATER: ">">
+	| < GREATEREQUAL: ">=">
+        | < LESS: "<">
+	| < LESSEQUAL: "<=">
+	| < AMPERSAND: "&">
+	| < DIFFERENT: "!=">
+	| < MOD: "%%">
+	| < PIPE: "|">
+	| < OPENPARENTHESIS: "(">
+	| < CLOSEPARENTHESIS: ")">
+}
+
+TOKEN : //Global
+{
+    < #LETTER_ID: ["A"-"Z", "a"-"z"] >
+    | < #DIGIT_ID: ["0"-"9"] >
+    | < #SYMBOL_UND: ["_"] >
+}
+
+TOKEN : // Identificadores
+{
+    <IDENTIFICATOR: (<LETTER_ID>|<SYMBOL_UND>(<LETTER_ID>|<DIGIT_ID><LETTER_ID>))+ //INICIO LETRA OU _
+                    ((<LETTER_ID>|<DIGIT_ID> (<LETTER_ID>|<SYMBOL_UND>) | <LETTER_ID><SYMBOL_UND>(<LETTER_ID>|<DIGIT_ID><LETTER_ID>))*  
+                    | ( (<SYMBOL_UND> (<LETTER_ID>|<DIGIT_ID>))*<SYMBOL_UND>(<LETTER_ID>)) 
+                    | ( (<SYMBOL_UND> (<LETTER_ID>|<DIGIT_ID>))+<SYMBOL_UND>)
+                    | ( (<SYMBOL_UND> (<LETTER_ID>|<DIGIT_ID>))*<LETTER_ID>))* >       
+}
+
+TOKEN :
+{
+    <INDENTIFICADOR_INVALIDO: <DIGIT_ID>(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* //COMECA COM DIGITO
+                                |(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)*<DIGIT_ID> //TERMINA COM DIGITO
+                                | (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* (<DIGIT_ID><DIGIT_ID>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // DIGITOS CONSECUTIVOS
+                                | (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* (<SYMBOL_UND><SYMBOL_UND>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* //DIGITOS CONSECUTIVOS
+                                | (<SYMBOL_UND><SYMBOL_UND>)(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)*> // INICIANDO COM DOIS _          
+}
+
+
+// STRINGS TOKEN
+TOKEN: {
+   <STRING_DUPLA: "\"" (~[ "\"" ])* "\""> 
+   |<STRING_SIMPLES: "'" (~[ "\'"])* "'">
+}
+
+
+TOKEN :
+{
+    <SIMBOLO_INVALIDO: (~ ["a"-"z", "A"-"Z",
+                    "0"-"9",
+                    "[",
+                    "]",
+                    ",",
+                    "{",
+                    "}",
+                    "+",
+                    "-",
+                    "*",
+                    "/",
+                    "%",
+                    "=",
+                    "!",
+                    ">",
+                    "<",
+                    "&",
+                    "|",
+                    "(",
+                    ")",
+                    "\"",
+                    "\'",
+                    " ",
+                    "\t",
+                    "\n",
+                    "\r",
+                    "\f"])* >
+            
+    | <CONSTANTE_NUM_INTEIRA_INVALIDA: ((<DIGIT>){3}(<DIGIT>)*) >
+    | <CONSTANTE_NUM_REAL_INVALIDA: ((<DIGIT>){5}(<DIGIT>)*(<DOT>)(<DIGIT>)(<DIGIT>)*) >
+    | <STRING_INVALIDA: "\"" (~["\n","\r","\""])* ~["\""]
+                                            | "\'" (~["\n","\r","\'"])* ~["\'"]>
+  }
