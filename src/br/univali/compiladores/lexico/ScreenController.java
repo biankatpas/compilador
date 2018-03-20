@@ -296,6 +296,55 @@ public class ScreenController
         return newFileName;
     }
 
+    public void exit(JTextArea jta, String fileName, JFrame jf)
+    {
+        if (fileName.equals("sem nome.djt"))
+        {
+            if ("".equals(jta.getText()))
+            {
+                System.exit(0);
+            } else
+            {
+                Object[] options
+                        =
+                        {
+                            "Sim", "Não", "Cancelar"
+                        };
+                int op = JOptionPane.showOptionDialog(null, fileName + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
+                if (op == 1) //dont save file
+                {
+                    System.exit(0);
+                } else if (op == 0) //save file
+                {
+                    save(fileName, jta, jf);
+                    System.exit(0);
+                }
+            }
+        } else
+        {
+            if (isEdited(jta, fileName) == true)
+            {
+                Object[] options
+                        =
+                        {
+                            "Sim", "Não", "Cancelar"
+                        };
+                int op = JOptionPane.showOptionDialog(null, fileName + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
+                if (op == 1) //dont save file
+                {
+                    System.exit(0);
+                } else if (op == 0) //save file
+                {
+                    save(fileName, jta, jf);
+                    System.exit(0);
+                }
+            } else
+            {
+                System.exit(0);
+            }
+        }
+    }
+
     public void about()
     {
         JOptionPane.showMessageDialog(null, "Desenvolvido por:\nBianka Passos\nJuliana Sanguinetto");

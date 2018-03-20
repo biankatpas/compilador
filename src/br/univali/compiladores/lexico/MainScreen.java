@@ -252,6 +252,13 @@ public class MainScreen extends javax.swing.JFrame
 
         jmiExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         jmiExit.setText("Sair");
+        jmiExit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiExitActionPerformed(evt);
+            }
+        });
         jmFile.add(jmiExit);
 
         jmbMenuBar.add(jmFile);
@@ -433,6 +440,11 @@ public class MainScreen extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jmiRunActionPerformed
         JOptionPane.showMessageDialog(null, "TODO");
     }//GEN-LAST:event_jmiRunActionPerformed
+
+    private void jmiExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiExitActionPerformed
+    {//GEN-HEADEREND:event_jmiExitActionPerformed
+        control.exit(jtaEdit, fileName, this);
+    }//GEN-LAST:event_jmiExitActionPerformed
 
     /**
      * @param args the command line arguments
