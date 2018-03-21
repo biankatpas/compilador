@@ -275,9 +275,6 @@ public class ScreenController
                         jtaMessage.setText("");
                         jf.setTitle("Compilador - " + newFileName);
                     }
-                    else{
-                        newFileName = fileName;
-                    }
                 } else
                 {
                     newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
