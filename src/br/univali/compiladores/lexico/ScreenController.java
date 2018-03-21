@@ -208,18 +208,23 @@ public class ScreenController
     public String openFile(JTextArea jtaEdit, JTextArea jtaMessage, String fileName, JFrame jf)
     {
         String newFileName = fileName;
+        String aux = "";
         try
         {
             if (fileName.equals("sem nome.djt"))
             {
                 if ("".equals(jtaEdit.getText()))
                 {
-                    newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
-                    newFileName += ".djt";
-                    BufferedReader br = new BufferedReader(new FileReader(newFileName));
-                    jtaEdit.setText(br.readLine());
-                    jtaMessage.setText("");
-                    jf.setTitle("Compilador - " + newFileName);
+                    aux = JOptionPane.showInputDialog("Nome do arquivo:");
+                    if (aux != null)
+                    {
+                        newFileName = aux;
+                        newFileName += ".djt";
+                        BufferedReader br = new BufferedReader(new FileReader(newFileName));
+                        jtaEdit.setText(br.readLine());
+                        jtaMessage.setText("");
+                        jf.setTitle("Compilador - " + newFileName);
+                    }
                 } else
                 {
                     Object[] options
@@ -228,23 +233,32 @@ public class ScreenController
                                 "Sim", "Não", "Cancelar"
                             };
                     int op = JOptionPane.showOptionDialog(null, fileName + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
+
                     if (op == 1) //dont save file
                     {
-                        newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
-                        newFileName += ".djt";
-                        BufferedReader br = new BufferedReader(new FileReader(newFileName));
-                        jtaEdit.setText(br.readLine());
-                        jtaMessage.setText("");
-                        jf.setTitle("Compilador - " + newFileName);
+                        aux = JOptionPane.showInputDialog("Nome do arquivo:");
+                        if (aux != null)
+                        {
+                            newFileName = aux;
+                            newFileName += ".djt";
+                            BufferedReader br = new BufferedReader(new FileReader(newFileName));
+                            jtaEdit.setText(br.readLine());
+                            jtaMessage.setText("");
+                            jf.setTitle("Compilador - " + newFileName);
+                        }
                     } else if (op == 0) //save file
                     {
                         save(fileName, jtaEdit, jf);
-                        newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
-                        newFileName += ".djt";
-                        BufferedReader br = new BufferedReader(new FileReader(newFileName));
-                        jtaEdit.setText(br.readLine());
-                        jtaMessage.setText("");
-                        jf.setTitle("Compilador - " + newFileName);
+                        aux = JOptionPane.showInputDialog("Nome do arquivo:");
+                        if (aux != null)
+                        {
+                            newFileName = aux;
+                            newFileName += ".djt";
+                            BufferedReader br = new BufferedReader(new FileReader(newFileName));
+                            jtaEdit.setText(br.readLine());
+                            jtaMessage.setText("");
+                            jf.setTitle("Compilador - " + newFileName);
+                        }
                     }
                 }
             } else
@@ -260,29 +274,41 @@ public class ScreenController
                     if (op == 0) //save file
                     {
                         save(fileName, jtaEdit, jf);
-                        newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
-                        newFileName += ".djt";
-                        BufferedReader br = new BufferedReader(new FileReader(newFileName));
-                        jtaEdit.setText(br.readLine());
-                        jtaMessage.setText("");
-                        jf.setTitle("Compilador - " + newFileName);
+                        aux = JOptionPane.showInputDialog("Nome do arquivo:");
+                        if (aux != null)
+                        {
+                            newFileName = aux;
+                            newFileName += ".djt";
+                            BufferedReader br = new BufferedReader(new FileReader(newFileName));
+                            jtaEdit.setText(br.readLine());
+                            jtaMessage.setText("");
+                            jf.setTitle("Compilador - " + newFileName);
+                        }
                     } else if (op == 1) //dont save file
                     {
-                        newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
+                        aux = JOptionPane.showInputDialog("Nome do arquivo:");
+                        if (aux != null)
+                        {
+                            newFileName = aux;
+                            newFileName += ".djt";
+                            BufferedReader br = new BufferedReader(new FileReader(newFileName));
+                            jtaEdit.setText(br.readLine());
+                            jtaMessage.setText("");
+                            jf.setTitle("Compilador - " + newFileName);
+                        }
+                    }
+                } else
+                {
+                    aux = JOptionPane.showInputDialog("Nome do arquivo:");
+                    if (aux != null)
+                    {
+                        newFileName = aux;
                         newFileName += ".djt";
                         BufferedReader br = new BufferedReader(new FileReader(newFileName));
                         jtaEdit.setText(br.readLine());
                         jtaMessage.setText("");
                         jf.setTitle("Compilador - " + newFileName);
                     }
-                } else
-                {
-                    newFileName = JOptionPane.showInputDialog("Nome do arquivo:");
-                    newFileName += ".djt";
-                    BufferedReader br = new BufferedReader(new FileReader(newFileName));
-                    jtaEdit.setText(br.readLine());
-                    jtaMessage.setText("");
-                    jf.setTitle("Compilador - " + newFileName);
                 }
             }
 
