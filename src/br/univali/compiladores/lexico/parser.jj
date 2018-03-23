@@ -138,59 +138,64 @@ SKIP : {
 
 //INTEGER / FLOAT TOKENS
 TOKEN : {
-    <CONSTANTE_NUM_INTEIRA: <DIGIT>(<DIGIT>)?(<DIGIT>)?>
+    <CONSTANTE_NUM_INTEIRA: <DIGIT>(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?>
 	| <CONSTANTE_NUM_REAL: <DIGIT>(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?<DOT><DIGIT>(<DIGIT>)?>
 	| <#DIGIT: ["0"-"9"]>
 }
 
 //RESERVED WORDS
 TOKEN : {
-    <PURPOSE: "purpose">
-	| <PROGRAM: "program">
-        | <DEFINE: "define">
-	| <CONSTANT: "constant">
+    <DO: "do">
+	| <THIS: "this">
+        | <BODY: "body">
+	| <DESCRIPTION: "description">
+	| <DECLARATION: "declaration">
+	| <TYPE: "type">
 	| <IS: "is">
-	| <NOT: "not">
-	| <CHAR: "char">
-	| <BOOLEAN: "boolean">
-	| <INT: "integer">
-        | <REAL: "float">  
-	| <EXECUTE: "execute">
-	| <SET: "set">
+	| <CONSTANT: "constant">
+	| <AND: "and">
+        | <VARIABLE: "variable">  
+	| <AS: "as">
+	| <INTEGER: "integer">
+	| <REAL: "real">
+	| <STRING: "string">
+	| <LOGIC: "logic">
+	| <DESIGNETED: "designeted">
 	| <TO: "to">
-	| <GET: "get">
-	| <PUT: "put">
-	| <LOOP: "loop">
-	| <WHILE: "while">
+	| <READ: "read">
+	| <WRITE: "write">
+	| <ALL: "all">
+	| <REPEAT: "repeat">
 	| <TRUE: "true">
-	| <DO: "do">
-	| <FALSE: "false">
+	| <UNTRUE: "untrue">
 }
 
 
 //SPECIAL SYMBOLS
 TOKEN : {
-    <DOT: ".">
-	| < OPENBRACKET: "[">
+    < OPENBRACKET: "["> 
 	| < CLOSEBRACKET: "]">
+	| <DOT: ".">
 	| < COMMA: ",">
-	| < OPENBRACE: "{">
-	| < CLOSEBRACE: "}">
+	| < ASSIGNMENT: "=">
 	| < PLUS: "+">
 	| < MINUS: "-">
 	| < MULTIPLY: "*">
 	| < FRACTION: "/">
+	| < POTENCY: "**">
 	| < PERCENT: "%">
-        | < EQUALS: "=">
-	| < EXCLAMATION: "!">
-	| < GREATER: ">">
-	| < GREATEREQUAL: ">=">
-        | < LESS: "<">
-	| < LESSEQUAL: "<=">
-	| < AMPERSAND: "&">
-	| < DIFFERENT: "!=">
+	| < OPENBRACE: "{">
+	| < CLOSEBRACE: "}">
 	| < MOD: "%%">
+	| < EQUALS: "==">
+        | < DIFFERENT: "!=">
+	| < LESS: "<<">
+	| < GREATER: ">>">
+	| < LESSEQUAL: "<<=">
+	| < GREATEREQUAL: ">>=">
+	| < AMPERSAND: "&">	
 	| < PIPE: "|">
+	| < EXCLAMATION: "!">	
 	| < OPENPARENTHESIS: "(">
 	| < CLOSEPARENTHESIS: ")">
 }
