@@ -53,7 +53,7 @@ public class Parser implements ParserConstants {
 
                 do {
                 switch (t.kind) {
-                    case ParserConstants.INDENTIFICADOR_INVALIDO:
+                    case ParserConstants.IDENTIFICADOR_INVALIDO:
                         output.add(new Message("Error: Identificador Invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
                     case ParserConstants.SIMBOLO_INVALIDO:
@@ -69,7 +69,7 @@ public class Parser implements ParserConstants {
                         output.add(new Message("Error: Constante literal invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
                     default:
-                        if (t.kind >= ParserConstants.PURPOSE && t.kind <= ParserConstants.FALSE) {
+                        if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.UNTRUE) {
                             tokenType = "<PALAVRAS_RESERVADAS>";
                         } else if (t.kind >= ParserConstants.DOT && t.kind <= ParserConstants.CLOSEPARENTHESIS) {
                             tokenType = "<SIMBOLOS_ESPECIAIS>";
@@ -235,7 +235,7 @@ public class Parser implements ParserConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[78];
+    boolean[] la1tokens = new boolean[74];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -255,7 +255,7 @@ public class Parser implements ParserConstants {
         }
       }
     }
-    for (int i = 0; i < 78; i++) {
+    for (int i = 0; i < 74; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

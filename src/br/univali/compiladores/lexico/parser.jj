@@ -68,7 +68,7 @@ JAVACODE void program() {
 
 		do {
                 switch (t.kind) {
-                    case ParserConstants.INDENTIFICADOR_INVALIDO:
+                    case ParserConstants.IDENTIFICADOR_INVALIDO:
                         output.add(new Message("Error: Identificador Invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
                     case ParserConstants.SIMBOLO_INVALIDO:
@@ -84,7 +84,7 @@ JAVACODE void program() {
                         output.add(new Message("Error: Constante literal invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
                     default:
-                        if (t.kind >= ParserConstants.PURPOSE && t.kind <= ParserConstants.FALSE) {
+                        if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.UNTRUE) {
                             tokenType = "<PALAVRAS_RESERVADAS>";
                         } else if (t.kind >= ParserConstants.DOT && t.kind <= ParserConstants.CLOSEPARENTHESIS) {
                             tokenType = "<SIMBOLOS_ESPECIAIS>";
@@ -139,14 +139,13 @@ SKIP : {
 //INTEGER / FLOAT TOKENS
 TOKEN : {
     <CONSTANTE_NUM_INTEIRA: <DIGIT>(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?>
-	| <CONSTANTE_NUM_REAL: <DIGIT>(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?<DOT><DIGIT>(<DIGIT>)?>
+	| <CONSTANTE_NUM_REAL: <DIGIT>(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?<DOT><DIGIT>(<DIGIT>)?(<DIGIT>)?>
 	| <#DIGIT: ["0"-"9"]>
 }
 
 //RESERVED WORDS
 TOKEN : {
-    < PURPOSE: "purpose">
-        |< DO: "do">
+    <DO: "do">
 	| <THIS: "this">
         | <BODY: "body">
 	| <DESCRIPTION: "description">
@@ -161,79 +160,71 @@ TOKEN : {
 	| <REAL: "real">
 	| <STRING: "string">
 	| <LOGIC: "logic">
-	| <DESIGNETED: "designeted">
+	| <DESIGNATE: "designate">
 	| <TO: "to">
 	| <READ: "read">
 	| <WRITE: "write">
 	| <ALL: "all">
-	| <REPEAT: "repeat">
-	| <TRUE: "true">
-	| <UNTRUE: "untrue">
-        | <FALSE: "false">
+        | <REPEAT: "repeat">
+        | <TRUE: "true">
+        | <UNTRUE: "untrue">
+
 }
 
 
 //SPECIAL SYMBOLS
 TOKEN : {
-    < OPENBRACKET: "["> 
+    <DOT: ".">
+	| < OPENBRACKET: "[">
 	| < CLOSEBRACKET: "]">
-	| <DOT: ".">
 	| < COMMA: ",">
-	| < ASSIGNMENT: "=">
+	| < OPENBRACE: "{">
+	| < CLOSEBRACE: "}">
 	| < PLUS: "+">
 	| < MINUS: "-">
 	| < MULTIPLY: "*">
 	| < FRACTION: "/">
-	| < POTENCY: "**">
 	| < PERCENT: "%">
-	| < OPENBRACE: "{">
-	| < CLOSEBRACE: "}">
+        | < EQUALS: "=">
+	| < EXCLAMATION: "!">
+	| < GREATER: ">">
+	| < GREATEREQUAL: ">=">
+        | < LESS: "<">
+	| < LESSEQUAL: "<=">
+	| < AMPERSAND: "&">
+	| < DIFFERENT: "!=">
 	| < MOD: "%%">
-	| < EQUALS: "==">
-        | < DIFFERENT: "!=">
-	| < LESS: "<<">
-	| < GREATER: ">>">
-	| < LESSEQUAL: "<<=">
-	| < GREATEREQUAL: ">>=">
-	| < AMPERSAND: "&">	
 	| < PIPE: "|">
-	| < EXCLAMATION: "!">	
 	| < OPENPARENTHESIS: "(">
 	| < CLOSEPARENTHESIS: ")">
 }
 
 TOKEN : //Global
 {
-    < #LETTER_UPPER: ["A"-"Z"] >
-    | < #LETTER_LOWER: ["a"-"z"] >
-    | < #LETTER_ID: ["A"-"Z", "a"-"z"] >
+    < #LETTER_ID: ["A"-"Z", "a"-"z"] >
+    | < #LETTER_UPPER: ["A"-"Z"] >
+    | < #LETTER_LOWER: ["a"- "z"] >
     | < #DIGIT_ID: ["0"-"9"] >
     | < #SYMBOL_UND: ["_"] >
 }
 
 TOKEN : // Identificadores
-{ 
-
-    <IDENTIFICATOR: (<LETTER_UPPER>(<DIGIT_ID>(((<DIGIT_ID>)?((<SYMBOL_UND>)(<LETTER_ID>)+(<DIGIT_ID>))|((<LETTER_ID>)+(<SYMBOL_UND><DIGIT_ID>))|(<SYMBOL_UND><DIGIT_ID>)|((<LETTER_ID>)+(<DIGIT_ID>))|((<SYMBOL_UND>)(<LETTER_ID>)+))*)|(<SYMBOL_UND>)|(<LETTER_ID>)+|((<SYMBOL_UND>)(<LETTER_ID>)+)|(<DIGIT_ID><SYMBOL_UND>)|((<DIGIT_ID><SYMBOL_UND>)(<LETTER_ID>)+)|((<DIGIT_ID>)(<LETTER_ID>))+)?)
+{
+    <IDENTIFICADOR: (<LETTER_UPPER>(<DIGIT_ID>(((<DIGIT_ID>)?((<SYMBOL_UND>)(<LETTER_ID>)+(<DIGIT_ID>))|((<LETTER_ID>)+(<SYMBOL_UND><DIGIT_ID>))|(<SYMBOL_UND><DIGIT_ID>)|((<LETTER_ID>)+(<DIGIT_ID>))|((<SYMBOL_UND>)(<LETTER_ID>)+))*)|(<SYMBOL_UND>)|(<LETTER_ID>)+|((<SYMBOL_UND>)(<LETTER_ID>)+)|(<DIGIT_ID><SYMBOL_UND>)|((<DIGIT_ID><SYMBOL_UND>)(<LETTER_ID>)+)|((<DIGIT_ID>)(<LETTER_ID>))+)?)
                     |(<LETTER_UPPER>(<SYMBOL_UND>((<DIGIT_ID>)?((<DIGIT_ID><SYMBOL_UND><LETTER_ID>)|(<DIGIT_ID><LETTER_ID><SYMBOL_UND>)|(<LETTER_ID><SYMBOL_UND>)|(<DIGIT_ID><SYMBOL_UND>)|((<DIGIT_ID>)?(<LETTER_ID>))))*))
                     |(<LETTER_UPPER>((<LETTER_ID>)+)(((<SYMBOL_UND>)?)((<DIGIT_ID>)?)((<DIGIT_ID><SYMBOL_UND><LETTER_ID>)|(<DIGIT_ID><LETTER_ID>)|(<DIGIT_ID><SYMBOL_UND>)|(<LETTER_ID><SYMBOL_UND>)|(<DIGIT_ID><SYMBOL_UND><LETTER_ID>)))*)
    >
-     
-   
-
 }
 
 TOKEN :
 {
-   <INDENTIFICADOR_INVALIDO: <DIGIT_ID>(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* //COMECA COM DIGITO
-                                | (<LETTER_LOWER>)* (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // COMECA COM LETRA MINUSCULA
-                                | (<LETTER_UPPER>)* <DIGIT_ID> //TERMINA COM DIGITO
-                                | (<LETTER_UPPER>)* (<DIGIT_ID><DIGIT_ID><DIGIT_ID>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // DIGITOS CONSECUTIVOS
-                                | (<LETTER_UPPER>)* (<SYMBOL_UND><SYMBOL_UND>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* //DIGITOS CONSECUTIVOS
-                                | (<LETTER_UPPER>)* (<SYMBOL_UND><SYMBOL_UND>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // _ CONSECUTIVOS
-                                | (<SYMBOL_UND>)(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)*> // INICIANDO COM _            
-}
-
+<IDENTIFICADOR_INVALIDO: <DIGIT_ID>(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* //COMECA COM DIGITO
+                                |(<LETTER_ID>|<SYMBOL_UND>)*<DIGIT_ID> //TERMINA COM DIGITO
+                                | (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* (<DIGIT_ID><DIGIT_ID>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // DIGITOS CONSECUTIVOS
+                                | (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* (<SYMBOL_UND><SYMBOL_UND>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* //DIGITOS CONSECUTIVOS
+                                //| (<SYMBOL_UND><SYMBOL_UND>)(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // INICIANDO COM DOIS _ 
+                                | (<SYMBOL_UND>)(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)*> // INICIANDO COM _          
+}   
 
 // STRINGS TOKEN
 TOKEN: {
@@ -272,8 +263,8 @@ TOKEN :
                     "\r",
                     "\f"])* >
             
-    | <CONSTANTE_NUM_INTEIRA_INVALIDA: ((<DIGIT>){3}(<DIGIT>)*) >
-    | <CONSTANTE_NUM_REAL_INVALIDA: ((<DIGIT>){5}(<DIGIT>)*(<DOT>)(<DIGIT>)(<DIGIT>)*) >
+    | <CONSTANTE_NUM_INTEIRA_INVALIDA: ((<DIGIT>){4}(<DIGIT>)*) >
+    | <CONSTANTE_NUM_REAL_INVALIDA: ((<DIGIT>){5}(<DIGIT>)*(<DOT>)(<DIGIT>)(<DIGIT>)(<DIGIT>)*) >
     | <STRING_INVALIDA: "\"" (~["\n","\r","\""])* ~["\""]
                                             | "\'" (~["\n","\r","\'"])* ~["\'"]>
   }
