@@ -145,7 +145,8 @@ TOKEN : {
 
 //RESERVED WORDS
 TOKEN : {
-    <DO: "do">
+    < PURPOSE: "purpose">
+        |< DO: "do">
 	| <THIS: "this">
         | <BODY: "body">
 	| <DESCRIPTION: "description">
@@ -168,6 +169,7 @@ TOKEN : {
 	| <REPEAT: "repeat">
 	| <TRUE: "true">
 	| <UNTRUE: "untrue">
+        | <FALSE: "false">
 }
 
 
@@ -212,11 +214,10 @@ TOKEN : //Global
 TOKEN : // Identificadores
 { 
 
-    <IDENTIFICATOR: (<LETTER_ID>|<SYMBOL_UND>(<LETTER_ID>|<DIGIT_ID><LETTER_ID>))+ //INICIO LETRA OU _
-                    ((<LETTER_ID>|<DIGIT_ID> (<LETTER_ID>|<SYMBOL_UND>) | <LETTER_ID><SYMBOL_UND>(<LETTER_ID>|<DIGIT_ID><LETTER_ID>))*  
-                    | ( (<SYMBOL_UND> (<LETTER_ID>|<DIGIT_ID>))*<SYMBOL_UND>(<LETTER_ID>)) 
-                    | ( (<SYMBOL_UND> (<LETTER_ID>|<DIGIT_ID>))+<SYMBOL_UND>)
-                    | ( (<SYMBOL_UND> (<LETTER_ID>|<DIGIT_ID>))*<LETTER_ID>))* > 
+    <IDENTIFICATOR: (<LETTER_UPPER>(<DIGIT_ID>(((<DIGIT_ID>)?((<SYMBOL_UND>)(<LETTER_ID>)+(<DIGIT_ID>))|((<LETTER_ID>)+(<SYMBOL_UND><DIGIT_ID>))|(<SYMBOL_UND><DIGIT_ID>)|((<LETTER_ID>)+(<DIGIT_ID>))|((<SYMBOL_UND>)(<LETTER_ID>)+))*)|(<SYMBOL_UND>)|(<LETTER_ID>)+|((<SYMBOL_UND>)(<LETTER_ID>)+)|(<DIGIT_ID><SYMBOL_UND>)|((<DIGIT_ID><SYMBOL_UND>)(<LETTER_ID>)+)|((<DIGIT_ID>)(<LETTER_ID>))+)?)
+                    |(<LETTER_UPPER>(<SYMBOL_UND>((<DIGIT_ID>)?((<DIGIT_ID><SYMBOL_UND><LETTER_ID>)|(<DIGIT_ID><LETTER_ID><SYMBOL_UND>)|(<LETTER_ID><SYMBOL_UND>)|(<DIGIT_ID><SYMBOL_UND>)|((<DIGIT_ID>)?(<LETTER_ID>))))*))
+                    |(<LETTER_UPPER>((<LETTER_ID>)+)(((<SYMBOL_UND>)?)((<DIGIT_ID>)?)((<DIGIT_ID><SYMBOL_UND><LETTER_ID>)|(<DIGIT_ID><LETTER_ID>)|(<DIGIT_ID><SYMBOL_UND>)|(<LETTER_ID><SYMBOL_UND>)|(<DIGIT_ID><SYMBOL_UND><LETTER_ID>)))*)
+   >
      
    
 
@@ -224,13 +225,13 @@ TOKEN : // Identificadores
 
 TOKEN :
 {
-    <INDENTIFICADOR_INVALIDO: <DIGIT_ID>(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* //COMECA COM DIGITO
-                                | (<LETTER_LOWER>)(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // COMECA COM LETRA MINUSCULA
-                                | (<LETTER_UPPER>)*<DIGIT_ID> //TERMINA COM DIGITO
+   <INDENTIFICADOR_INVALIDO: <DIGIT_ID>(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* //COMECA COM DIGITO
+                                | (<LETTER_LOWER>)* (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // COMECA COM LETRA MINUSCULA
+                                | (<LETTER_UPPER>)* <DIGIT_ID> //TERMINA COM DIGITO
                                 | (<LETTER_UPPER>)* (<DIGIT_ID><DIGIT_ID><DIGIT_ID>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // DIGITOS CONSECUTIVOS
                                 | (<LETTER_UPPER>)* (<SYMBOL_UND><SYMBOL_UND>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* //DIGITOS CONSECUTIVOS
                                 | (<LETTER_UPPER>)* (<SYMBOL_UND><SYMBOL_UND>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // _ CONSECUTIVOS
-                                | (<SYMBOL_UND>)(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)*> // INICIANDO COM _          
+                                | (<SYMBOL_UND>)(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)*> // INICIANDO COM _            
 }
 
 
