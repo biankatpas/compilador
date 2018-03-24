@@ -17,113 +17,127 @@ public interface ParserConstants {
   /** RegularExpression Id. */
   int DIGIT = 14;
   /** RegularExpression Id. */
-  int PURPOSE = 15;
+  int DO = 15;
   /** RegularExpression Id. */
-  int PROGRAM = 16;
+  int THIS = 16;
   /** RegularExpression Id. */
-  int DEFINE = 17;
+  int BODY = 17;
   /** RegularExpression Id. */
-  int CONSTANT = 18;
+  int DESCRIPTION = 18;
   /** RegularExpression Id. */
-  int IS = 19;
+  int DECLARATION = 19;
   /** RegularExpression Id. */
-  int NOT = 20;
+  int TYPE = 20;
   /** RegularExpression Id. */
-  int CHAR = 21;
+  int IS = 21;
   /** RegularExpression Id. */
-  int BOOLEAN = 22;
+  int CONSTANT = 22;
   /** RegularExpression Id. */
-  int INT = 23;
+  int AND = 23;
   /** RegularExpression Id. */
-  int REAL = 24;
+  int VARIABLE = 24;
   /** RegularExpression Id. */
-  int EXECUTE = 25;
+  int AS = 25;
   /** RegularExpression Id. */
-  int SET = 26;
+  int INTEGER = 26;
   /** RegularExpression Id. */
-  int TO = 27;
+  int REAL = 27;
   /** RegularExpression Id. */
-  int GET = 28;
+  int STRING = 28;
   /** RegularExpression Id. */
-  int PUT = 29;
+  int LOGIC = 29;
   /** RegularExpression Id. */
-  int LOOP = 30;
+  int DESIGNETED = 30;
   /** RegularExpression Id. */
-  int WHILE = 31;
+  int TO = 31;
   /** RegularExpression Id. */
-  int TRUE = 32;
+  int READ = 32;
   /** RegularExpression Id. */
-  int DO = 33;
+  int WRITE = 33;
   /** RegularExpression Id. */
-  int FALSE = 34;
+  int ALL = 34;
   /** RegularExpression Id. */
-  int DOT = 35;
+  int REPEAT = 35;
   /** RegularExpression Id. */
-  int OPENBRACKET = 36;
+  int TRUE = 36;
   /** RegularExpression Id. */
-  int CLOSEBRACKET = 37;
+  int UNTRUE = 37;
   /** RegularExpression Id. */
-  int COMMA = 38;
+  int OPENBRACKET = 38;
   /** RegularExpression Id. */
-  int OPENBRACE = 39;
+  int CLOSEBRACKET = 39;
   /** RegularExpression Id. */
-  int CLOSEBRACE = 40;
+  int DOT = 40;
   /** RegularExpression Id. */
-  int PLUS = 41;
+  int COMMA = 41;
   /** RegularExpression Id. */
-  int MINUS = 42;
+  int ASSIGNMENT = 42;
   /** RegularExpression Id. */
-  int MULTIPLY = 43;
+  int PLUS = 43;
   /** RegularExpression Id. */
-  int FRACTION = 44;
+  int MINUS = 44;
   /** RegularExpression Id. */
-  int PERCENT = 45;
+  int MULTIPLY = 45;
   /** RegularExpression Id. */
-  int EQUALS = 46;
+  int FRACTION = 46;
   /** RegularExpression Id. */
-  int EXCLAMATION = 47;
+  int POTENCY = 47;
   /** RegularExpression Id. */
-  int GREATER = 48;
+  int PERCENT = 48;
   /** RegularExpression Id. */
-  int GREATEREQUAL = 49;
+  int OPENBRACE = 49;
   /** RegularExpression Id. */
-  int LESS = 50;
+  int CLOSEBRACE = 50;
   /** RegularExpression Id. */
-  int LESSEQUAL = 51;
+  int MOD = 51;
   /** RegularExpression Id. */
-  int AMPERSAND = 52;
+  int EQUALS = 52;
   /** RegularExpression Id. */
   int DIFFERENT = 53;
   /** RegularExpression Id. */
-  int MOD = 54;
+  int LESS = 54;
   /** RegularExpression Id. */
-  int PIPE = 55;
+  int GREATER = 55;
   /** RegularExpression Id. */
-  int OPENPARENTHESIS = 56;
+  int LESSEQUAL = 56;
   /** RegularExpression Id. */
-  int CLOSEPARENTHESIS = 57;
+  int GREATEREQUAL = 57;
   /** RegularExpression Id. */
-  int LETTER_ID = 58;
+  int AMPERSAND = 58;
   /** RegularExpression Id. */
-  int DIGIT_ID = 59;
+  int PIPE = 59;
   /** RegularExpression Id. */
-  int SYMBOL_UND = 60;
+  int EXCLAMATION = 60;
   /** RegularExpression Id. */
-  int IDENTIFICATOR = 61;
+  int OPENPARENTHESIS = 61;
   /** RegularExpression Id. */
-  int INDENTIFICADOR_INVALIDO = 62;
+  int CLOSEPARENTHESIS = 62;
   /** RegularExpression Id. */
-  int STRING_DUPLA = 63;
+  int LETTER_UPPER = 63;
   /** RegularExpression Id. */
-  int STRING_SIMPLES = 64;
+  int LETTER_LOWER = 64;
   /** RegularExpression Id. */
-  int SIMBOLO_INVALIDO = 65;
+  int LETTER_ID = 65;
   /** RegularExpression Id. */
-  int CONSTANTE_NUM_INTEIRA_INVALIDA = 66;
+  int DIGIT_ID = 66;
   /** RegularExpression Id. */
-  int CONSTANTE_NUM_REAL_INVALIDA = 67;
+  int SYMBOL_UND = 67;
   /** RegularExpression Id. */
-  int STRING_INVALIDA = 68;
+  int IDENTIFICATOR = 68;
+  /** RegularExpression Id. */
+  int INDENTIFICADOR_INVALIDO = 69;
+  /** RegularExpression Id. */
+  int STRING_DUPLA = 70;
+  /** RegularExpression Id. */
+  int STRING_SIMPLES = 71;
+  /** RegularExpression Id. */
+  int SIMBOLO_INVALIDO = 72;
+  /** RegularExpression Id. */
+  int CONSTANTE_NUM_INTEIRA_INVALIDA = 73;
+  /** RegularExpression Id. */
+  int CONSTANTE_NUM_REAL_INVALIDA = 74;
+  /** RegularExpression Id. */
+  int STRING_INVALIDA = 75;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -149,49 +163,56 @@ public interface ParserConstants {
     "<CONSTANTE_NUM_INTEIRA>",
     "<CONSTANTE_NUM_REAL>",
     "<DIGIT>",
-    "\"purpose\"",
-    "\"program\"",
-    "\"define\"",
-    "\"constant\"",
-    "\"is\"",
-    "\"not\"",
-    "\"char\"",
-    "\"boolean\"",
-    "\"integer\"",
-    "\"float\"",
-    "\"execute\"",
-    "\"set\"",
-    "\"to\"",
-    "\"get\"",
-    "\"put\"",
-    "\"loop\"",
-    "\"while\"",
-    "\"true\"",
     "\"do\"",
-    "\"false\"",
-    "\".\"",
+    "\"this\"",
+    "\"body\"",
+    "\"description\"",
+    "\"declaration\"",
+    "\"type\"",
+    "\"is\"",
+    "\"constant\"",
+    "\"and\"",
+    "\"variable\"",
+    "\"as\"",
+    "\"integer\"",
+    "\"real\"",
+    "\"string\"",
+    "\"logic\"",
+    "\"designeted\"",
+    "\"to\"",
+    "\"read\"",
+    "\"write\"",
+    "\"all\"",
+    "\"repeat\"",
+    "\"true\"",
+    "\"untrue\"",
     "\"[\"",
     "\"]\"",
+    "\".\"",
     "\",\"",
-    "\"{\"",
-    "\"}\"",
+    "\"=\"",
     "\"+\"",
     "\"-\"",
     "\"*\"",
     "\"/\"",
+    "\"**\"",
     "\"%\"",
-    "\"=\"",
-    "\"!\"",
-    "\">\"",
-    "\">=\"",
-    "\"<\"",
-    "\"<=\"",
-    "\"&\"",
-    "\"!=\"",
+    "\"{\"",
+    "\"}\"",
     "\"%%\"",
+    "\"==\"",
+    "\"!=\"",
+    "\"<<\"",
+    "\">>\"",
+    "\"<<=\"",
+    "\">>=\"",
+    "\"&\"",
     "\"|\"",
+    "\"!\"",
     "\"(\"",
     "\")\"",
+    "<LETTER_UPPER>",
+    "<LETTER_LOWER>",
     "<LETTER_ID>",
     "<DIGIT_ID>",
     "<SYMBOL_UND>",
