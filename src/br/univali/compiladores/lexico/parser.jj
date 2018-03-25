@@ -86,7 +86,7 @@ JAVACODE void program() {
                     default:
                         if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.UNTRUE) {
                             tokenType = "<PALAVRAS_RESERVADAS>";
-                        } else if (t.kind >= ParserConstants.DOT && t.kind <= ParserConstants.CLOSEPARENTHESIS) {
+                        } else if (t.kind >= ParserConstants.OPENBRACKET && t.kind <= ParserConstants.CLOSEPARENTHESIS) {
                             tokenType = "<SIMBOLOS_ESPECIAIS>";
                         } else {
                             tokenType = im(st.kind);
@@ -174,29 +174,32 @@ TOKEN : {
 
 //SPECIAL SYMBOLS
 TOKEN : {
-    <DOT: ".">
-	| < OPENBRACKET: "[">
+     < OPENBRACKET: "["> 
 	| < CLOSEBRACKET: "]">
+	| <DOT: ".">
 	| < COMMA: ",">
-	| < OPENBRACE: "{">
-	| < CLOSEBRACE: "}">
+	| < ASSIGNMENT: "=">
 	| < PLUS: "+">
 	| < MINUS: "-">
 	| < MULTIPLY: "*">
 	| < FRACTION: "/">
+	| < POTENCY: "**">
 	| < PERCENT: "%">
-        | < EQUALS: "=">
-	| < EXCLAMATION: "!">
-	| < GREATER: ">">
-	| < GREATEREQUAL: ">=">
-        | < LESS: "<">
-	| < LESSEQUAL: "<=">
-	| < AMPERSAND: "&">
-	| < DIFFERENT: "!=">
+	| < OPENBRACE: "{">
+	| < CLOSEBRACE: "}">
 	| < MOD: "%%">
+	| < EQUALS: "==">
+        | < DIFFERENT: "!=">
+	| < LESS: "<<">
+	| < GREATER: ">>">
+	| < LESSEQUAL: "<<=">
+	| < GREATEREQUAL: ">>=">
+	| < AMPERSAND: "&">	
 	| < PIPE: "|">
+	| < EXCLAMATION: "!">	
 	| < OPENPARENTHESIS: "(">
 	| < CLOSEPARENTHESIS: ")">
+
 }
 
 TOKEN : //Global
