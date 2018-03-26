@@ -57,7 +57,7 @@ public class ScreenController
             }
 
         } else
-        {   System.out.println(fileName);
+        {
             if (isEdited(jtaEdit, fileName) == true)
             {
                 Object[] options
@@ -80,12 +80,12 @@ public class ScreenController
                     jtaMessage.setText("");
                     jf.setTitle("Compilador - [sem nome.djt]");
                 }
-            }
-            else{
-                 fileName = "sem nome.djt";
-                 jtaEdit.setText("");
-                 jtaMessage.setText("");
-                 jf.setTitle("Compilador - [sem nome.djt]");
+            } else
+            {
+                fileName = "sem nome.djt";
+                jtaEdit.setText("");
+                jtaMessage.setText("");
+                jf.setTitle("Compilador - [sem nome.djt]");
             }
         }
         return fileName;
@@ -98,13 +98,21 @@ public class ScreenController
             if (fileName.equalsIgnoreCase("sem nome.djt"))
             {
                 String message = "Nome do arquivo: ";
+                String aux = "";
                 do
                 {
-                    fileName = JOptionPane.showInputDialog(message);
-                    fileName += ".djt";
-                    if (exists(fileName))
+                    aux = JOptionPane.showInputDialog(message);
+                    if (aux != null)
                     {
-                        message = "O arquivo já existe. Informe um novo nome.";
+                        fileName = aux;
+                        fileName += ".djt";
+                        if (exists(fileName))
+                        {
+                            message = "O arquivo já existe. Informe um novo nome.";
+                        }
+                    }
+                    else{
+                        break;
                     }
                 } while (exists(fileName));
             }
@@ -418,8 +426,8 @@ public class ScreenController
                 }
             }
             jtaMessage.setText(output);
-        }
-        else{
+        } else
+        {
             JOptionPane.showMessageDialog(null, "Um arquivo vazio não pode ser compilado.");
         }
     }
