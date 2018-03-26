@@ -314,7 +314,8 @@ public class ScreenController
 
         } catch (FileNotFoundException ex)
         {
-            Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Arquivo não encontrado.");
+            newFileName = fileName;
         } catch (IOException ex)
         {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
