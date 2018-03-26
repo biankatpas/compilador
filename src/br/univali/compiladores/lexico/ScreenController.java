@@ -412,5 +412,8 @@ public class ScreenController
             }
             jtaMessage.setText(output);
         }
+        else{
+            JOptionPane.showMessageDialog(null, "Um arquivo vazio não pode ser compilado.");
+        }
     }
 }
