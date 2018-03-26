@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/biankatpas/Dropbox/Workspace/compilador/src/br/univali/compiladores/lexico/parser.jj</file>
-            <file>file:/home/biankatpas/Dropbox/Workspace/compilador/src/br/univali/compiladores/lexico/ParserTokenManager.java</file>
-            <file>file:/home/biankatpas/Dropbox/Workspace/compilador/src/br/univali/compiladores/lexico/Parser.java</file>
+            <file>file:/C:/Users/Sanguinetto/Documents/NetBeansProjects/compiladores/compilador/src/br/univali/compiladores/lexico/ParseException.java</file>
+            <file>file:/C:/Users/Sanguinetto/Documents/NetBeansProjects/compiladores/compilador/src/br/univali/compiladores/lexico/parser.jj</file>
+            <file>file:/C:/Users/Sanguinetto/Documents/NetBeansProjects/compiladores/compilador/src/br/univali/compiladores/lexico/Parser.java</file>
+            <file>file:/C:/Users/Sanguinetto/Documents/NetBeansProjects/compiladores/compilador/src/br/univali/compiladores/lexico/ParserConstants.java</file>
         </group>
     </open-files>
 </project-private>
