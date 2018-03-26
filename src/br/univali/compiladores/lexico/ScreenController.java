@@ -57,7 +57,7 @@ public class ScreenController
             }
 
         } else
-        {
+        {   System.out.println(fileName);
             if (isEdited(jtaEdit, fileName) == true)
             {
                 Object[] options
@@ -80,6 +80,12 @@ public class ScreenController
                     jtaMessage.setText("");
                     jf.setTitle("Compilador - [sem nome.djt]");
                 }
+            }
+            else{
+                 fileName = "sem nome.djt";
+                 jtaEdit.setText("");
+                 jtaMessage.setText("");
+                 jf.setTitle("Compilador - [sem nome.djt]");
             }
         }
         return fileName;
