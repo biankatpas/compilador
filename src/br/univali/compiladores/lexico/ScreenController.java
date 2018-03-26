@@ -110,8 +110,8 @@ public class ScreenController
                         {
                             message = "O arquivo já existe. Informe um novo nome.";
                         }
-                    }
-                    else{
+                    } else
+                    {
                         break;
                     }
                 } while (exists(fileName));
@@ -138,13 +138,21 @@ public class ScreenController
         try
         {
             String message = "Nome do arquivo: ";
+            String aux = "";
             do
             {
-                fileName = JOptionPane.showInputDialog(message);
-                fileName += ".djt";
-                if (exists(fileName))
+                aux = JOptionPane.showInputDialog(message);
+                if (aux != null)
                 {
-                    message = "O arquivo já existe. Informe um novo nome.";
+                    fileName = aux;
+                    fileName += ".djt";
+                    if (exists(fileName))
+                    {
+                        message = "O arquivo já existe. Informe um novo nome.";
+                    }
+                } else
+                {
+                    break;
                 }
             } while (exists(fileName));
 
