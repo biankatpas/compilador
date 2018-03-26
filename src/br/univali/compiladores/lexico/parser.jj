@@ -213,7 +213,7 @@ TOKEN : //Global
 
 TOKEN : // Identificadores
 {
-    <IDENTIFICATOR: (<LETTER_UPPER>(<SYMBOL_UND>)?) 
+      <IDENTIFICATOR:(<LETTER_UPPER>(<SYMBOL_UND>)?) 
                     |(<LETTER_UPPER>(<SYMBOL_UND>)?((<LETTER_ID>)?|(<DIGIT_ID>(<DIGIT_ID>)?)))((<SYMBOL_UND>)|(<LETTER_ID>)+) //INICIO LETRA OU _
                     ((((<LETTER_ID>)+(<SYMBOL_UND>))|<DIGIT_ID>(<DIGIT_ID>)? (<LETTER_ID>|<SYMBOL_UND>) | <LETTER_ID><SYMBOL_UND>((<LETTER_ID>)+|<DIGIT_ID>(<DIGIT_ID>)?(<LETTER_ID>)+))*  
                     | ( (<SYMBOL_UND> ((<LETTER_ID>)+|<DIGIT_ID>(<DIGIT_ID>)?))*<SYMBOL_UND>(<LETTER_ID>)+) 
@@ -225,16 +225,17 @@ TOKEN : // Identificadores
                     (((<LETTER_ID>)+|<DIGIT_ID>(<DIGIT_ID>)? (<LETTER_ID>|<SYMBOL_UND>) | <LETTER_ID><SYMBOL_UND>((<LETTER_ID>)+|<DIGIT_ID>(<DIGIT_ID>)?(<LETTER_ID>)+))*  
                     | ( (<SYMBOL_UND> ((<LETTER_ID>)+|<DIGIT_ID>(<DIGIT_ID>)?))*<SYMBOL_UND>(<LETTER_ID>)+) 
                     | ( (<SYMBOL_UND> ((<LETTER_ID>)+|<DIGIT_ID>(<DIGIT_ID>)?))+<SYMBOL_UND>)
-                    | ( (<SYMBOL_UND> ((<LETTER_ID>)+|<DIGIT_ID>(<DIGIT_ID>)?))*(<LETTER_ID>)+))*(<SYMBOL_UND>)? 
+                    | ( (<SYMBOL_UND> ((<LETTER_ID>)+|<DIGIT_ID>(<DIGIT_ID>)?))*(<LETTER_ID>)+))*(<SYMBOL_UND>)?
 
 >
 }
 
 TOKEN :
 {
-<IDENTIFICADOR_INVALIDO: <DIGIT_ID>(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* //COMECA COM DIGITO    
+<IDENTIFICADOR_INVALIDO:
+                                 (<DIGIT_ID>)+((<LETTER_ID>(<DIGIT_ID>)?(<DIGIT_ID>)?)|<SYMBOL_UND>(<DIGIT_ID>)?(<DIGIT_ID>)?)+ //COMECA COM DIGITO    
                                 | ((<LETTER_ID>|<SYMBOL_UND>)(<DIGIT_ID>)?(<DIGIT_ID>)?)+ (<DIGIT_ID>)+ //TERMINA COM DIGITO
-                                | (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* (<DIGIT_ID><DIGIT_ID><DIGIT_ID>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // DIGITOS CONSECUTIVOS
+                                | (<LETTER_ID>|<SYMBOL_UND>)+ (<DIGIT_ID><DIGIT_ID><DIGIT_ID>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // DIGITOS CONSECUTIVOS
                                 | (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* (<SYMBOL_UND><SYMBOL_UND>) (<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* //SIMBOLOS CONSECUTIVOS
                                 | (<SYMBOL_UND>)(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // INICIANDO COM _     
                                 | (<LETTER_LOWER>)(<LETTER_ID>|<SYMBOL_UND>|<DIGIT_ID>)* // INCIANDO COM MINUSCULA
