@@ -242,8 +242,7 @@ public class ScreenController
                     {
                         newFileName = aux;
                         newFileName += ".djt";
-                        BufferedReader br = new BufferedReader(new FileReader(newFileName));
-                        jtaEdit.setText(br.readLine());
+                        readFileText(newFileName, jtaEdit);
                         jtaMessage.setText("");
                         jf.setTitle("Compilador - " + newFileName);
                     }
@@ -263,8 +262,7 @@ public class ScreenController
                         {
                             newFileName = aux;
                             newFileName += ".djt";
-                            BufferedReader br = new BufferedReader(new FileReader(newFileName));
-                            jtaEdit.setText(br.readLine());
+                            readFileText(newFileName, jtaEdit);
                             jtaMessage.setText("");
                             jf.setTitle("Compilador - " + newFileName);
                         }
@@ -276,8 +274,7 @@ public class ScreenController
                         {
                             newFileName = aux;
                             newFileName += ".djt";
-                            BufferedReader br = new BufferedReader(new FileReader(newFileName));
-                            jtaEdit.setText(br.readLine());
+                            readFileText(newFileName, jtaEdit);
                             jtaMessage.setText("");
                             jf.setTitle("Compilador - " + newFileName);
                         }
@@ -301,8 +298,7 @@ public class ScreenController
                         {
                             newFileName = aux;
                             newFileName += ".djt";
-                            BufferedReader br = new BufferedReader(new FileReader(newFileName));
-                            jtaEdit.setText(br.readLine());
+                            readFileText(newFileName, jtaEdit);
                             jtaMessage.setText("");
                             jf.setTitle("Compilador - " + newFileName);
                         }
@@ -313,8 +309,7 @@ public class ScreenController
                         {
                             newFileName = aux;
                             newFileName += ".djt";
-                            BufferedReader br = new BufferedReader(new FileReader(newFileName));
-                            jtaEdit.setText(br.readLine());
+                            readFileText(newFileName, jtaEdit);
                             jtaMessage.setText("");
                             jf.setTitle("Compilador - " + newFileName);
                         }
@@ -326,8 +321,7 @@ public class ScreenController
                     {
                         newFileName = aux;
                         newFileName += ".djt";
-                        BufferedReader br = new BufferedReader(new FileReader(newFileName));
-                        jtaEdit.setText(br.readLine());
+                        readFileText(newFileName, jtaEdit);
                         jtaMessage.setText("");
                         jf.setTitle("Compilador - " + newFileName);
                     }
@@ -343,6 +337,30 @@ public class ScreenController
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return newFileName;
+    }
+
+    private void readFileText(String fileName, JTextArea jta) throws IOException
+    {
+
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+        try
+        {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null)
+            {
+                sb.append(line);
+                sb.append("\n");
+                line = br.readLine();
+            }
+            jta.setText(sb.toString());
+//            originalString = sb.toString();
+        } finally
+        {
+            br.close();
+        }
+
     }
 
     public void exit(JTextArea jta, String fileName, JFrame jf)
