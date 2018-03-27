@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 public class MainScreen extends javax.swing.JFrame
 {
 
-     /**
+    /**
      * Creates new form Screen
      */
     public MainScreen()
@@ -40,11 +40,12 @@ public class MainScreen extends javax.swing.JFrame
         btRun = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btAbout = new javax.swing.JButton();
-        jspEdit = new javax.swing.JScrollPane();
-        jtaEdit = new javax.swing.JTextArea();
         jspMessage = new javax.swing.JScrollPane();
         jtaMessage = new javax.swing.JTextArea();
         jsTextAreaSeparator = new javax.swing.JSeparator();
+        jspEdit = new javax.swing.JScrollPane();
+        jtaEdit = new javax.swing.JEditorPane();
+        lbPosition = new javax.swing.JLabel();
         jmbMenuBar = new javax.swing.JMenuBar();
         jmFile = new javax.swing.JMenu();
         jmiNew = new javax.swing.JMenuItem();
@@ -194,15 +195,20 @@ public class MainScreen extends javax.swing.JFrame
         });
         jtbToolBar.add(btAbout);
 
-        jtaEdit.setColumns(20);
-        jtaEdit.setLineWrap(true);
-        jtaEdit.setRows(5);
-        jspEdit.setViewportView(jtaEdit);
-
         jtaMessage.setColumns(20);
         jtaMessage.setLineWrap(true);
         jtaMessage.setRows(5);
         jspMessage.setViewportView(jtaMessage);
+
+        jtaEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jtaEdit.addCaretListener(new javax.swing.event.CaretListener()
+        {
+            public void caretUpdate(javax.swing.event.CaretEvent evt)
+            {
+                jtaEditCaretUpdate(evt);
+            }
+        });
+        jspEdit.setViewportView(jtaEdit);
 
         jmFile.setText("Arquivo");
 
@@ -332,22 +338,26 @@ public class MainScreen extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspEdit)
             .addComponent(jspMessage)
             .addComponent(jsTextAreaSeparator)
             .addComponent(jtbToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
+            .addComponent(jspEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lbPosition)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jtbToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jspEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addComponent(jspEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jsTextAreaSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jspMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jspMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(lbPosition))
         );
 
         pack();
@@ -446,6 +456,12 @@ public class MainScreen extends javax.swing.JFrame
         control.exit(jtaEdit, fileName, this);
     }//GEN-LAST:event_jmiExitActionPerformed
 
+    private void jtaEditCaretUpdate(javax.swing.event.CaretEvent evt)//GEN-FIRST:event_jtaEditCaretUpdate
+    {//GEN-HEADEREND:event_jtaEditCaretUpdate
+        control.getPosition(jtaEdit, lbPosition);
+    }//GEN-LAST:event_jtaEditCaretUpdate
+
+    
     /**
      * @param args the command line arguments
      */
@@ -522,9 +538,10 @@ public class MainScreen extends javax.swing.JFrame
     private javax.swing.JToolBar.Separator jsToolBarSeparator2;
     private javax.swing.JScrollPane jspEdit;
     private javax.swing.JScrollPane jspMessage;
-    private javax.swing.JTextArea jtaEdit;
+    private javax.swing.JEditorPane jtaEdit;
     private javax.swing.JTextArea jtaMessage;
     private javax.swing.JToolBar jtbToolBar;
+    private javax.swing.JLabel lbPosition;
     // End of variables declaration//GEN-END:variables
     private ScreenController control = new ScreenController();
     private String fileName = "sem nome.djt";

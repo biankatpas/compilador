@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
@@ -23,7 +25,7 @@ import javax.swing.JTextArea;
 public class ScreenController
 {
 
-    public String newFile(JTextArea jtaEdit, JTextArea jtaMessage, JFrame jf, String fileName)
+    public String newFile(JEditorPane jtaEdit, JTextArea jtaMessage, JFrame jf, String fileName)
     {
         if (fileName.equals("sem nome.djt"))
         {
@@ -91,7 +93,7 @@ public class ScreenController
         return fileName;
     }
 
-    public String save(String fileName, JTextArea jta, JFrame jf)
+    public String save(String fileName, JEditorPane jta, JFrame jf)
     {
         try
         {
@@ -133,7 +135,7 @@ public class ScreenController
         return fileName;
     }
 
-    public String saveAs(JTextArea jta, String fileName, JFrame jf)
+    public String saveAs(JEditorPane jta, String fileName, JFrame jf)
     {
         try
         {
@@ -173,38 +175,38 @@ public class ScreenController
         return fileName;
     }
 
-    public boolean isEdited(JTextArea jta, String fileName)
+    public boolean isEdited(JEditorPane jta, String fileName)
     {
         try
         {
-
             FileReader arq = new FileReader(fileName);
-            BufferedReader lerArq = new BufferedReader(arq);
+            BufferedReader readArq = new BufferedReader(arq);
+           
             Scanner reader = new Scanner(jta.getText());
+            
             ArrayList<String> jtaLines = new ArrayList<>();
-            ArrayList<String> originalFileLines = new ArrayList<>();
+            ArrayList<String> fileLines = new ArrayList<>();
 
-            String linha = lerArq.readLine();
-            originalFileLines.add(linha);
-            while (linha != null)
+            fileLines.add(readArq.readLine());
+            while (readArq.readLine() != null)
             {
-                linha = lerArq.readLine();
+                fileLines.add(readArq.readLine());
             }
             arq.close();
             while (reader.hasNextLine())
             {
                 jtaLines.add(reader.nextLine());
             }
-
-            if (originalFileLines.size() != jtaLines.size())
+            
+            if (fileLines.size() != jtaLines.size())
             {
                 return true;
             } else
             {
 
-                for (int i = 0; i < originalFileLines.size(); i++)
+                for (int i = 0; i < fileLines.size(); i++)
                 {
-                    if (!originalFileLines.get(i).equals(jtaLines.get(i)))
+                    if (!fileLines.get(i).equals(jtaLines.get(i)))
                     {
                         return true;
                     }
@@ -227,7 +229,7 @@ public class ScreenController
         return file.exists();
     }
 
-    public String openFile(JTextArea jtaEdit, JTextArea jtaMessage, String fileName, JFrame jf)
+    public String openFile(JEditorPane jtaEdit, JTextArea jtaMessage, String fileName, JFrame jf)
     {
         String newFileName = fileName;
         String aux = "";
@@ -339,7 +341,7 @@ public class ScreenController
         return newFileName;
     }
 
-    private void readFileText(String fileName, JTextArea jta) throws IOException
+    private void readFileText(String fileName, JEditorPane jta) throws IOException
     {
 
         BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -355,7 +357,6 @@ public class ScreenController
                 line = br.readLine();
             }
             jta.setText(sb.toString());
-//            originalString = sb.toString();
         } finally
         {
             br.close();
@@ -363,7 +364,7 @@ public class ScreenController
 
     }
 
-    public void exit(JTextArea jta, String fileName, JFrame jf)
+    public void exit(JEditorPane jta, String fileName, JFrame jf)
     {
         if (fileName.equals("sem nome.djt"))
         {
@@ -417,22 +418,29 @@ public class ScreenController
         JOptionPane.showMessageDialog(null, "Desenvolvido por:\nBianka Passos\nJuliana Sanguinetto");
     }
 
-    public void cut(JTextArea jta)
+    public void cut(JEditorPane jta)
     {
         jta.cut();
     }
 
-    public void copy(JTextArea jta)
+    public void copy(JEditorPane jta)
     {
         jta.copy();
     }
 
-    public void paste(JTextArea jta)
+    public void paste(JEditorPane jta)
     {
         jta.paste();
     }
 
-    public void compile(JTextArea jtaEdit, JTextArea jtaMessage)
+    public void getPosition(JEditorPane jta, JLabel lb)
+    {
+        int row = jta.getDocument().getRootElements()[0].getElementIndex(jta.getCaretPosition());
+        int col = jta.getCaretPosition() - jta.getDocument().getRootElements()[0].getElement(row).getStartOffset();
+        lb.setText("Linha: " + (row + 1) + ", Coluna:" + (col + 1));
+    }
+
+    public void compile(JEditorPane jtaEdit, JTextArea jtaMessage)
     {
         Parser p = new Parser();
         if (!jtaEdit.getText().equals(""))
