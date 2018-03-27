@@ -179,34 +179,40 @@ public class ScreenController
     {
         try
         {
-            FileReader arq = new FileReader(fileName);
-            BufferedReader readArq = new BufferedReader(arq);
-           
-            Scanner reader = new Scanner(jta.getText());
-            
-            ArrayList<String> jtaLines = new ArrayList<>();
-            ArrayList<String> fileLines = new ArrayList<>();
 
-            fileLines.add(readArq.readLine());
-            while (readArq.readLine() != null)
+            FileReader arq = new FileReader(fileName);
+            BufferedReader lerArq = new BufferedReader(arq);
+            Scanner reader = new Scanner(jta.getText());
+            ArrayList<String> jtaLines = new ArrayList<>();
+            ArrayList<String> originalFileLines = new ArrayList<>();
+
+            String linha = lerArq.readLine();
+            originalFileLines.add(linha);
+            while (linha != null)
             {
-                fileLines.add(readArq.readLine());
+                linha = lerArq.readLine();
+                if (linha != null)
+                {
+                    originalFileLines.add(linha);
+                }
             }
             arq.close();
             while (reader.hasNextLine())
             {
                 jtaLines.add(reader.nextLine());
             }
-            
-            if (fileLines.size() != jtaLines.size())
+
+            System.out.println(originalFileLines);
+            if (originalFileLines.size() != jtaLines.size())
             {
+                System.out.println("bostaaaaaaa");
                 return true;
             } else
             {
 
-                for (int i = 0; i < fileLines.size(); i++)
+                for (int i = 0; i < originalFileLines.size(); i++)
                 {
-                    if (!fileLines.get(i).equals(jtaLines.get(i)))
+                    if (!originalFileLines.get(i).equals(jtaLines.get(i)))
                     {
                         return true;
                     }
