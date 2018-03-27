@@ -1,5 +1,6 @@
 package br.univali.compiladores.lexico;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -444,8 +445,19 @@ public class ScreenController
         int col = jta.getCaretPosition() - jta.getDocument().getRootElements()[0].getElement(row).getStartOffset();
         lb.setText("Linha: " + (row + 1) + ", Coluna:" + (col + 1));
     }
+    
+    public void setFeedback(JLabel lb, boolean status, int error){
+        if(!status){
+            lb.setText("Compilado com sucesso...");
+            lb.setBackground(Color.GREEN);
+        }
+        else{
+            lb.setText("Contem " + error+ " erros...");
+            lb.setBackground(Color.RED);
+        }
+    }
 
-    public void compile(JEditorPane jtaEdit, JTextArea jtaMessage)
+    public void compile(JEditorPane jtaEdit, JTextArea jtaMessage, JLabel lb)
     {
         Parser p = new Parser();
         if (!jtaEdit.getText().equals(""))
@@ -453,18 +465,20 @@ public class ScreenController
             String output = "";
             jtaMessage.setText("");
             List<Message> parserOutput = p.lexicalAnalizer(jtaEdit.getText());
-
+            int error_counter = 0;
             for (int i = 0; i < parserOutput.size(); i++)
             {
                 if (parserOutput.get(i).isError())
                 {
                     output += parserOutput.get(i).getMessage() + "\n";
+                    error_counter++;
                 } else
                 {
                     output += parserOutput.get(i).getMessage() + "\n";
                 }
             }
             jtaMessage.setText(output);
+            setFeedback(lb, error_counter>0, error_counter);
         } else
         {
             JOptionPane.showMessageDialog(null, "Um arquivo vazio não pode ser compilado.");

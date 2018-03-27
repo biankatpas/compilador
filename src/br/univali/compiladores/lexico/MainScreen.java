@@ -46,6 +46,7 @@ public class MainScreen extends javax.swing.JFrame
         jspEdit = new javax.swing.JScrollPane();
         jtaEdit = new javax.swing.JEditorPane();
         lbPosition = new javax.swing.JLabel();
+        lbFeedback = new javax.swing.JLabel();
         jmbMenuBar = new javax.swing.JMenuBar();
         jmFile = new javax.swing.JMenu();
         jmiNew = new javax.swing.JMenuItem();
@@ -344,7 +345,9 @@ public class MainScreen extends javax.swing.JFrame
             .addComponent(jspEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lbPosition)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,9 +358,14 @@ public class MainScreen extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jsTextAreaSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jspMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                .addGap(23, 23, 23)
-                .addComponent(lbPosition))
+                .addComponent(jspMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(lbPosition))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
@@ -443,7 +451,7 @@ public class MainScreen extends javax.swing.JFrame
 
     private void jmiCompileActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiCompileActionPerformed
     {//GEN-HEADEREND:event_jmiCompileActionPerformed
-        control.compile(jtaEdit, jtaMessage);
+        control.compile(jtaEdit, jtaMessage, lbFeedback);
     }//GEN-LAST:event_jmiCompileActionPerformed
 
     private void jmiRunActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiRunActionPerformed
@@ -541,6 +549,7 @@ public class MainScreen extends javax.swing.JFrame
     private javax.swing.JEditorPane jtaEdit;
     private javax.swing.JTextArea jtaMessage;
     private javax.swing.JToolBar jtbToolBar;
+    private javax.swing.JLabel lbFeedback;
     private javax.swing.JLabel lbPosition;
     // End of variables declaration//GEN-END:variables
     private ScreenController control = new ScreenController();
