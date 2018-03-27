@@ -144,30 +144,30 @@ TOKEN : {
 }
 
 //RESERVED WORDS
-TOKEN : {
-    <DO: "do"|"DO">
-	| <THIS: "this"|"THIS">
-        | <BODY: "body"|"BODY">
-	| <DESCRIPTION: "description"|"DESCRIPTION">
-	| <DECLARATION: "declaration"|"DECLARATION">
-	| <TYPE: "type"|"TYPE">
-	| <IS: "is"|"IS">
-	| <CONSTANT: "constant"|"CONSTANT">
-	| <AND: "and"|"AND">
-        | <VARIABLE: "variable"|"VARIABLE">  
-	| <AS: "as"|"AS">
-	| <INTEGER: "integer"|"INTEGER">
-	| <REAL: "real"|"REAL">
-	| <STRING: "string"|"STRING">
-	| <LOGIC: "logic"|"LOGIC">
-	| <DESIGNATE: "designate"|"DESIGNATE">
-	| <TO: "to"|"TO">
-	| <READ: "read"|"READ">
-	| <WRITE: "write"|"WRITE">
-	| <ALL: "all"|"ALL">
-        | <REPEAT: "repeat"|"REPEAT">
-        | <TRUE: "true"|"TRUE">
-        | <UNTRUE: "untrue"|"UNTRUE">
+TOKEN [IGNORE_CASE]: {
+    <DO: "do">
+	| <THIS: "this">
+        | <BODY: "body">
+	| <DESCRIPTION: "description">
+	| <DECLARATION: "declaration">
+	| <TYPE: "type">
+	| <IS: "is">
+	| <CONSTANT: "constant">
+	| <AND: "and">
+        | <VARIABLE: "variable">  
+	| <AS: "as">
+	| <INTEGER: "integer">
+	| <REAL: "real">
+	| <STRING: "string">
+	| <LOGIC: "logic">
+	| <DESIGNATE: "designate">
+	| <TO: "to">
+	| <READ: "read">
+	| <WRITE: "write">
+	| <ALL: "all">
+        | <REPEAT: "repeat">
+        | <TRUE: "true">
+        | <UNTRUE: "untrue">
 
 }
 
@@ -213,8 +213,7 @@ TOKEN : //Global
 
 TOKEN : // Identificadores
 {
-    <IDENTIFICADOR: (<LETTER_UPPER>)(<SYMBOL_UND>)?((<LETTER_ID>(<SYMBOL_UND>)?)|(<DIGIT_ID>(<DIGIT_ID>)?(<LETTER_ID>|<SYMBOL_UND>|(<LETTER_ID>)<SYMBOL_UND>)))*> 
-                    
+    <IDENTIFICADOR: (<LETTER_UPPER>)(<SYMBOL_UND>)?((<LETTER_ID>(<SYMBOL_UND>)?)|(<DIGIT_ID>(<DIGIT_ID>)?(<LETTER_ID>|<SYMBOL_UND>|(<LETTER_ID>)<SYMBOL_UND>)))*>                    
 }
 
 TOKEN :
