@@ -202,7 +202,6 @@ public class ScreenController
                 jtaLines.add(reader.nextLine());
             }
 
-            System.out.println(originalFileLines);
             if (originalFileLines.size() != jtaLines.size())
             {
                 System.out.println("bostaaaaaaa");
