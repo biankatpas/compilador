@@ -449,11 +449,11 @@ public class ScreenController
     public void setFeedback(JLabel lb, boolean status, int error){
         if(!status){
             lb.setText("Compilado com sucesso...");
-            lb.setBackground(Color.GREEN);
+            lb.setForeground(Color.black);
         }
         else{
             lb.setText("Contem " + error+ " erros...");
-            lb.setBackground(Color.RED);
+            lb.setForeground(Color.RED);
         }
     }
 
