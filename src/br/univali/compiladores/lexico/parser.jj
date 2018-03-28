@@ -71,9 +71,6 @@ JAVACODE void program() {
                     case ParserConstants.IDENTIFICADOR_INVALIDO:
                         output.add(new Message("Error: Identificador Invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
-                    case ParserConstants.SIMBOLO_INVALIDO:
-                        output.add(new Message("Error: Simbolo Invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
-                        break;
                     case ParserConstants.CONSTANTE_NUM_INTEIRA_INVALIDA:
                         output.add(new Message("Error: Constante numerica inteira invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
@@ -84,7 +81,7 @@ JAVACODE void program() {
                         output.add(new Message("Error: Constante literal invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
                     default:
-                        if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.AVALIATE) {
+                        if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.UNTRUE) {
                             tokenType = "<PALAVRAS_RESERVADAS>";
                         } else if (t.kind >= ParserConstants.OPENBRACKET && t.kind <= ParserConstants.CLOSEPARENTHESIS) {
                             tokenType = "<SIMBOLOS_ESPECIAIS>";
@@ -111,7 +108,7 @@ JAVACODE void program() {
 
 //CHARACTERS TO SCAPE
 SKIP : {
-    " "
+          " "
 	| "\t"
         | "\n"
         | "\r"
@@ -239,22 +236,7 @@ TOKEN: {
 
 TOKEN :
 {
-    <SIMBOLO_INVALIDO: (~ [
-                    "{",
-                    "}",
-                    ">",
-                    "<",
-                    "(",
-                    ")",
-                    "\"",
-                    "\'",
-                    " ",
-                    "\t",
-                    "\n",
-                    "\r",
-                    "\f"])+ >
-            
-    | <CONSTANTE_NUM_INTEIRA_INVALIDA: ((<DIGIT>){4}(<DIGIT>)+) >
+    <CONSTANTE_NUM_INTEIRA_INVALIDA: ((<DIGIT>){4}(<DIGIT>)+) >
     | <CONSTANTE_NUM_REAL_INVALIDA:   ((<DIGIT>){6})+(<DOT>) (<DIGIT>)*
                                     | (((<DIGIT>){5})+(<DOT>)((<DIGIT>)(<DIGIT>)(<DIGIT>)+)*)
                                     | (((<DIGIT>){4})+(<DOT>)((<DIGIT>)(<DIGIT>)(<DIGIT>)+)*) 
@@ -265,3 +247,38 @@ TOKEN :
     | <STRING_INVALIDA: "\"" (~["\n","\r","\""])* ~["\""]
                                             | "\'" (~["\n","\r","\'"])* ~["\'"]|"'">
   }
+
+TOKEN :
+{
+    < INVALID_LEXICAL : (~ [
+		"a"-"z",
+		"A"-"Z",
+		"0"-"9",
+		"[",
+		"]",
+		"=",
+		".",
+		"/",
+		"(",
+		")",
+		"+",
+		"-",
+		"*",
+		"%",
+		"=",
+		"!",
+		"<",
+		">",
+		"&",
+		"|",
+		"!",   
+		" ",
+		"\t",
+		"\n",
+		"\r",
+		"\f"
+    ])+ > {
+		System.out.println("Entrada Inválida"  + "  -  Linha: " + input_stream.getEndLine()  + " / Coluna " + input_stream.getBeginColumn());
+                //System.out.println("Linha: " + input_stream.getEndLine() + " / Coluna: " + input_stream.getBeginColumn() + " - Entrada de dados inválida: " + image);
+    }
+}
