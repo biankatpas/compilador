@@ -213,7 +213,7 @@ public class MainScreen extends javax.swing.JFrame
 
         jmFile.setText("Arquivo");
 
-        jmiNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        jmiNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_MASK));
         jmiNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/new.png"))); // NOI18N
         jmiNew.setText("Novo");
         jmiNew.addActionListener(new java.awt.event.ActionListener()
@@ -225,7 +225,7 @@ public class MainScreen extends javax.swing.JFrame
         });
         jmFile.add(jmiNew);
 
-        jmiOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jmiOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
         jmiOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/open.png"))); // NOI18N
         jmiOpen.setText("Abrir");
         jmiOpen.addActionListener(new java.awt.event.ActionListener()
@@ -237,7 +237,7 @@ public class MainScreen extends javax.swing.JFrame
         });
         jmFile.add(jmiOpen);
 
-        jmiSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jmiSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
         jmiSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         jmiSave.setText("Salvar");
         jmiSave.addActionListener(new java.awt.event.ActionListener()
@@ -249,7 +249,7 @@ public class MainScreen extends javax.swing.JFrame
         });
         jmFile.add(jmiSave);
 
-        jmiSaveAs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jmiSaveAs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
         jmiSaveAs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save-as.png"))); // NOI18N
         jmiSaveAs.setText("Salvar como...");
         jmiSaveAs.addActionListener(new java.awt.event.ActionListener()
@@ -261,7 +261,7 @@ public class MainScreen extends javax.swing.JFrame
         });
         jmFile.add(jmiSaveAs);
 
-        jmiExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        jmiExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.SHIFT_MASK));
         jmiExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         jmiExit.setText("Sair");
         jmiExit.addActionListener(new java.awt.event.ActionListener()
@@ -277,7 +277,7 @@ public class MainScreen extends javax.swing.JFrame
 
         jmEdit.setText("Edição");
 
-        jmiCopy.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jmiCopy.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
         jmiCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/copy.png"))); // NOI18N
         jmiCopy.setText("Copiar");
         jmiCopy.addActionListener(new java.awt.event.ActionListener()
@@ -301,7 +301,7 @@ public class MainScreen extends javax.swing.JFrame
         });
         jmEdit.add(jmiPaste);
 
-        jmiCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        jmiCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.SHIFT_MASK));
         jmiCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cut.png"))); // NOI18N
         jmiCut.setText("Recortar");
         jmiCut.addActionListener(new java.awt.event.ActionListener()
