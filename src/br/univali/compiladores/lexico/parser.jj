@@ -80,11 +80,11 @@ JAVACODE void program() {
                     case ParserConstants.CONSTANTE_NUM_REAL_INVALIDA:
                         output.add(new Message("Error: Constante numerica real invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
-                    case ParserConstants.STRING_INVALIDA:
+                    case ParserConstants.CONSTANTE_LITERAL_INVALIDA:
                         output.add(new Message("Error: Constante literal invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
                     default:
-                        if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.UNTRUE) {
+                        if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.AVALIATE) {
                             tokenType = "<PALAVRAS_RESERVADAS>";
                         } else if (t.kind >= ParserConstants.OPENBRACKET && t.kind <= ParserConstants.CLOSEPARENTHESIS) {
                             tokenType = "<SIMBOLOS_ESPECIAIS>";
@@ -231,7 +231,7 @@ TOKEN :
 
 }   
 
-// STRINGS TOKEN
+// CONSTANTE LITERAL TOKEN
 TOKEN: {
    <CONSTANTE_LITERAL: "\"" (~[ "\"" ])* "\""> 
 }
@@ -247,7 +247,7 @@ TOKEN :
                                     | (((<DIGIT>){2})+(<DOT>)((<DIGIT>)(<DIGIT>)(<DIGIT>)+)*) 
                                     | ((<DIGIT>)+(<DOT>)((<DIGIT>)(<DIGIT>)(<DIGIT>)+)*) >
 
-    | <STRING_INVALIDA: "\"" (~["\n","\r","\""])* ~["\""]
+    | <CONSTANTE_LITERAL_INVALIDA: "\"" (~["\n","\r","\""])* ~["\""]
                                             | "\'" (~["\n","\r","\'"])* ~["\'"]|"'">
   }
 
