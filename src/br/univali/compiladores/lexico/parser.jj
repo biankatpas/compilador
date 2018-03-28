@@ -71,6 +71,9 @@ JAVACODE void program() {
                     case ParserConstants.IDENTIFICADOR_INVALIDO:
                         output.add(new Message("Error: Identificador Invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
+                     case ParserConstants.SIMBOLO_INVALIDO:
+                        output.add(new Message("Error: Simbolo invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        break;    
                     case ParserConstants.CONSTANTE_NUM_INTEIRA_INVALIDA:
                         output.add(new Message("Error: Constante numerica inteira invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
@@ -250,7 +253,7 @@ TOKEN :
 
 TOKEN :
 {
-    < INVALID_LEXICAL : (~ [
+    < SIMBOLO_INVALIDO : (~ [
 		"a"-"z",
 		"A"-"Z",
 		"0"-"9",
@@ -277,8 +280,5 @@ TOKEN :
 		"\n",
 		"\r",
 		"\f"
-    ])+ > {
-		System.out.println("Entrada Inválida"  + "  -  Linha: " + input_stream.getEndLine()  + " / Coluna " + input_stream.getBeginColumn());
-                //System.out.println("Linha: " + input_stream.getEndLine() + " / Coluna: " + input_stream.getBeginColumn() + " - Entrada de dados inválida: " + image);
-    }
+    ])+ > 
 }
