@@ -452,7 +452,7 @@ public class ScreenController
             lb.setForeground(Color.black);
         }
         else{
-            lb.setText("Contem " + error+ " erros...");
+            lb.setText("Contem " + error+ " erro(s)...");
             lb.setForeground(Color.RED);
         }
     }

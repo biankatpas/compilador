@@ -24,8 +24,7 @@ public class MainScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jtbToolBar = new javax.swing.JToolBar();
         btNew = new javax.swing.JButton();
@@ -72,10 +71,8 @@ public class MainScreen extends javax.swing.JFrame
         btNew.setFocusable(false);
         btNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btNew.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btNew.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btNewActionPerformed(evt);
             }
         });
@@ -86,10 +83,8 @@ public class MainScreen extends javax.swing.JFrame
         btOpen.setFocusable(false);
         btOpen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btOpen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btOpen.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btOpenActionPerformed(evt);
             }
         });
@@ -100,10 +95,8 @@ public class MainScreen extends javax.swing.JFrame
         btSave.setFocusable(false);
         btSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btSave.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSaveActionPerformed(evt);
             }
         });
@@ -115,10 +108,8 @@ public class MainScreen extends javax.swing.JFrame
         btCut.setFocusable(false);
         btCut.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCut.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btCut.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCutActionPerformed(evt);
             }
         });
@@ -129,10 +120,8 @@ public class MainScreen extends javax.swing.JFrame
         btCopy.setFocusable(false);
         btCopy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCopy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btCopy.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCopyActionPerformed(evt);
             }
         });
@@ -143,10 +132,8 @@ public class MainScreen extends javax.swing.JFrame
         btPaste.setFocusable(false);
         btPaste.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btPaste.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btPaste.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btPaste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btPasteActionPerformed(evt);
             }
         });
@@ -158,10 +145,8 @@ public class MainScreen extends javax.swing.JFrame
         btCompile.setFocusable(false);
         btCompile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCompile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btCompile.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btCompile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCompileActionPerformed(evt);
             }
         });
@@ -172,10 +157,8 @@ public class MainScreen extends javax.swing.JFrame
         btRun.setFocusable(false);
         btRun.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btRun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btRun.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btRun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btRunActionPerformed(evt);
             }
         });
@@ -187,25 +170,22 @@ public class MainScreen extends javax.swing.JFrame
         btAbout.setFocusable(false);
         btAbout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btAbout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btAbout.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAboutActionPerformed(evt);
             }
         });
         jtbToolBar.add(btAbout);
 
+        jtaMessage.setEditable(false);
         jtaMessage.setColumns(20);
         jtaMessage.setLineWrap(true);
         jtaMessage.setRows(5);
         jspMessage.setViewportView(jtaMessage);
 
         jtaEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jtaEdit.addCaretListener(new javax.swing.event.CaretListener()
-        {
-            public void caretUpdate(javax.swing.event.CaretEvent evt)
-            {
+        jtaEdit.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 jtaEditCaretUpdate(evt);
             }
         });
@@ -216,10 +196,8 @@ public class MainScreen extends javax.swing.JFrame
         jmiNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_MASK));
         jmiNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/new.png"))); // NOI18N
         jmiNew.setText("Novo");
-        jmiNew.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jmiNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiNewActionPerformed(evt);
             }
         });
@@ -228,10 +206,8 @@ public class MainScreen extends javax.swing.JFrame
         jmiOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
         jmiOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/open.png"))); // NOI18N
         jmiOpen.setText("Abrir");
-        jmiOpen.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jmiOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiOpenActionPerformed(evt);
             }
         });
@@ -240,10 +216,8 @@ public class MainScreen extends javax.swing.JFrame
         jmiSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
         jmiSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         jmiSave.setText("Salvar");
-        jmiSave.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jmiSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiSaveActionPerformed(evt);
             }
         });
@@ -252,10 +226,8 @@ public class MainScreen extends javax.swing.JFrame
         jmiSaveAs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
         jmiSaveAs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save-as.png"))); // NOI18N
         jmiSaveAs.setText("Salvar como...");
-        jmiSaveAs.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jmiSaveAs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiSaveAsActionPerformed(evt);
             }
         });
@@ -264,10 +236,8 @@ public class MainScreen extends javax.swing.JFrame
         jmiExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.SHIFT_MASK));
         jmiExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         jmiExit.setText("Sair");
-        jmiExit.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jmiExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiExitActionPerformed(evt);
             }
         });
@@ -277,37 +247,28 @@ public class MainScreen extends javax.swing.JFrame
 
         jmEdit.setText("Edição");
 
-        jmiCopy.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
         jmiCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/copy.png"))); // NOI18N
         jmiCopy.setText("Copiar");
-        jmiCopy.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jmiCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiCopyActionPerformed(evt);
             }
         });
         jmEdit.add(jmiCopy);
 
-        jmiPaste.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jmiPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paste.png"))); // NOI18N
         jmiPaste.setText("Colar");
-        jmiPaste.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jmiPaste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiPasteActionPerformed(evt);
             }
         });
         jmEdit.add(jmiPaste);
 
-        jmiCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.SHIFT_MASK));
         jmiCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cut.png"))); // NOI18N
         jmiCut.setText("Recortar");
-        jmiCut.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jmiCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiCutActionPerformed(evt);
             }
         });
@@ -320,10 +281,8 @@ public class MainScreen extends javax.swing.JFrame
         jmiCompile.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         jmiCompile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/compile.png"))); // NOI18N
         jmiCompile.setText("Compilar");
-        jmiCompile.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jmiCompile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiCompileActionPerformed(evt);
             }
         });
@@ -332,10 +291,8 @@ public class MainScreen extends javax.swing.JFrame
         jmiRun.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
         jmiRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
         jmiRun.setText("Executar");
-        jmiRun.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jmiRun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiRunActionPerformed(evt);
             }
         });
