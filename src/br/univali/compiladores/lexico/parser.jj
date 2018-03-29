@@ -83,6 +83,8 @@ JAVACODE void program() {
                     case ParserConstants.CONSTANTE_LITERAL_INVALIDA:
                         output.add(new Message("Error "+ st.kind+": Constante literal invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
+                    case ParserConstants.COMENTARIO_BLOCO:
+                        break;
                     default:
                         if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.AVALIATE) {
                             tokenType = "<PALAVRAS_RESERVADAS>";
@@ -119,7 +121,7 @@ SKIP : {
 }
 
 SKIP : {
-    "/*": multilinecomment
+    "##": multilinecomment
 }
 
 SKIP : {
@@ -127,7 +129,7 @@ SKIP : {
 }
 
 <multilinecomment> SKIP : {
-	"*/": DEFAULT
+	"#": DEFAULT
 	| <~[]>
 }
 
@@ -240,7 +242,7 @@ TOKEN: {
 TOKEN :
 {
     <CONSTANTE_NUM_INTEIRA_INVALIDA: ((<DIGIT>){4}(<DIGIT>)+) >
-    | <CONSTANTE_NUM_REAL_INVALIDA:   ((<DIGIT>){6})+(<DOT>) (<DIGIT>)*
+    | <CONSTANTE_NUM_REAL_INVALIDA:   ((<DIGIT>){5}(<DIGIT>)+)(<DOT>) (<DIGIT>)*
                                     | (((<DIGIT>){5})+(<DOT>)((<DIGIT>)(<DIGIT>)(<DIGIT>)+)*)
                                     | (((<DIGIT>){4})+(<DOT>)((<DIGIT>)(<DIGIT>)(<DIGIT>)+)*) 
                                     | (((<DIGIT>){3})+(<DOT>)((<DIGIT>)(<DIGIT>)(<DIGIT>)+)*) 
@@ -249,7 +251,10 @@ TOKEN :
 
     | <CONSTANTE_LITERAL_INVALIDA: "\"" (~["\n","\r","\""])* ~["\""]
                                             | "\'" (~["\n","\r","\'"])* ~["\'"]|"'">
-  }
+    
+    | <COMENTARIO_BLOCO_INVALIDO: "##" (~["#"])* >
+    | <COMENTARIO_BLOCO: "##" (~["#"])* "#">
+}
 
 TOKEN :
 {
