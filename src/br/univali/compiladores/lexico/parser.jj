@@ -85,6 +85,9 @@ JAVACODE void program() {
                         break;
                     case ParserConstants.COMENTARIO_BLOCO:
                         break;
+                    case ParserConstants.COMENTARIO_BLOCO_INVALIDO:
+                        output.add(new Message("Error "+ st.kind+": Comentario de bloco nao finalizado em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        break;
                     default:
                         if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.AVALIATE) {
                             tokenType = "<PALAVRAS_RESERVADAS>";
