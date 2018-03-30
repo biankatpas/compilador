@@ -476,7 +476,7 @@ public class MainScreen extends javax.swing.JFrame
 
     private void jtaEditCaretUpdate(javax.swing.event.CaretEvent evt)//GEN-FIRST:event_jtaEditCaretUpdate
     {//GEN-HEADEREND:event_jtaEditCaretUpdate
-        control.getPosition(jtaEdit, lbPosition);
+        control.getPosition(evt, lbPosition);
     }//GEN-LAST:event_jtaEditCaretUpdate
 
     

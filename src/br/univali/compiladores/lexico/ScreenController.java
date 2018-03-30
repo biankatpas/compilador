@@ -18,6 +18,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.event.CaretEvent;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.Utilities;
 
 /**
  *
@@ -439,20 +443,54 @@ public class ScreenController
         jta.paste();
     }
 
-    public void getPosition(JEditorPane jta, JLabel lb)
+    public void getPosition(CaretEvent evt, JLabel lb)
     {
-        int row = jta.getDocument().getRootElements()[0].getElementIndex(jta.getCaretPosition());
-        int col = jta.getCaretPosition() - jta.getDocument().getRootElements()[0].getElement(row).getStartOffset();
-        lb.setText("Linha: " + (row + 1) + ", Coluna:" + (col + 1));
+//        int row = jta.getDocument().getRootElements()[0].getElementIndex(jta.getCaretPosition());
+//        int col = jta.getCaretPosition() - jta.getDocument().getRootElements()[0].getElement(row).getStartOffset();
+        int x = getRow(evt.getDot(), (JTextComponent) evt.getSource());
+        int y = getColumn(evt.getDot(), (JTextComponent) evt.getSource());
+        lb.setText("Linha: " + x + ", Coluna:" + y);
     }
-    
-    public void setFeedback(JLabel lb, boolean status, int error){
-        if(!status){
+
+    private int getRow(int pos, JTextComponent editor)
+    {
+        int rn = (pos == 0) ? 1 : 0;
+        try
+        {
+            int offs = pos;
+            while (offs > 0)
+            {
+                offs = Utilities.getRowStart(editor, offs) - 1;
+                rn++;
+            }
+        } catch (BadLocationException e)
+        {
+            e.printStackTrace();
+        }
+        return rn;
+    }
+
+    private int getColumn(int pos, JTextComponent editor)
+    {
+        try
+        {
+            return pos - Utilities.getRowStart(editor, pos) + 1;
+        } catch (BadLocationException e)
+        {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public void setFeedback(JLabel lb, boolean status, int error)
+    {
+        if (!status)
+        {
             lb.setText("Compilado com sucesso...");
             lb.setForeground(Color.black);
-        }
-        else{
-            lb.setText("Contem " + error+ " erros...");
+        } else
+        {
+            lb.setText("Contem " + error + " erros...");
             lb.setForeground(Color.RED);
         }
     }
@@ -478,7 +516,7 @@ public class ScreenController
                 }
             }
             jtaMessage.setText(output);
-            setFeedback(lb, error_counter>0, error_counter);
+            setFeedback(lb, error_counter > 0, error_counter);
         } else
         {
             JOptionPane.showMessageDialog(null, "Um arquivo vazio não pode ser compilado.");
