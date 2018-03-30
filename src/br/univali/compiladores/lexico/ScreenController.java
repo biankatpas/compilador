@@ -1,24 +1,29 @@
 package br.univali.compiladores.lexico;
 
-import java.awt.Color;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.event.CaretEvent;
+import java.awt.Color;
+import javax.swing.JFileChooser;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.Utilities;
@@ -239,24 +244,49 @@ public class ScreenController
         return file.exists();
     }
 
-    public String openFile(JEditorPane jtaEdit, JTextArea jtaMessage, String fileName, JFrame jf)
+    private String getProjectPath()
+    {
+        File exeFile = new File(".");
+        String path = exeFile.getAbsolutePath();
+        return path;
+    }
+
+    public String openFile(JEditorPane jtaEdit, JTextArea jtaMessage, String fileName, String filePath, JFrame jf)
     {
         String newFileName = fileName;
         String aux = "";
+
+        final JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter txt = new FileNameExtensionFilter("Text (*.txt;*.text)", "txt", "text");
+        FileNameExtensionFilter djt = new FileNameExtensionFilter("DJT (*.djt)", "djt");
+        FileNameExtensionFilter cmp = new FileNameExtensionFilter("CMP (*.cmp)", "cmp");
+        FileFilter defaultFilter = fc.getFileFilter();
+
+        Path currentRelativePath = Paths.get("");
+        fc.setSelectedFile(new File(getProjectPath()));
+
+        fc.setFileFilter(txt);
+        fc.setFileFilter(djt);
+        fc.setFileFilter(cmp);
+        fc.setFileFilter(defaultFilter);
+
         try
         {
             if (fileName.equals("sem nome.djt"))
             {
                 if ("".equals(jtaEdit.getText()))
                 {
-                    aux = JOptionPane.showInputDialog("Nome do arquivo:");
-                    if (aux != null)
+                    if (fc.showOpenDialog(fc) == JFileChooser.APPROVE_OPTION)
                     {
-                        newFileName = aux;
-                        newFileName += ".djt";
-                        readFileText(newFileName, jtaEdit);
-                        jtaMessage.setText("");
-                        jf.setTitle("Compilador - " + newFileName);
+                        if (fc.getSelectedFile() != null)
+                        {
+                            filePath = fc.getSelectedFile().toString();
+                            File selectedFile = new File(filePath);
+                            newFileName = selectedFile.getName();
+                            readFileText(newFileName, jtaEdit);
+                            jtaMessage.setText("");
+                            jf.setTitle("Compilador - " + newFileName);
+                        }
                     }
                 } else
                 {
@@ -269,26 +299,32 @@ public class ScreenController
 
                     if (op == 1) //dont save file
                     {
-                        aux = JOptionPane.showInputDialog("Nome do arquivo:");
-                        if (aux != null)
+                        if (fc.showOpenDialog(fc) == JFileChooser.APPROVE_OPTION)
                         {
-                            newFileName = aux;
-                            newFileName += ".djt";
-                            readFileText(newFileName, jtaEdit);
-                            jtaMessage.setText("");
-                            jf.setTitle("Compilador - " + newFileName);
+                            if (fc.getSelectedFile() != null)
+                            {
+                                filePath = fc.getSelectedFile().toString();
+                                File selectedFile = new File(filePath);
+                                newFileName = selectedFile.getName();
+                                readFileText(newFileName, jtaEdit);
+                                jtaMessage.setText("");
+                                jf.setTitle("Compilador - " + newFileName);
+                            }
                         }
                     } else if (op == 0) //save file
                     {
                         save(fileName, jtaEdit, jf);
-                        aux = JOptionPane.showInputDialog("Nome do arquivo:");
-                        if (aux != null)
+                        if (fc.showOpenDialog(fc) == JFileChooser.APPROVE_OPTION)
                         {
-                            newFileName = aux;
-                            newFileName += ".djt";
-                            readFileText(newFileName, jtaEdit);
-                            jtaMessage.setText("");
-                            jf.setTitle("Compilador - " + newFileName);
+                            if (fc.getSelectedFile() != null)
+                            {
+                                filePath = fc.getSelectedFile().toString();
+                                File selectedFile = new File(filePath);
+                                newFileName = selectedFile.getName();
+                                readFileText(newFileName, jtaEdit);
+                                jtaMessage.setText("");
+                                jf.setTitle("Compilador - " + newFileName);
+                            }
                         }
                     }
                 }
@@ -305,37 +341,46 @@ public class ScreenController
                     if (op == 0) //save file
                     {
                         save(fileName, jtaEdit, jf);
-                        aux = JOptionPane.showInputDialog("Nome do arquivo:");
-                        if (aux != null)
+                        if (fc.showOpenDialog(fc) == JFileChooser.APPROVE_OPTION)
                         {
-                            newFileName = aux;
-                            newFileName += ".djt";
-                            readFileText(newFileName, jtaEdit);
-                            jtaMessage.setText("");
-                            jf.setTitle("Compilador - " + newFileName);
+                            if (fc.getSelectedFile() != null)
+                            {
+                                filePath = fc.getSelectedFile().toString();
+                                File selectedFile = new File(filePath);
+                                newFileName = selectedFile.getName();
+                                readFileText(newFileName, jtaEdit);
+                                jtaMessage.setText("");
+                                jf.setTitle("Compilador - " + newFileName);
+                            }
                         }
                     } else if (op == 1) //dont save file
                     {
-                        aux = JOptionPane.showInputDialog("Nome do arquivo:");
-                        if (aux != null)
+                        if (fc.showOpenDialog(fc) == JFileChooser.APPROVE_OPTION)
                         {
-                            newFileName = aux;
-                            newFileName += ".djt";
-                            readFileText(newFileName, jtaEdit);
-                            jtaMessage.setText("");
-                            jf.setTitle("Compilador - " + newFileName);
+                            if (fc.getSelectedFile() != null)
+                            {
+                                filePath = fc.getSelectedFile().toString();
+                                File selectedFile = new File(filePath);
+                                newFileName = selectedFile.getName();
+                                readFileText(newFileName, jtaEdit);
+                                jtaMessage.setText("");
+                                jf.setTitle("Compilador - " + newFileName);
+                            }
                         }
                     }
                 } else
                 {
-                    aux = JOptionPane.showInputDialog("Nome do arquivo:");
-                    if (aux != null)
+                    if (fc.showOpenDialog(fc) == JFileChooser.APPROVE_OPTION)
                     {
-                        newFileName = aux;
-                        newFileName += ".djt";
-                        readFileText(newFileName, jtaEdit);
-                        jtaMessage.setText("");
-                        jf.setTitle("Compilador - " + newFileName);
+                        if (fc.getSelectedFile() != null)
+                        {
+                            filePath = fc.getSelectedFile().toString();
+                            File selectedFile = new File(filePath);
+                            newFileName = selectedFile.getName();
+                            readFileText(newFileName, jtaEdit);
+                            jtaMessage.setText("");
+                            jf.setTitle("Compilador - " + newFileName);
+                        }
                     }
                 }
             }
@@ -488,9 +533,9 @@ public class ScreenController
         {
             lb.setText("Compilado com sucesso...");
             lb.setForeground(Color.black);
-        }
-        else{
-            lb.setText("Contem " + error+ " erro(s)...");
+        } else
+        {
+            lb.setText("Contem " + error + " erro(s)...");
             lb.setForeground(Color.RED);
         }
     }
@@ -516,7 +561,7 @@ public class ScreenController
                 }
             }
             jtaMessage.setText(output);
-            setFeedback(lb, error_counter>0, error_counter);
+            setFeedback(lb, error_counter > 0, error_counter);
         } else
         {
             JOptionPane.showMessageDialog(null, "Um arquivo vazio não pode ser compilado.");

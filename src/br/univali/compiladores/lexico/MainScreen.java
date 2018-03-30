@@ -199,6 +199,7 @@ public class MainScreen extends javax.swing.JFrame
         });
         jtbToolBar.add(btAbout);
 
+        jSplitPanel.setDividerSize(20);
         jSplitPanel.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPanel.setOneTouchExpandable(true);
 
@@ -254,11 +255,11 @@ public class MainScreen extends javax.swing.JFrame
         );
         jpMessageLayout.setVerticalGroup(
             jpMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
+            .addGap(0, 170, Short.MAX_VALUE)
             .addGroup(jpMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jpMessageLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jspMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                    .addComponent(jspMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -481,7 +482,7 @@ public class MainScreen extends javax.swing.JFrame
 
     private void jmiOpenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiOpenActionPerformed
     {//GEN-HEADEREND:event_jmiOpenActionPerformed
-        fileName = control.openFile(jtaEdit, jtaMessage, fileName, this);
+        fileName = control.openFile(jtaEdit, jtaMessage, fileName, filePath, this);
     }//GEN-LAST:event_jmiOpenActionPerformed
 
     private void jmiCopyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiCopyActionPerformed
@@ -632,4 +633,5 @@ public class MainScreen extends javax.swing.JFrame
     // End of variables declaration//GEN-END:variables
     private ScreenController control = new ScreenController();
     private String fileName = "sem nome.djt";
+    private String filePath = "";
 }
