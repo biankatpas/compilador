@@ -244,31 +244,38 @@ public class ScreenController
         return file.exists();
     }
 
-    private String getProjectPath()
+    private String getPath(String filePath)
     {
         File exeFile = new File(".");
-        String path = exeFile.getAbsolutePath();
+        String path = "";
+        if (filePath.equals(""))
+        {
+            path = exeFile.getAbsolutePath();
+        } else
+        {
+            exeFile = new File(filePath);
+            path = exeFile.getAbsolutePath();
+        }
         return path;
     }
 
     public String openFile(JEditorPane jtaEdit, JTextArea jtaMessage, String fileName, String filePath, JFrame jf)
     {
         String newFileName = fileName;
-        String aux = "";
+        String dir = "";
+        String res = "";
 
         final JFileChooser fc = new JFileChooser();
-        FileNameExtensionFilter txt = new FileNameExtensionFilter("Text (*.txt;*.text)", "txt", "text");
+//        FileNameExtensionFilter txt = new FileNameExtensionFilter("Text (*.txt;*.text)", "txt", "text");
+//        FileNameExtensionFilter cmp = new FileNameExtensionFilter("CMP (*.cmp)", "cmp");
         FileNameExtensionFilter djt = new FileNameExtensionFilter("DJT (*.djt)", "djt");
-        FileNameExtensionFilter cmp = new FileNameExtensionFilter("CMP (*.cmp)", "cmp");
         FileFilter defaultFilter = fc.getFileFilter();
-
-        Path currentRelativePath = Paths.get("");
-        fc.setSelectedFile(new File(getProjectPath()));
-
-        fc.setFileFilter(txt);
+        dir = getPath(filePath);
+        fc.setSelectedFile(new File(dir));
         fc.setFileFilter(djt);
-        fc.setFileFilter(cmp);
-        fc.setFileFilter(defaultFilter);
+//        fc.setFileFilter(txt);
+//        fc.setFileFilter(cmp);
+//        fc.setFileFilter(defaultFilter);
 
         try
         {
@@ -280,7 +287,9 @@ public class ScreenController
                     {
                         if (fc.getSelectedFile() != null)
                         {
+                            dir = fc.getSelectedFile().getAbsolutePath();
                             filePath = fc.getSelectedFile().toString();
+                            System.out.println(filePath);
                             File selectedFile = new File(filePath);
                             newFileName = selectedFile.getName();
                             readFileText(newFileName, jtaEdit);
@@ -303,6 +312,8 @@ public class ScreenController
                         {
                             if (fc.getSelectedFile() != null)
                             {
+
+                                dir = fc.getSelectedFile().getAbsolutePath();
                                 filePath = fc.getSelectedFile().toString();
                                 File selectedFile = new File(filePath);
                                 newFileName = selectedFile.getName();
@@ -318,6 +329,7 @@ public class ScreenController
                         {
                             if (fc.getSelectedFile() != null)
                             {
+                                dir = fc.getSelectedFile().getAbsolutePath();
                                 filePath = fc.getSelectedFile().toString();
                                 File selectedFile = new File(filePath);
                                 newFileName = selectedFile.getName();
@@ -345,6 +357,7 @@ public class ScreenController
                         {
                             if (fc.getSelectedFile() != null)
                             {
+                                dir = fc.getSelectedFile().getAbsolutePath();
                                 filePath = fc.getSelectedFile().toString();
                                 File selectedFile = new File(filePath);
                                 newFileName = selectedFile.getName();
@@ -359,6 +372,7 @@ public class ScreenController
                         {
                             if (fc.getSelectedFile() != null)
                             {
+                                dir = fc.getSelectedFile().getAbsolutePath();
                                 filePath = fc.getSelectedFile().toString();
                                 File selectedFile = new File(filePath);
                                 newFileName = selectedFile.getName();
@@ -374,6 +388,7 @@ public class ScreenController
                     {
                         if (fc.getSelectedFile() != null)
                         {
+                            dir = fc.getSelectedFile().getAbsolutePath();
                             filePath = fc.getSelectedFile().toString();
                             File selectedFile = new File(filePath);
                             newFileName = selectedFile.getName();
@@ -393,12 +408,12 @@ public class ScreenController
         {
             Logger.getLogger(ScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return newFileName;
+
+        return newFileName + "," + dir;
     }
 
     private void readFileText(String fileName, JEditorPane jta) throws IOException
     {
-
         BufferedReader br = new BufferedReader(new FileReader(fileName));
         try
         {

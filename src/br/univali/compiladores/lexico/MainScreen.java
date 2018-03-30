@@ -482,7 +482,13 @@ public class MainScreen extends javax.swing.JFrame
 
     private void jmiOpenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiOpenActionPerformed
     {//GEN-HEADEREND:event_jmiOpenActionPerformed
-        fileName = control.openFile(jtaEdit, jtaMessage, fileName, filePath, this);
+        String res = control.openFile(jtaEdit, jtaMessage, fileName, filePath, this);
+        String array[] = new String[2];
+        array = res.split(",");
+        fileName = array[0];
+        filePath = array[1];
+        System.out.println(fileName);
+        System.out.println(filePath);
     }//GEN-LAST:event_jmiOpenActionPerformed
 
     private void jmiCopyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiCopyActionPerformed
