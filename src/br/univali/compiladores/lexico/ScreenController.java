@@ -488,9 +488,9 @@ public class ScreenController
         {
             lb.setText("Compilado com sucesso...");
             lb.setForeground(Color.black);
-        } else
-        {
-            lb.setText("Contem " + error + " erros...");
+        }
+        else{
+            lb.setText("Contem " + error+ " erro(s)...");
             lb.setForeground(Color.RED);
         }
     }
@@ -516,7 +516,7 @@ public class ScreenController
                 }
             }
             jtaMessage.setText(output);
-            setFeedback(lb, error_counter > 0, error_counter);
+            setFeedback(lb, error_counter>0, error_counter);
         } else
         {
             JOptionPane.showMessageDialog(null, "Um arquivo vazio não pode ser compilado.");

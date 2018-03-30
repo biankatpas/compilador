@@ -69,22 +69,27 @@ JAVACODE void program() {
 		do {
                 switch (t.kind) {
                     case ParserConstants.IDENTIFICADOR_INVALIDO:
-                        output.add(new Message("Error: Identificador Invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        output.add(new Message("Error "+ st.kind+": Identificador Invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
                      case ParserConstants.SIMBOLO_INVALIDO:
-                        output.add(new Message("Error: Simbolo invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        output.add(new Message("Error "+ st.kind+": Simbolo invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;    
                     case ParserConstants.CONSTANTE_NUM_INTEIRA_INVALIDA:
-                        output.add(new Message("Error: Constante numerica inteira invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        output.add(new Message("Error "+ st.kind+": Constante numerica inteira invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
                     case ParserConstants.CONSTANTE_NUM_REAL_INVALIDA:
-                        output.add(new Message("Error: Constante numerica real invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        output.add(new Message("Error "+ st.kind+": Constante numerica real invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
-                    case ParserConstants.STRING_INVALIDA:
-                        output.add(new Message("Error: Constante literal invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                    case ParserConstants.CONSTANTE_LITERAL_INVALIDA:
+                        output.add(new Message("Error "+ st.kind+": Constante literal invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        break;
+                    case ParserConstants.COMENTARIO_BLOCO:
+                        break;
+                    case ParserConstants.COMENTARIO_BLOCO_INVALIDO:
+                        output.add(new Message("Error "+ st.kind+": Comentario de bloco nao finalizado em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
                         break;
                     default:
-                        if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.UNTRUE) {
+                        if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.AVALIATE) {
                             tokenType = "<PALAVRAS_RESERVADAS>";
                         } else if (t.kind >= ParserConstants.OPENBRACKET && t.kind <= ParserConstants.CLOSEPARENTHESIS) {
                             tokenType = "<SIMBOLOS_ESPECIAIS>";
@@ -119,7 +124,7 @@ SKIP : {
 }
 
 SKIP : {
-    "/*": multilinecomment
+    "##": multilinecomment
 }
 
 SKIP : {
@@ -127,7 +132,7 @@ SKIP : {
 }
 
 <multilinecomment> SKIP : {
-	"*/": DEFAULT
+	"#": DEFAULT
 	| <~[]>
 }
 
@@ -231,7 +236,7 @@ TOKEN :
 
 }   
 
-// STRINGS TOKEN
+// CONSTANTE LITERAL TOKEN
 TOKEN: {
    <CONSTANTE_LITERAL: "\"" (~[ "\"" ])* "\""> 
 }
@@ -240,16 +245,19 @@ TOKEN: {
 TOKEN :
 {
     <CONSTANTE_NUM_INTEIRA_INVALIDA: ((<DIGIT>){4}(<DIGIT>)+) >
-    | <CONSTANTE_NUM_REAL_INVALIDA:   ((<DIGIT>){6})+(<DOT>) (<DIGIT>)*
+    | <CONSTANTE_NUM_REAL_INVALIDA:   ((<DIGIT>){5}(<DIGIT>)+)(<DOT>) (<DIGIT>)*
                                     | (((<DIGIT>){5})+(<DOT>)((<DIGIT>)(<DIGIT>)(<DIGIT>)+)*)
                                     | (((<DIGIT>){4})+(<DOT>)((<DIGIT>)(<DIGIT>)(<DIGIT>)+)*) 
                                     | (((<DIGIT>){3})+(<DOT>)((<DIGIT>)(<DIGIT>)(<DIGIT>)+)*) 
                                     | (((<DIGIT>){2})+(<DOT>)((<DIGIT>)(<DIGIT>)(<DIGIT>)+)*) 
                                     | ((<DIGIT>)+(<DOT>)((<DIGIT>)(<DIGIT>)(<DIGIT>)+)*) >
 
-    | <STRING_INVALIDA: "\"" (~["\n","\r","\""])* ~["\""]
+    | <CONSTANTE_LITERAL_INVALIDA: "\"" (~["\n","\r","\""])* ~["\""]
                                             | "\'" (~["\n","\r","\'"])* ~["\'"]|"'">
-  }
+    
+    | <COMENTARIO_BLOCO_INVALIDO: "##" (~["#"])* >
+    | <COMENTARIO_BLOCO: "##" (~["#"])* "#">
+}
 
 TOKEN :
 {
