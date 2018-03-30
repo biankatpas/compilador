@@ -24,7 +24,8 @@ public class MainScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jtbToolBar = new javax.swing.JToolBar();
         btNew = new javax.swing.JButton();
@@ -39,13 +40,16 @@ public class MainScreen extends javax.swing.JFrame
         btRun = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btAbout = new javax.swing.JButton();
-        jspMessage = new javax.swing.JScrollPane();
-        jtaMessage = new javax.swing.JTextArea();
-        jsTextAreaSeparator = new javax.swing.JSeparator();
-        jspEdit = new javax.swing.JScrollPane();
-        jtaEdit = new javax.swing.JEditorPane();
         lbPosition = new javax.swing.JLabel();
         lbFeedback = new javax.swing.JLabel();
+        jpMain = new javax.swing.JPanel();
+        jSplitPanel = new javax.swing.JSplitPane();
+        jpEdit = new javax.swing.JPanel();
+        jspEdit = new javax.swing.JScrollPane();
+        jtaEdit = new javax.swing.JEditorPane();
+        jpMessage = new javax.swing.JPanel();
+        jspMessage = new javax.swing.JScrollPane();
+        jtaMessage = new javax.swing.JTextArea();
         jmbMenuBar = new javax.swing.JMenuBar();
         jmFile = new javax.swing.JMenu();
         jmiNew = new javax.swing.JMenuItem();
@@ -71,8 +75,10 @@ public class MainScreen extends javax.swing.JFrame
         btNew.setFocusable(false);
         btNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btNew.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btNew.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btNewActionPerformed(evt);
             }
         });
@@ -83,8 +89,10 @@ public class MainScreen extends javax.swing.JFrame
         btOpen.setFocusable(false);
         btOpen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btOpen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btOpen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btOpen.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btOpenActionPerformed(evt);
             }
         });
@@ -95,8 +103,10 @@ public class MainScreen extends javax.swing.JFrame
         btSave.setFocusable(false);
         btSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btSaveActionPerformed(evt);
             }
         });
@@ -108,8 +118,10 @@ public class MainScreen extends javax.swing.JFrame
         btCut.setFocusable(false);
         btCut.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCut.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btCut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btCut.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btCutActionPerformed(evt);
             }
         });
@@ -120,8 +132,10 @@ public class MainScreen extends javax.swing.JFrame
         btCopy.setFocusable(false);
         btCopy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCopy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btCopy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btCopy.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btCopyActionPerformed(evt);
             }
         });
@@ -132,8 +146,10 @@ public class MainScreen extends javax.swing.JFrame
         btPaste.setFocusable(false);
         btPaste.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btPaste.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btPaste.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btPaste.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btPasteActionPerformed(evt);
             }
         });
@@ -145,8 +161,10 @@ public class MainScreen extends javax.swing.JFrame
         btCompile.setFocusable(false);
         btCompile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btCompile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btCompile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btCompile.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btCompileActionPerformed(evt);
             }
         });
@@ -157,8 +175,10 @@ public class MainScreen extends javax.swing.JFrame
         btRun.setFocusable(false);
         btRun.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btRun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btRun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btRun.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btRunActionPerformed(evt);
             }
         });
@@ -170,12 +190,50 @@ public class MainScreen extends javax.swing.JFrame
         btAbout.setFocusable(false);
         btAbout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btAbout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btAbout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btAbout.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btAboutActionPerformed(evt);
             }
         });
         jtbToolBar.add(btAbout);
+
+        jSplitPanel.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPanel.setOneTouchExpandable(true);
+
+        jtaEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jtaEdit.addCaretListener(new javax.swing.event.CaretListener()
+        {
+            public void caretUpdate(javax.swing.event.CaretEvent evt)
+            {
+                jtaEditCaretUpdate(evt);
+            }
+        });
+        jspEdit.setViewportView(jtaEdit);
+
+        javax.swing.GroupLayout jpEditLayout = new javax.swing.GroupLayout(jpEdit);
+        jpEdit.setLayout(jpEditLayout);
+        jpEditLayout.setHorizontalGroup(
+            jpEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1008, Short.MAX_VALUE)
+            .addGroup(jpEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpEditLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jspEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jpEditLayout.setVerticalGroup(
+            jpEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 512, Short.MAX_VALUE)
+            .addGroup(jpEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpEditLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jspEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jSplitPanel.setLeftComponent(jpEdit);
 
         jtaMessage.setEditable(false);
         jtaMessage.setColumns(20);
@@ -183,21 +241,55 @@ public class MainScreen extends javax.swing.JFrame
         jtaMessage.setRows(5);
         jspMessage.setViewportView(jtaMessage);
 
-        jtaEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jtaEdit.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jtaEditCaretUpdate(evt);
-            }
-        });
-        jspEdit.setViewportView(jtaEdit);
+        javax.swing.GroupLayout jpMessageLayout = new javax.swing.GroupLayout(jpMessage);
+        jpMessage.setLayout(jpMessageLayout);
+        jpMessageLayout.setHorizontalGroup(
+            jpMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1008, Short.MAX_VALUE)
+            .addGroup(jpMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpMessageLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jspMessage)
+                    .addContainerGap()))
+        );
+        jpMessageLayout.setVerticalGroup(
+            jpMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+            .addGroup(jpMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpMessageLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jspMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jSplitPanel.setRightComponent(jpMessage);
+
+        javax.swing.GroupLayout jpMainLayout = new javax.swing.GroupLayout(jpMain);
+        jpMain.setLayout(jpMainLayout);
+        jpMainLayout.setHorizontalGroup(
+            jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSplitPanel)
+                .addContainerGap())
+        );
+        jpMainLayout.setVerticalGroup(
+            jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSplitPanel)
+                .addContainerGap())
+        );
 
         jmFile.setText("Arquivo");
 
         jmiNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_MASK));
         jmiNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/new.png"))); // NOI18N
         jmiNew.setText("Novo");
-        jmiNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jmiNew.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jmiNewActionPerformed(evt);
             }
         });
@@ -206,8 +298,10 @@ public class MainScreen extends javax.swing.JFrame
         jmiOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
         jmiOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/open.png"))); // NOI18N
         jmiOpen.setText("Abrir");
-        jmiOpen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jmiOpen.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jmiOpenActionPerformed(evt);
             }
         });
@@ -216,8 +310,10 @@ public class MainScreen extends javax.swing.JFrame
         jmiSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
         jmiSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         jmiSave.setText("Salvar");
-        jmiSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jmiSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jmiSaveActionPerformed(evt);
             }
         });
@@ -226,8 +322,10 @@ public class MainScreen extends javax.swing.JFrame
         jmiSaveAs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
         jmiSaveAs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save-as.png"))); // NOI18N
         jmiSaveAs.setText("Salvar como...");
-        jmiSaveAs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jmiSaveAs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jmiSaveAsActionPerformed(evt);
             }
         });
@@ -236,8 +334,10 @@ public class MainScreen extends javax.swing.JFrame
         jmiExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.SHIFT_MASK));
         jmiExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         jmiExit.setText("Sair");
-        jmiExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jmiExit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jmiExitActionPerformed(evt);
             }
         });
@@ -249,8 +349,10 @@ public class MainScreen extends javax.swing.JFrame
 
         jmiCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/copy.png"))); // NOI18N
         jmiCopy.setText("Copiar");
-        jmiCopy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jmiCopy.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jmiCopyActionPerformed(evt);
             }
         });
@@ -258,8 +360,10 @@ public class MainScreen extends javax.swing.JFrame
 
         jmiPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paste.png"))); // NOI18N
         jmiPaste.setText("Colar");
-        jmiPaste.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jmiPaste.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jmiPasteActionPerformed(evt);
             }
         });
@@ -267,8 +371,10 @@ public class MainScreen extends javax.swing.JFrame
 
         jmiCut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cut.png"))); // NOI18N
         jmiCut.setText("Recortar");
-        jmiCut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jmiCut.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jmiCutActionPerformed(evt);
             }
         });
@@ -281,8 +387,10 @@ public class MainScreen extends javax.swing.JFrame
         jmiCompile.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         jmiCompile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/compile.png"))); // NOI18N
         jmiCompile.setText("Compilar");
-        jmiCompile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jmiCompile.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jmiCompileActionPerformed(evt);
             }
         });
@@ -291,8 +399,10 @@ public class MainScreen extends javax.swing.JFrame
         jmiRun.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
         jmiRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
         jmiRun.setText("Executar");
-        jmiRun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jmiRun.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jmiRunActionPerformed(evt);
             }
         });
@@ -306,33 +416,31 @@ public class MainScreen extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspMessage)
-            .addComponent(jsTextAreaSeparator)
-            .addComponent(jtbToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
-            .addComponent(jspEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jtbToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lbPosition)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jtbToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jspEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jsTextAreaSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jspMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 730, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(lbPosition))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lbPosition)
+                    .addComponent(lbFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(23, 23, 23)
+                    .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(21, 21, 21)))
         );
 
         pack();
@@ -494,6 +602,7 @@ public class MainScreen extends javax.swing.JFrame
     private javax.swing.JButton btRun;
     private javax.swing.JButton btSave;
     private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JSplitPane jSplitPanel;
     private javax.swing.JMenu jmCompile;
     private javax.swing.JMenu jmEdit;
     private javax.swing.JMenu jmFile;
@@ -508,7 +617,9 @@ public class MainScreen extends javax.swing.JFrame
     private javax.swing.JMenuItem jmiRun;
     private javax.swing.JMenuItem jmiSave;
     private javax.swing.JMenuItem jmiSaveAs;
-    private javax.swing.JSeparator jsTextAreaSeparator;
+    private javax.swing.JPanel jpEdit;
+    private javax.swing.JPanel jpMain;
+    private javax.swing.JPanel jpMessage;
     private javax.swing.JToolBar.Separator jsToolBarSeparator1;
     private javax.swing.JToolBar.Separator jsToolBarSeparator2;
     private javax.swing.JScrollPane jspEdit;
