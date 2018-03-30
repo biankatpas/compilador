@@ -15,6 +15,8 @@ public class MainScreen extends javax.swing.JFrame
     public MainScreen()
     {
         initComponents();
+        TextLineNumber LinesCounter = new TextLineNumber(jtaEdit);
+        jspEdit.setRowHeaderView(LinesCounter);
     }
 
     /**
