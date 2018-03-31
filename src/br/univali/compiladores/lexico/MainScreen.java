@@ -1,5 +1,8 @@
 package br.univali.compiladores.lexico;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -450,7 +453,7 @@ public class MainScreen extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNewActionPerformed
-        fileName = control.newFile(jtaEdit, jtaMessage, this, fileName);
+        fileName = control.newFile(jtaEdit, jtaMessage, this, fileName, filePath);
     }//GEN-LAST:event_jmiNewActionPerformed
 
     private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
@@ -459,12 +462,20 @@ public class MainScreen extends javax.swing.JFrame
 
     private void jmiSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiSaveActionPerformed
     {//GEN-HEADEREND:event_jmiSaveActionPerformed
-        fileName = control.save(fileName, jtaEdit, this);
+        String res = control.save(fileName, filePath, jtaEdit, this);
+        String array[] = new String[2];
+        array = res.split(",");
+        fileName = array[0];
+        filePath = array[1];
     }//GEN-LAST:event_jmiSaveActionPerformed
 
     private void jmiSaveAsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiSaveAsActionPerformed
     {//GEN-HEADEREND:event_jmiSaveAsActionPerformed
-        fileName = control.saveAs(jtaEdit, fileName, this);
+        String res = control.saveAs(jtaEdit, fileName, filePath, this);
+        String array[] = new String[2];
+        array = res.split(",");
+        fileName = array[0];
+        filePath = array[1];
     }//GEN-LAST:event_jmiSaveAsActionPerformed
 
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btSaveActionPerformed
@@ -489,8 +500,6 @@ public class MainScreen extends javax.swing.JFrame
         array = res.split(",");
         fileName = array[0];
         filePath = array[1];
-        System.out.println(fileName);
-        System.out.println(filePath);
     }//GEN-LAST:event_jmiOpenActionPerformed
 
     private void jmiCopyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiCopyActionPerformed
@@ -545,7 +554,7 @@ public class MainScreen extends javax.swing.JFrame
 
     private void jmiExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiExitActionPerformed
     {//GEN-HEADEREND:event_jmiExitActionPerformed
-        control.exit(jtaEdit, fileName, this);
+        control.exit(jtaEdit, fileName, filePath, this);
     }//GEN-LAST:event_jmiExitActionPerformed
 
     private void jtaEditCaretUpdate(javax.swing.event.CaretEvent evt)//GEN-FIRST:event_jtaEditCaretUpdate
@@ -553,7 +562,6 @@ public class MainScreen extends javax.swing.JFrame
         control.getPosition(evt, lbPosition);
     }//GEN-LAST:event_jtaEditCaretUpdate
 
-    
     /**
      * @param args the command line arguments
      */
