@@ -1,4 +1,4 @@
-package br.univali.compiladores.lexico;
+package br.univali.compiladores.sintatico;
 
 import java.awt.Color;
 import java.awt.Dimension;
