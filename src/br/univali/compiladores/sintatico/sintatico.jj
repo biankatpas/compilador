@@ -542,7 +542,7 @@ void value() : {}
 
 void index() : {} 
 {
-	<OPENBRACE> <CONSTANTE_NUM_INTEIRA> <CLOSEBRACE> |
+	<OPENBRACKET> <CONSTANTE_NUM_INTEIRA> <CLOSEBRACKET> |
 	{}
 }
 
@@ -641,9 +641,6 @@ TOKEN [IGNORE_CASE]: {
 TOKEN : {
      < OPENBRACKET: "["> 
 	| < CLOSEBRACKET: "]">
-        // ----- isso vai sair depois -----
-        | < OPENBRACE: "{">
-	| < CLOSEBRACE: "}">
         //----- acaba aki -----------------
 	| <DOT: ".">
 	| < COMMA: ",">
