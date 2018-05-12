@@ -1,3 +1,4 @@
+
 options{
     STATIC = false;
     IGNORE_CASE = true;
@@ -28,7 +29,7 @@ public class Parser {
 
             try{
                 lexicalParser = new Parser(new StringReader(code));
-                //lexicalParser.begin_program();
+                lexicalParser.begin_program();
             } catch(Exception e){
                 output.add(new Message(e.toString(), true));
             } finally{
@@ -117,6 +118,280 @@ TOKEN_MGR_DECLS : {
     }   
 }
 
+void begin_program() throws ParseException : 
+{
+	RecoverySet g = new RecoverySet(EOF);
+	RecoverySet f = new RecoverySet(CLOSEBRACKET).union(g);
+	RecoverySet h = First.cmd.union(f);
+}
+{
+	try {
+		(<PURPOSE> comment())? 
+			<PROGRAM> <OPENBRACKET> 
+				(<DEFINE> <OPENBRACKET>
+					decl_gen(f)
+				<CLOSEBRACKET>)?
+				<EXECUTE> 
+					<OPENBRACKET> 
+						lst_cmd(h)
+					<CLOSEBRACKET>
+			<CLOSEBRACKET> (<IDENTIFICADOR>)? 
+		<EOF> |
+		<EOF>
+	} catch (ParseException e) {
+		consumeUntil(h, e, "begin_program");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void lst_cmd(RecoverySet g) : 
+{
+	RecoverySet f = new RecoverySet(DOT).union(g);
+}
+{
+	try {
+		(cmd(f))+ 
+	} catch (ParseException e) {
+		consumeUntil(g, e, "lst_cmd");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}	
+}
+
+void cmd(RecoverySet g) : 
+{
+	RecoverySet f = g.remove(CLOSEBRACKET);
+	RecoverySet h = new RecoverySet(OPENBRACKET).union(g);
+}
+{
+	try {
+		attrib(g)    <DOT> |
+		input(f)     <DOT> |
+		output(f)    <DOT> |
+		selection(f) <DOT> |
+		repeat(f)     <DOT> 
+	} catch (ParseException e) {
+		consumeUntil(g, e, "cmd");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void repeat(RecoverySet g) : {}
+{
+	loop(g) | while_(g)
+}
+
+void loop(RecoverySet g) : 
+{
+	RecoverySet f = g.union(new RecoverySet(CLOSEBRACKET));
+	RecoverySet h = g.union(new RecoverySet(IS));
+}
+{
+	try {
+		loop_(g) lst_cmd(g) <CLOSEBRACKET> while__(h) <TRUE>
+	} catch (ParseException e) {
+		consumeUntil(g, e, "loop");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void loop_(RecoverySet g) : 
+{
+
+}
+{
+	try {
+		<LOOP> <OPENBRACKET>
+	} catch (ParseException e) {
+		consumeUntil(g, e, "loop_");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void while_(RecoverySet g) : 
+{
+}
+{
+	try {
+		while_____(g) lst_cmd(g) <CLOSEBRACKET> 
+	} catch (ParseException e) {
+		consumeUntil(g, e, "while_");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void while__(RecoverySet g): {}
+{
+	try {
+		<WHILE> expression(g) <IS>
+	} catch (ParseException e) {
+		consumeUntil(g, e, "while__");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void while___(RecoverySet g):
+{
+	RecoverySet f = new RecoverySet(TRUE).union(g);
+} 
+{
+	try {
+		while__(f) <TRUE>
+	} catch (ParseException e) {
+		consumeUntil(g, e, "while___");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}	
+}
+
+void while____(RecoverySet g) :
+{
+	RecoverySet f = new RecoverySet(DO).union(g);
+}
+{
+	try {
+		while___(f) <DO>
+	} catch (ParseException e) {
+		consumeUntil(g, e, "while____");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void while_____(RecoverySet g) : 
+{
+	RecoverySet f = new RecoverySet(OPENBRACKET).union(g);
+}
+{
+	try {
+		while____(f) <OPENBRACKET>
+	} catch (ParseException e) {
+		consumeUntil(g, e, "while_____");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void selection(RecoverySet g) : 
+{
+	RecoverySet f = new RecoverySet(IS).union(g);
+	RecoverySet h = new RecoverySet(EOF).union(
+			new RecoverySet(TRUE)).union(
+			new RecoverySet(UNTRUE));
+}
+{
+	try {
+		<INSPECT> expression(f) cond(h) 
+	} catch (ParseException e) {
+		consumeUntil(g, e, "selection");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}	
+
+void cond(RecoverySet g) : {} 
+{
+	try {
+		<IS> cond_(g)
+	} catch (ParseException e) {
+		consumeUntil(g, e, "cond");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void cond_(RecoverySet g) : 
+{
+	RecoverySet j = g.union(First.cmd.union(new RecoverySet(IS)));
+}
+{
+	try {
+		(cond_false(j) lst_cmd(j) <CLOSEBRACKET> [cond_true_(j) lst_cmd(j) <CLOSEBRACKET>]) |
+			(cond_true(j)  lst_cmd(j) <CLOSEBRACKET> [cond_false_(j) lst_cmd(j) <CLOSEBRACKET>])
+	} catch (ParseException e) {
+		consumeUntil(g, e, "cond_");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void cond_true_(RecoverySet g) :
+{
+	RecoverySet j = g.remove(TRUE).remove(UNTRUE);
+}
+{
+	try {
+		<IS> cond_true(j)
+	} catch (ParseException e) {
+		consumeUntil(g, e, "cond_true_");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void cond_true(RecoverySet g) :
+{}
+{
+	try {
+		<TRUE> <OPENBRACKET>
+	} catch (ParseException e) {
+		consumeUntil(g, e, "cond_true");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void cond_false_(RecoverySet g) : 
+{
+	RecoverySet j = g.remove(UNTRUE).remove(TRUE);
+}
+{
+	try {
+		<IS> cond_false(j)
+	} catch (ParseException e) {
+		consumeUntil(g, e, "cond_false_");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+void cond_false(RecoverySet g) :
+{
+}
+{
+	try {
+		<UNTRUE> <OPENBRACKET> 
+	} catch (ParseException e) {
+		consumeUntil(g, e, "cond_false");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+
+void attrib(RecoverySet g) : 
+{
+	RecoverySet f = g.union(new RecoverySet(TO));
+} 
+{
+	try {
+		<SET> expression(f) <TO> lst_var()
+	} catch (ParseException e) {
+		consumeUntil(g, e, "attrib");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void input(RecoverySet g) :
+{}
+{
+	try {
+		<GET> <OPENBRACKET> lst_var() <CLOSEBRACKET> 
+	} catch (ParseException e) {
+		consumeUntil(g, e, "input");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+}
+
+void output(RecoverySet g) : {}
+{
+	try {
+		<PUT> <OPENBRACKET> lst_const_var() <CLOSEBRACKET> 
+	} catch(ParseException e) {
+		consumeUntil(g, e, "output");
+                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+	}
+
+}
+
 void expression(RecoverySet g) : {} 
 {	
 	try {
@@ -189,12 +464,6 @@ void element(RecoverySet g) : {}
 	<EXCLAMATION> <OPENPARENTHESIS> expression(g) <CLOSEPARENTHESIS>
 }
 
-void index() : {} 
-{
-	<OPENBRACKET> <CONSTANTE_NUM_INTEIRA> <CLOSEBRACKET> |
-	{}
-}
-
 void comment() : {}
 {
 	<CONSTANTE_LITERAL>
@@ -264,12 +533,18 @@ void lst_var() : {}
 
 void type() : {}
 {
-	<INTEGER> | <REAL> | <STRING> | <LOGIC>
+	<INTEGER> | <REAL> | <CHAR> | <BOOLEAN>
 }
 
 void value() : {} 
 {
 	<CONSTANTE_NUM_REAL> | <CONSTANTE_NUM_INTEIRA> | <CONSTANTE_LITERAL> | <TRUE> | <UNTRUE>
+}
+
+void index() : {} 
+{
+	<OPENBRACKET> <CONSTANTE_NUM_INTEIRA> <CLOSEBRACKET> |
+	{}
 }
 
 void mult_identifier() : {}
@@ -353,6 +628,8 @@ TOKEN [IGNORE_CASE]: {
 	| <WHILE: "while">
         | <PURPOSE: "purpose">
         | <EXECUTE: "execute">
+        | <CHAR: "char">
+	| <BOOLEAN: "boolean">
         | <SET: "set">
         | <INSPECT: "inspect">
         //-------- acaba aqui ---------------------------------------------------------
@@ -365,6 +642,7 @@ TOKEN [IGNORE_CASE]: {
 TOKEN : {
      < OPENBRACKET: "["> 
 	| < CLOSEBRACKET: "]">
+        //----- acaba aki -----------------
 	| <DOT: ".">
 	| < COMMA: ",">
 	| < ASSIGNMENT: "=">
