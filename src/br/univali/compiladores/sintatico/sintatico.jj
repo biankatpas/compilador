@@ -28,7 +28,7 @@ public class Parser {
 
             try{
                 lexicalParser = new Parser(new StringReader(code));
-                //lexicalParser.begin_program();
+                lexicalParser.begin_program();
             } catch(Exception e){
                 output.add(new Message(e.toString(), true));
             } finally{
@@ -115,6 +115,257 @@ TOKEN_MGR_DECLS : {
     public int foundLexError() {
         return countLexError;
     }   
+}
+
+void begin_program() throws ParseException: 
+{}
+{
+    try{
+        <DO> <THIS> <IDENTIFICADOR> <OPENBRACKET> <CLOSEBRACKET> declarations() <BODY> <DESCRIPTION> <EOF>
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void declarations() throws ParseException:
+{}
+{
+    try {
+        <DECLARATION> declarations_() |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void declarations_() throws ParseException:
+{}
+{
+    try{
+        declaracao_tipo_enumerado() declaracao_tipo_enumerado_() | declaracao_constantes_variaveis()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void declaracao_tipo_enumerado_() throws ParseException:
+{}
+{
+    try {
+        <DECLARATION> declaracao_constantes_variaveis() |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void declaracao_tipo_enumerado() throws ParseException:
+{}
+{
+    try {
+        <TYPE> [identificadores_constantes() <DOT>]
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void identificadores_constantes() throws ParseException:
+{}
+{
+    try {
+        constante() identificadores_constantes_()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void identificadores_constantes_() throws ParseException:
+{}
+{
+    try {
+        identificadores_constantes() |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void constante() throws ParseException:
+{}
+{
+    try {
+        <IDENTIFICADOR> <IS> lista_identificadores_constante()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void declaracao_constantes_variaveis() throws ParseException:
+{}
+{
+    try {
+        <CONSTANT> <AND> <VARIABLE> [ constantes_variaveis() ]
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void constantes_variaveis() throws ParseException:
+{}
+{
+    try {
+        <AS> constantes_variaveis_()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void constantes_variaveis_() throws ParseException:
+{}
+{
+    try {
+        bloco_constante() <DOT> constante_() | bloco_variavel() <DOT> variavel_() | {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void constante_() throws ParseException:
+{}
+{
+    try {
+        <AS> bloco_variavel() <DOT> |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void variavel_() throws ParseException:
+{}
+{
+    try {
+        <AS> bloco_constante() <DOT> |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void bloco_constante() throws ParseException:
+{}
+{
+    try {
+        <CONSTANT> declaracao_constante() bloco_constante_()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void bloco_constante_() throws ParseException:
+{}
+{
+    try {
+        bloco_constante() |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void declaracao_constante() throws ParseException:
+{}
+{
+    try {
+        lista_identificadores_constante() <IS> type() <ASSIGNMENT> value() |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void lista_identificadores_constante() throws ParseException:
+{}
+{
+    try {
+        <IDENTIFICADOR> lista_identificadores_constante_()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void lista_identificadores_constante_() throws ParseException:
+{}
+{
+    try {
+        <COMMA> <IDENTIFICADOR> lista_identificadores_constante__() |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void lista_identificadores_constante__() throws ParseException:
+{}
+{
+    try {
+        lista_identificadores_constante_()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void bloco_variavel() throws ParseException:
+{}
+{
+    try {
+        <VARIABLE> declaracao_variavel() bloco_variavel_()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void bloco_variavel_() throws ParseException:
+{}
+{
+    try {
+        bloco_variavel() |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void declaraca_variavel() throws ParseException:
+{}
+{
+    try {
+        lista_identificadores_variavel() <IS> type()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void lista_identificadores_variavel() throws ParseException:
+{}
+{
+    try {
+        <IDENTIFICADOR> lista_identificadores_variavel_()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void lista_identificadores_variavel_() throws ParseException:
+{}
+{
+    try {
+        <COMMA> lista_identificadores_variavel__() |
+        [<CONSTANTE_NUM_INTEIRA>] lista_identificadores_variavel__() |
+        {}    
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
 }
 
 void expression(RecoverySet g) : {} 
@@ -269,7 +520,7 @@ void type() : {}
 
 void value() : {} 
 {
-	<CONSTANTE_NUM_REAL> | <CONSTANTE_NUM_INTEIRA> | <CONSTANTE_LITERAL> | <TRUE> | <UNTRUE>
+	<INTEGER> | <REAL> | <STRING>
 }
 
 void mult_identifier() : {}
@@ -282,7 +533,7 @@ void mult_constants() : {}
 	(<COMMA> constants())
 }
 
-//--------------------------------------------------------- lexico - m1 -----------------------------------------------------------------------
+//------------------------------------------------------------- lexico - m1 - inicio ------------------------------------------------------------------
 //CHARACTERS TO SCAPE
 SKIP : {
           " "
