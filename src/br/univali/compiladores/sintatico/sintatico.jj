@@ -360,19 +360,9 @@ void lista_identificadores_variavel_() throws ParseException:
 {}
 {
     try {
-        <COMMA> lista_identificadores_variavel__() |
-        [<CONSTANTE_NUM_INTEIRA>] lista_identificadores_variavel__() |
+        <COMMA> lista_identificadores_variavel() |
+        [<CONSTANTE_NUM_INTEIRA>] lista_identificadores_variavel() |
         {}    
-    } catch (ParseException e) {
-        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
-    }
-}
-
-void lista_identificadores_variavel__() throws ParseException:
-{}
-{
-    try {
-        lista_identificadores_variavel_()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -398,24 +388,24 @@ void comando_entrada_dados() throws ParseException:
     }
 }
 
-void lista_identificadores_constantes() throws ParseException:
+
+void Nlista_identificadores_constantes() throws ParseException:
 {}
 {
     try {
-        lista_identificadores_constantes() lista_identificadores_constantes_() |
-        lista_identificadores_variavel() lista_identificadores_constantes_() |
-        <CONSTANTE_NUM_INTEIRA> lista_identificadores_constantes_() |
-        <CONSTANTE_LITERAL> lista_identificadores_constantes_()
+        <AS> Nlista_identificadores_constantes_()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void lista_identificadores_constantes_() throws ParseException:
+void Nlista_identificadores_constantes_() throws ParseException:
 {}
 {
     try {
-        <COMMA> lista_identificadores_constantes_() |
+
+        <CONSTANT> Nlista_identificadores_constantes_() <AS> <VARIABLE> lista_identificadores_variavel() |
+        <VARIABLE> lista_identificadores_variavel() <AS> <CONSTANT> Nlista_identificadores_constantes() |
         {}
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
@@ -549,7 +539,7 @@ void comando_saida_dados__() throws ParseException:
 {}
 {
     try {
-        <THIS> <OPENBRACKET> lista_identificadores_constantes() <CLOSEBRACKET>
+        <THIS> <OPENBRACKET> Nlista_identificadores_constantes() <CLOSEBRACKET>
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
