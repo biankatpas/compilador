@@ -398,6 +398,196 @@ void comando_entrada_dados() throws ParseException:
     }
 }
 
+void lista_identificadores_constantes() throws ParseException:
+{}
+{
+    try {
+        lista_identificadores_constantes() lista_identificadores_constantes_() |
+        lista_identificadores_variavel() lista_identificadores_constantes_() |
+        <CONSTANTE_NUM_INTEIRA> lista_identificadores_constantes_() |
+        <CONSTANTE_LITERAL> lista_identificadores_constantes_()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void lista_identificadores_constantes_() throws ParseException:
+{}
+{
+    try {
+        <COMMA> lista_identificadores_constantes_() |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void true_result() throws ParseException:
+{}
+{
+    try {
+        <TRUE> result() true_result_()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void true_result_() throws ParseException:
+{}
+{
+    try {
+        <UNTRUE> result() |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void untrue_result() throws ParseException:
+{}
+{
+    try {
+        <UNTRUE> result() untrue_result_()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void untrue_result_() throws ParseException:
+{}
+{
+    try {
+        <TRUE> result() |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void result() throws ParseException:
+{}
+{
+    try {
+        result() [lista_comandos()]
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void body() throws ParseException:
+{}
+{
+    try {
+        <BODY> [lista_comandos()]
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void description() throws ParseException:
+{}
+{
+    try {
+        <CONSTANTE_LITERAL> |
+        {}
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void comando_saida_dados() throws ParseException:
+{}
+{
+    try {
+            <WRITE> comando_saida_dados_() <DOT>
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+
+void comando_saida_dados_() throws ParseException:
+{}
+{
+    try {
+        <ALL> comando_saida_dados_() | comando_saida_dados_()
+  } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void comando_saida_dados__() throws ParseException:
+{}
+{
+    try {
+        <THIS> <OPENBRACKET>lista_identificadores_constantes()<CLOSEBRACKET>
+  } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void comando_selecao() throws ParseException:
+{}
+{
+    try {
+        <AVALIATE> <THIS> expression() comando_selecao_() <DOT>
+  } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void comando_selecao_() throws ParseException:
+{}
+{
+    try {
+        true_result() | untrue_result()
+  } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void comando_repeticao() throws ParseException:
+{}
+{
+    try {
+        <REPEAT> <THIS> expression() <OPENBRACKET> lista_comandos() <CLOSEBRACKET> <DOT>
+  } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void lista_comandos() throws ParseException:
+{}
+{
+    try {
+        comando() lista_comandos_()
+  } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void lista_comandos_() throws ParseException:
+{}
+{
+    try {
+        lista_comandos_() |
+        {}
+  } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void comando() throws ParseException:
+{}
+{
+    try {
+        comando_atribuicao() | comando_entrada_dados() | comando_saida_dados() | comando_selecao()
+  } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
 
 void expression(RecoverySet g) : {} 
 {	
