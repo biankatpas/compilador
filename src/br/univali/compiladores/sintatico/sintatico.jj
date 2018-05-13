@@ -512,7 +512,7 @@ void comando_saida_dados_() throws ParseException:
 {}
 {
     try {
-        <ALL> comando_saida_dados_() | comando_saida_dados_()
+        <ALL> comando_saida_dados__() | comando_saida_dados__()
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -572,7 +572,7 @@ void lista_comandos_() throws ParseException:
 {}
 {
     try {
-        lista_comandos_() |
+        lista_comandos() |
         {}
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
@@ -892,7 +892,7 @@ TOKEN :
 
 // CONSTANTE LITERAL TOKEN
 TOKEN: {
-   <CONSTANTE_LITERAL: "\"" (~[ "\"" ])* "\""> 
+   <CONSTANTE_LITERAL: "\"" (~[ "\"", "\n" ])* "\""> 
 }
 
 
