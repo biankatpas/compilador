@@ -163,7 +163,7 @@ void declaracao_tipo_enumerado() throws ParseException:
 {}
 {
     try {
-        <TYPE> [identificadores_constantes() <DOT>]
+        <TYPE> <OPENBRACKET> identificadores_constantes() <DOT> <CLOSEBRACKET>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -204,7 +204,7 @@ void declaracao_constantes_variaveis() throws ParseException:
 {}
 {
     try {
-        <CONSTANT> <AND> <VARIABLE> [ constantes_variaveis() ]
+        <CONSTANT> <AND> <VARIABLE> <OPENBRACKET> constantes_variaveis() <CLOSEBRACKET>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -422,17 +422,17 @@ void lista_identificadores_constantes_() throws ParseException:
     }
 }
 
-void selecao() throws ParseException:
+void comando_selecao() throws ParseException:
 {}
 {
     try {
-        <AVALIATE> <THIS> expression() selecao_() <DOT>
+        <AVALIATE> <THIS> expression() comando_selecao_() <DOT>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void selecao_() throws ParseException:
+void comando_selecao_() throws ParseException:
 {}
 {
     try {
@@ -466,7 +466,7 @@ void true_() throws ParseException:
 {}
 {
     try {
-        <TRUE> <RESULT> [lista_comandos()]
+        <TRUE> <RESULT> <OPENBRACKET> lista_comandos() <CLOSEBRACKET>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -476,7 +476,7 @@ void untrue_() throws ParseException:
 {}
 {
     try {
-        <UNTRUE> <RESULT> [lista_comandos()]
+        <UNTRUE> <RESULT> <OPENBRACKET> lista_comandos() <CLOSEBRACKET>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -506,7 +506,7 @@ void body() throws ParseException:
 {}
 {
     try {
-        <BODY> [lista_comandos()]
+        <BODY> <OPENBRACKET> lista_comandos() <CLOSEBRACKET>
         {}
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
@@ -549,27 +549,7 @@ void comando_saida_dados__() throws ParseException:
 {}
 {
     try {
-        <THIS> <OPENBRACKET>lista_identificadores_constantes()<CLOSEBRACKET>
-  } catch (ParseException e) {
-        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
-    }
-}
-
-void comando_selecao() throws ParseException:
-{}
-{
-    try {
-        <AVALIATE> <THIS> expression() comando_selecao_() <DOT>
-  } catch (ParseException e) {
-        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
-    }
-}
-
-void comando_selecao_() throws ParseException:
-{}
-{
-    try {
-        result_true() | result_untrue()
+        <THIS> <OPENBRACKET> lista_identificadores_constantes() <CLOSEBRACKET>
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -699,6 +679,7 @@ void comment() : {}
 	<CONSTANTE_LITERAL>
 }
 
+// ------------------------------ codigo da linguagem anterior, verificar oq fica ------------------------------------------------
 void decl_gen(RecoverySet g) : 
 {
 	RecoverySet f = new RecoverySet(DOT).union(g);
