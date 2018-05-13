@@ -368,11 +368,16 @@ void lista_identificadores_variavel_() throws ParseException:
     }
 }
 
-void comando_atribuicao() throws ParseException:
-{}
+void comando_atribuicao(RecoverySet g) throws ParseException:
+{
+    RecoverySet f = new RecoverySet(IS).union(g);
+
+}
+
+
 {
     try {
-        <DESIGNATE> <THIS> lista_identificadores_variavel() <TO> expression() <DOT>
+        <DESIGNATE> <THIS> lista_identificadores_variavel() <TO> expression(g) <DOT>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -412,51 +417,51 @@ void Nlista_identificadores_constantes_() throws ParseException:
     }
 }
 
-void comando_selecao() throws ParseException:
+void comando_selecao(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        <AVALIATE> <THIS> expression() comando_selecao_() <DOT>
+        <AVALIATE> <THIS> expression(g) comando_selecao_(g) <DOT>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void comando_selecao_() throws ParseException:
+void comando_selecao_(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        selecao_true() | selecao_untrue()
+        selecao_true(g) | selecao_untrue(g)
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void selecao_true() throws ParseException:
+void selecao_true(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        <TRUE> <RESULT> <OPENBRACKET> lista_comandos() <CLOSEBRACKET>
+        <TRUE> <RESULT> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void selecao_untrue() throws ParseException:
+void selecao_untrue(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        <UNTRUE> <RESULT> <OPENBRACKET> lista_comandos() <CLOSEBRACKET>
+        <UNTRUE> <RESULT> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void body() throws ParseException:
+void body(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        <BODY> <OPENBRACKET> lista_comandos() <CLOSEBRACKET>
+        <BODY> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET>
         {}
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
@@ -505,42 +510,42 @@ void comando_saida_dados__() throws ParseException:
     }
 }
 
-void comando_repeticao() throws ParseException:
+void comando_repeticao(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        <REPEAT> <THIS> expression() <OPENBRACKET> lista_comandos() <CLOSEBRACKET> <DOT>
+        <REPEAT> <THIS> expression(g) <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> <DOT>
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void lista_comandos() throws ParseException:
+void lista_comandos(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        comando() lista_comandos_()
+        comando(g) lista_comandos_(g)
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void lista_comandos_() throws ParseException:
+void lista_comandos_(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        lista_comandos() |
+        lista_comandos(g) |
         {}
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void comando() throws ParseException:
+void comando(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        comando_atribuicao() | comando_entrada_dados() | comando_saida_dados() | comando_selecao()
+        comando_atribuicao(g) | comando_entrada_dados() | comando_saida_dados() | comando_selecao(g)
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -639,81 +644,9 @@ void comment() : {}
 	<CONSTANTE_LITERAL>
 }
 
-// ------------------------------ codigo da linguagem anterior, verificar oq fica ------------------------------------------------
-void decl_gen(RecoverySet g) : 
-{
-	RecoverySet f = new RecoverySet(DOT).union(g);
-}
-{
-	try {
-		<CONSTANT> (constant(f) <DOT>)+ 
-		(<NOT> <CONSTANT> (not_constant(f) <DOT>)+)? 
-		| 
-		<NOT> <CONSTANT> (not_constant(f) <DOT>)+ 
-		(<CONSTANT> (constant(f) <DOT>)+)?
-	} catch (ParseException e) {
-		consumeUntil(g, e, "decl_gen");
-                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
-	}
-}
-
-void constant(RecoverySet g) : {}
-{
-	try {
-		type() <IS> lst_const() value() 
-	}catch (ParseException e) {
-		consumeUntil(g, e, "constant");
-                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
-	}
-}
-
-void lst_const() : {} 
-{
-	<IDENTIFICADOR> (mult_identifier())*
-}
-
-void not_constant(RecoverySet g) : {}
-{
-	try {
-		type() <IS> lst_var() 
-	} catch (ParseException e) {
-		consumeUntil(g, e, "not_constant");
-                output.add(new Message(ErrorMessage.getErrorMessage(e), true));
-	}
-}
-
-void lst_const_var() : {}
-{
-    lst_var() | lst_constante()
-}
-
-void lst_constante() : {}
-{
-    constants() (mult_constants())*
-}
-
-void constants() : {}
-{
-    <CONSTANTE_NUM_REAL> | <CONSTANTE_NUM_INTEIRA> | <CONSTANTE_LITERAL>
-}
-
-void lst_var() : {}
-{
-	<IDENTIFICADOR> index() (mult_identifier() index())*
-}
-
-void mult_identifier() : {}
-{
-	(<COMMA> <IDENTIFICADOR>)
-}
-
-void mult_constants() : {}
-{
-	(<COMMA> constants())
-}
-
 //------------------------------------------------------------- lexico - m1 - inicio ------------------------------------------------------------------
 //CHARACTERS TO SCAPE
+
 SKIP : {
           " "
 	| "\t"
