@@ -824,17 +824,7 @@ TOKEN [IGNORE_CASE]: {
         | <UNTRUE: "untrue">
         | <RESULT: "result">
         //------- isso pode vir a sair.. linguagem anterior ---------------------------
-        | <PROGRAM: "program">
-        | <DEFINE: "define">
-        | <GET: "get">
-	| <PUT: "put">
         | <NOT: "not">
-        | <LOOP: "loop">
-	| <WHILE: "while">
-        | <PURPOSE: "purpose">
-        | <EXECUTE: "execute">
-        | <SET: "set">
-        | <INSPECT: "inspect">
         //-------- acaba aqui ---------------------------------------------------------
         | <AVALIATE: "avaliate">
 
