@@ -238,7 +238,7 @@ TOKEN :
 
 // CONSTANTE LITERAL TOKEN
 TOKEN: {
-   <CONSTANTE_LITERAL: "\"" (~[ "\"" ])* "\""> 
+   <CONSTANTE_LITERAL: "\"" (~[ "\"", "\n" ])* "\""> 
 }
 
 
