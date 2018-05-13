@@ -392,7 +392,7 @@ void comando_entrada_dados() throws ParseException:
 {}
 {
     try {
-        <READ> <THIS> lista_identificadores_variavel() <DOT>
+        <READ> <THIS> <OPENBRACKET> lista_identificadores_variavel() <CLOSEBRACKET> <DOT>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -674,6 +674,16 @@ void index() : {}
 	{}
 }
 
+void type() : {}
+{
+	<INTEGER> | <REAL> | <STRING> | <LOGIC>
+}
+
+void value() : {} 
+{
+	<INTEGER> | <REAL> | <STRING>
+}
+
 void comment() : {}
 {
 	<CONSTANTE_LITERAL>
@@ -740,16 +750,6 @@ void constants() : {}
 void lst_var() : {}
 {
 	<IDENTIFICADOR> index() (mult_identifier() index())*
-}
-
-void type() : {}
-{
-	<INTEGER> | <REAL> | <STRING> | <LOGIC>
-}
-
-void value() : {} 
-{
-	<INTEGER> | <REAL> | <STRING>
 }
 
 void mult_identifier() : {}
