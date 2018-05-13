@@ -336,7 +336,7 @@ void bloco_variavel_() throws ParseException:
     }
 }
 
-void declaraca_variavel() throws ParseException:
+void declaracao_variavel() throws ParseException:
 {}
 {
     try {
@@ -367,6 +367,37 @@ void lista_identificadores_variavel_() throws ParseException:
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
+
+void lista_identificadores_variavel__() throws ParseException:
+{}
+{
+    try {
+        lista_identificadores_variavel_()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void comando_atribuicao() throws ParseException:
+{}
+{
+    try {
+        <DESIGNATE> <THIS> lista_identificadores_variavel() <TO> expression() <DOT>
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void comando_entrada_dados() throws ParseException:
+{}
+{
+    try {
+        <READ> <THIS> lista_identificadores_variavel() <DOT>
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
 
 void expression(RecoverySet g) : {} 
 {	
