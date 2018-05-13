@@ -4,7 +4,7 @@ options{
 }
 
 PARSER_BEGIN(Parser)
-package br.univali.compiladores.lexico;
+package br.univali.compiladores.sintatico;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.StringReader;
