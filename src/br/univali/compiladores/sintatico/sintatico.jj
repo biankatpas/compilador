@@ -422,54 +422,81 @@ void lista_identificadores_constantes_() throws ParseException:
     }
 }
 
-void true_result() throws ParseException:
+void selecao() throws ParseException:
 {}
 {
     try {
-        <TRUE> result() true_result_()
+        <AVALIATE> <THIS> expression() selecao_() <DOT>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void true_result_() throws ParseException:
+void selecao_() throws ParseException:
 {}
 {
     try {
-        <UNTRUE> result() |
-        {}
+        result_true() | result_untrue()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void untrue_result() throws ParseException:
+void result_true() throws ParseException:
 {}
 {
     try {
-        <UNTRUE> result() untrue_result_()
+        true_() | result_true_()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void untrue_result_() throws ParseException:
+void result_true_() throws ParseException:
 {}
 {
     try {
-        <TRUE> result() |
-        {}
+        untrue_() | {}
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void result() throws ParseException:
+void true_() throws ParseException:
 {}
 {
     try {
-        result() [lista_comandos()]
-        {}
+        <TRUE> <RESULT> [lista_comandos()]
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void untrue_() throws ParseException:
+{}
+{
+    try {
+        <UNTRUE> <RESULT> [lista_comandos()]
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void result_untrue() throws ParseException:
+{}
+{
+    try {
+        untrue_() result_untrue_()
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void result_untrue_() throws ParseException:
+{}
+{
+    try {
+        true_() | {}
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -542,7 +569,7 @@ void comando_selecao_() throws ParseException:
 {}
 {
     try {
-        true_result() | untrue_result()
+        result_true() | result_untrue()
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
