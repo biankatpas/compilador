@@ -13,7 +13,7 @@ package br.univali.compiladores.sintatico;
 public class ErrorMessage
 {
     public static String getErrorMessage(ParseException e) {
-        if (e.currentToken.next.kind >= ParserConstants.PURPOSE && e.currentToken.next.kind <= ParserConstants.UNTRUE) {
+        if (e.currentToken.next.kind >= ParserConstants.DO && e.currentToken.next.kind <= ParserConstants.AVALIATE) {
             e.tokenImage[e.currentToken.next.kind] = "<PALAVRAS_RESERVADAS>";
         } else if (e.currentToken.next.kind >= ParserConstants.DOT && e.currentToken.next.kind <= ParserConstants.CLOSEPARENTHESIS) {
             e.tokenImage[e.currentToken.next.kind] = "<SIMBOLOS_ESPECIAIS>";
