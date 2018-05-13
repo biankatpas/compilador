@@ -118,11 +118,15 @@ TOKEN_MGR_DECLS : {
 }
 
 void begin_program() throws ParseException: 
-{ }
+{ 
+    RecoverySet g = new RecoverySet(EOF);
+    RecoverySet f = new RecoverySet(DO).union(g);
+}
 {
     try{
         <DO> <THIS> <IDENTIFICADOR> <OPENBRACKET> <CLOSEBRACKET> declarations() <BODY> <DESCRIPTION> <EOF>
     } catch (ParseException e) {
+        consumeUntil(f, e, "begin_program");
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
