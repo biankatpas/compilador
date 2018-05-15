@@ -316,7 +316,7 @@ void bloco_constante() throws ParseException:
 {}
 {
     try {
-        <CONSTANT> declaracao_constante() bloco_constante_()
+        <CONSTANT> declaracao_constante() bloco_constante_() <DOT>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -336,7 +336,7 @@ void declaracao_constante() throws ParseException:
 {}
 {
     try {
-        lista_identificadores_constante() <IS> type() <ASSIGNMENT> value() <DOT>
+        lista_identificadores_constante() <IS> type() <ASSIGNMENT> value()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -366,7 +366,7 @@ void declaracao_variavel() throws ParseException:
 {}
 {
     try {
-        lista_identificadores_variavel() <IS> type() <DOT>
+        lista_identificadores_variavel() <IS> type()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
