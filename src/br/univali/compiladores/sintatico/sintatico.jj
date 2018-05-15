@@ -119,7 +119,7 @@ TOKEN_MGR_DECLS : {
 
 void program() : {} {
     try {
-        [ programa() ]<EOF>
+        [ begin_program() ]<EOF>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -136,10 +136,12 @@ void value() : {}
 }
 
 void begin_program() throws ParseException: 
-{}
+{
+    RecoverySet g = new RecoverySet(EOF);
+}
 {
     try{
-        <DO> <THIS> <IDENTIFICADOR> <OPENBRACKET> <CLOSEBRACKET> declarations() body() description()?
+        <DO> <THIS> <IDENTIFICADOR> <OPENBRACKET> <CLOSEBRACKET> declarations() body(g) (description())?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -149,7 +151,7 @@ void description() throws ParseException:
 {}
 {
     try {
-        comment()
+        comment() 
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -274,7 +276,7 @@ void constantes_variaveis() throws ParseException:
 {}
 {
     try {
-        (<AS> constantes_e_variaveis_())?
+        (<AS> constantes_variaveis_())?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -314,7 +316,7 @@ void bloco_constante() throws ParseException:
 {}
 {
     try {
-        <CONSTANT> declaracao_constant() bloco_constante_()
+        <CONSTANT> declaracao_constante() bloco_constante_()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -324,7 +326,7 @@ void bloco_constante_() throws ParseException:
 {}
 {
     try {
-        ( decl_constant() ) *
+        ( declaracao_constante() ) *
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -386,7 +388,7 @@ void lista_identificadores_variavel_() throws ParseException:
     try {
         ( <COMMA> <IDENTIFICADOR>
         lista_identificadores_variavel__() |
-        <OPENBRACKET><CONSTANTE_INTEIRA><CLOSEBRACKET> lista_identificadores_variavel__()
+        <OPENBRACKET><CONSTANTE_NUM_INTEIRA><CLOSEBRACKET> lista_identificadores_variavel__()
      ) ?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
@@ -455,7 +457,7 @@ void comando_atribuicao(RecoverySet g) throws ParseException:
     }
 }
 
-void comando_entrada_dados() throws ParseException:
+void comando_entrada_dados(RecoverySet g) throws ParseException:
 {}
 {
     try {
@@ -465,7 +467,7 @@ void comando_entrada_dados() throws ParseException:
     }
 }
 
-void comando_saida_dados() throws ParseException:
+void comando_saida_dados(RecoverySet g) throws ParseException:
 {}
 {
     try {
@@ -479,7 +481,7 @@ void comando_saida_dados_() throws ParseException:
 {}
 {
     try {
-        (<ALL> comando_saida_de_dados__()) | comando_saida_de_dados__()
+        (<ALL> comando_saida_dados__()) | comando_saida_dados__()
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -496,14 +498,14 @@ void comando_saida_dados__() throws ParseException:
 }
 
 void lista_identificadores_constantes() : {} {
-    <IDENTIFICADOR>(<LBRACKET><CONSTANTE_INTEIRA><RBRACKET>)?  lista_identificadores_constantes_() |
-    <CONSTANTE_INTEIRA> lista_identificadores_constantes_()|
-    <CONSTANTE_REAL> lista_identificadores_constantes_()|
+    <IDENTIFICADOR>(<OPENBRACKET><CONSTANTE_NUM_INTEIRA><CLOSEBRACKET>)?  lista_identificadores_constantes_() |
+    <CONSTANTE_NUM_INTEIRA> lista_identificadores_constantes_()|
+    <CONSTANTE_NUM_REAL> lista_identificadores_constantes_()|
     <CONSTANTE_LITERAL>lista_identificadores_constantes_()
 }
 
 void lista_identificadores_constantes_() : {} {
-    (<VIRGULA> lista_identificadores_constantes())?
+    (<COMMA> lista_identificadores_constantes())?
 }
 
 void comando_selecao(RecoverySet g) throws ParseException:
@@ -530,7 +532,7 @@ void selecao_true(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        <TRUE> <RESULT> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> (selecao_untrue())?
+        <TRUE> <RESULT> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> (selecao_untrue(g))?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -540,7 +542,7 @@ void selecao_untrue(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        <UNTRUE> <RESULT> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> (selecao_true())?
+        <UNTRUE> <RESULT> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> (selecao_true(g))?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
