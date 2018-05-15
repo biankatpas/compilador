@@ -117,22 +117,33 @@ TOKEN_MGR_DECLS : {
     }   
 }
 
-void program() : {} {
+void program() throws ParseException: {} {
     try {
         [ begin_program() ]<EOF>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
-void type() : {}
+void type() throws ParseException: {}
 {
+    try{
 	<INTEGER> | <REAL> | <STRING> | <LOGIC>
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
+    }
 }
 
-void value() : {} 
+void value() throws ParseException: {} 
 {
+    try{
 	<INTEGER> | <REAL> | <STRING>
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
+    }
 }
 
 void begin_program() throws ParseException: 
@@ -144,6 +155,7 @@ void begin_program() throws ParseException:
         <DO> <THIS> <IDENTIFICADOR> <OPENBRACKET> <CLOSEBRACKET> declarations() body(g) (description())?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -154,12 +166,18 @@ void description() throws ParseException:
         comment() 
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
-void comment() : {}
+void comment() throws ParseException: {}
 {
+    try{
 	<CONSTANTE_LITERAL>
+    } catch (ParseException e) {
+        output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
+    }
 }
 
 void declarations() throws ParseException:
@@ -169,6 +187,7 @@ void declarations() throws ParseException:
         ( <DECLARATION> declarations_() ) ?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -179,6 +198,7 @@ void declarations_() throws ParseException:
         (declaracao_tipo_enumerado() declaracao_tipo_enumerado_()) | declaracao_constantes_variaveis()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -189,6 +209,7 @@ void declaracao_tipo_enumerado() throws ParseException:
         <TYPE> <OPENBRACKET> identificadores_constantes() <DOT> <CLOSEBRACKET>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -199,6 +220,7 @@ void declaracao_tipo_enumerado_() throws ParseException:
         ( <DECLARATION> declaracao_constantes_variaveis() )?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -209,6 +231,7 @@ void identificadores_constantes() throws ParseException:
         constante() identificadores_constantes_()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -219,6 +242,7 @@ void identificadores_constantes_() throws ParseException:
         (identificadores_constantes())?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -229,6 +253,7 @@ void constante() throws ParseException:
         <IDENTIFICADOR> <IS> lista_identificadores_constante()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -239,6 +264,7 @@ void lista_identificadores_constante() throws ParseException:
         <IDENTIFICADOR> lista_identificadores_constante_()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -249,6 +275,7 @@ void lista_identificadores_constante_() throws ParseException:
         (<COMMA> <IDENTIFICADOR> lista_identificadores_constante__())?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -259,6 +286,7 @@ void lista_identificadores_constante__() throws ParseException:
         lista_identificadores_constante_()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -269,6 +297,7 @@ void declaracao_constantes_variaveis() throws ParseException:
         <CONSTANT> <AND> <VARIABLE> <OPENBRACKET> constantes_variaveis() <CLOSEBRACKET>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -279,6 +308,7 @@ void constantes_variaveis() throws ParseException:
         (<AS> constantes_variaveis_())?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -289,6 +319,7 @@ void constantes_variaveis_() throws ParseException:
         ( bloco_constante() constante_() ) | ( bloco_variavel() variavel_() )
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -299,6 +330,7 @@ void constante_() throws ParseException:
         ( <AS> bloco_variavel() ) ?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -309,6 +341,7 @@ void variavel_() throws ParseException:
         ( <AS> bloco_constante() ) ?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -319,6 +352,7 @@ void bloco_constante() throws ParseException:
         <CONSTANT> declaracao_constante() bloco_constante_() <DOT>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -329,6 +363,7 @@ void bloco_constante_() throws ParseException:
         ( declaracao_constante() ) *
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -339,6 +374,7 @@ void declaracao_constante() throws ParseException:
         lista_identificadores_constante() <IS> type() <ASSIGNMENT> value()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -349,6 +385,7 @@ void bloco_variavel() throws ParseException:
         <VARIABLE> declaracao_variavel() bloco_variavel_()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -359,6 +396,7 @@ void bloco_variavel_() throws ParseException:
         ( declaracao_variavel() ) *
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -369,6 +407,7 @@ void declaracao_variavel() throws ParseException:
         lista_identificadores_variavel() <IS> type()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -379,6 +418,7 @@ void lista_identificadores_variavel() throws ParseException:
         <IDENTIFICADOR> lista_identificadores_variavel_()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -392,6 +432,7 @@ void lista_identificadores_variavel_() throws ParseException:
      ) ?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -402,6 +443,7 @@ void lista_identificadores_variavel__() throws ParseException:
         lista_identificadores_variavel_()
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -412,6 +454,7 @@ void body(RecoverySet g) throws ParseException:
         <BODY> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -422,6 +465,7 @@ void lista_comandos(RecoverySet g) throws ParseException:
         comando(g) lista_comandos_(g)
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -432,6 +476,7 @@ void comando(RecoverySet g) throws ParseException:
         comando_atribuicao(g) | comando_entrada_dados(g) | comando_saida_dados(g) | comando_selecao(g)
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -443,6 +488,7 @@ void lista_comandos_(RecoverySet g) throws ParseException:
         {}
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -454,6 +500,7 @@ void comando_atribuicao(RecoverySet g) throws ParseException:
     } catch (ParseException e) {
         consumeUntil(g, e, "comando_atribuicao");
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -464,6 +511,7 @@ void comando_entrada_dados(RecoverySet g) throws ParseException:
         <READ> <THIS> <OPENBRACKET> lista_identificadores_variavel() <CLOSEBRACKET> <DOT>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -474,6 +522,7 @@ void comando_saida_dados(RecoverySet g) throws ParseException:
         <WRITE> comando_saida_dados_() <DOT>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -484,6 +533,7 @@ void comando_saida_dados_() throws ParseException:
         (<ALL> comando_saida_dados__()) | comando_saida_dados__()
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -494,6 +544,7 @@ void comando_saida_dados__() throws ParseException:
         <THIS> <OPENBRACKET> lista_identificadores_constantes() <CLOSEBRACKET>
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -515,6 +566,7 @@ void comando_selecao(RecoverySet g) throws ParseException:
         <AVALIATE> <THIS> expression(g) comando_selecao_(g) <DOT>
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -525,6 +577,7 @@ void comando_selecao_(RecoverySet g) throws ParseException:
         selecao_true(g) | selecao_untrue(g)
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -535,6 +588,7 @@ void selecao_true(RecoverySet g) throws ParseException:
         <TRUE> <RESULT> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> (selecao_untrue(g))?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -545,6 +599,7 @@ void selecao_untrue(RecoverySet g) throws ParseException:
         <UNTRUE> <RESULT> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> (selecao_true(g))?
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -555,6 +610,7 @@ void comando_repeticao(RecoverySet g) throws ParseException:
         <REPEAT> <THIS> expression(g) <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> <DOT>
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+        contParseError++;
     }
 }
 
@@ -565,6 +621,7 @@ void expression(RecoverySet g) : {}
 	} catch (ParseException e) {
 		consumeUntil(g, e, "expression");
                 output.add(new Message(ErrorMessage.getErrorMessage(e), true));
+                contParseError++;
 	}
 }
 
