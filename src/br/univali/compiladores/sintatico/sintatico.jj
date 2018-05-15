@@ -141,17 +141,19 @@ void begin_program() throws ParseException:
 }
 {
     try{
-        <DO> <THIS> <IDENTIFICADOR> <OPENBRACKET> <CLOSEBRACKET> declarations() body(g) description()
+       (<DO> <THIS> <IDENTIFICADOR> <OPENBRACKET>  <CLOSEBRACKET> declarations() body(g) description())
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
 }
 
+
+
 void description() throws ParseException:
 {}
 {
     try {
-         ( <DESCRIPTION> <CONSTANTE_LITERAL> )? 
+         ( <DESCRIPTION> <CONSTANTE_LITERAL>)? 
     } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -414,7 +416,7 @@ void lista_comandos(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        (comando_atribuicao(g) | comando_entrada_dados(g) | comando_saida_dados(g) | comando_selecao(g) |  comando_repeticao(g) | (<COMENTARIO_BLOCO>) )+
+        (comando_atribuicao(g) | comando_entrada_dados(g) | comando_saida_dados(g) | comando_selecao(g) |  comando_repeticao(g) )+
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -630,7 +632,7 @@ SKIP : {
 }
 
 <multilinecomment> SKIP : {
-	"#": DEFAULT
+	"$$": DEFAULT
 	| <~[]>
 }
 
@@ -757,8 +759,8 @@ TOKEN :
     | <CONSTANTE_LITERAL_INVALIDA: "\"" (~["\n","\r","\""])* ~["\""]
                                             | "\'" (~["\n","\r","\'"])* ~["\'"]|"'">
     
-    | <COMENTARIO_BLOCO_INVALIDO: "##" (~["#"])* >
-    | <COMENTARIO_BLOCO: "##" (~["#"])* "#">
+   // | <COMENTARIO_BLOCO_INVALIDO: "##" (~["#"])* >
+   // | <COMENTARIO_BLOCO: "##" (~["#"])* "#">
 }
 
 TOKEN :
