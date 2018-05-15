@@ -414,7 +414,7 @@ void lista_comandos(RecoverySet g) throws ParseException:
 {}
 {
     try {
-        (comando_atribuicao(g) | comando_entrada_dados(g) | comando_saida_dados(g) | comando_selecao(g) |  comando_repeticao(g))+
+        (comando_atribuicao(g) | comando_entrada_dados(g) | comando_saida_dados(g) | comando_selecao(g) |  comando_repeticao(g) | (<COMENTARIO_BLOCO>) )+
   } catch (ParseException e) {
         output.add(new Message(ErrorMessage.getErrorMessage(e), true));
     }
@@ -622,7 +622,7 @@ SKIP : {
 }
 
 SKIP : {
-    "##": multilinecomment
+   "##": multilinecomment
 }
 
 SKIP : {
