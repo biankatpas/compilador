@@ -1,0 +1,55 @@
+do this Herbivore []
+// teste linha
+declaration type [
+	Food is Potato, Banana, Apple, Rice, Been .
+]
+
+## comentando no meio do codigo 
+em duas linhas $$
+
+declaration constant and variable [
+	as  variable 
+		Fruit is integer. Banana[12] is integer . Laranja, Uva[2] is logic. Melancia, Pitaya, Cereja is string .
+## comentando no meio do codigo $$
+	as constant 
+		Vegetal is integer = 1 . Cebola is integer = 2 . Cebola, Cenoura is logic = 1 . Abacate, Chuchu, Repolho is string = "refogado" .
+]
+
+
+body [
+	
+	read this [Alecrim, Alho[123], Amendoim] .
+	designate this  Batata to 2 + 3 .
+	read this [Batata, Abacaxi] .
+	read this [Melancia, Papaya] .
+	designate this  Batata to 2 + 3 .
+	## comentando no meio do codigo $$
+	write all this [Laranja, Cenoura[2]] .
+	write all this [Cebola, Cenoura] .
+	write all this [1, "aaaa"] .
+	write all this [1, "bbb", Cebola, Cenoura[2],  Banana, 1] .
+	write all this ["ccc", Cebola, Cenoura[2], 1, 2, "dddd", Banana, 1, Cebola, Tahine[123]] .
+
+	write this [Cebola, Cenoura[2]] .
+	write this [Cebola, Cenoura] .
+	write this [1, "eee"] .
+	write this [1, "fff", Cebola, Cenoura[2],  Banana, 1] .
+	write this ["ggggg", Cebola, Cenoura[2], 1, 2, "hhhhhhh", Banana, 1, Cebola, Tahine[123]] .
+
+	avaliate this 3 << 4 
+	untrue result [
+		write all this [1, "asdasd", Cebola, Cenoura[2],  Banana, 1] .
+		write all this ["asdasd", Cebola, Cenoura[2], 1, 2, "asdasdasdasd", Banana, 1, Cebola, PaoDeQUeijo[123]] .
+	]
+	true result [
+		write all this [1, "iiiiiiii", Cebola, Cenoura[2],  Banana, 1] .
+		write all this ["jjjjjj", Cebola, Cenoura[2], 1, 2, "kkkkkkkk", Banana, 1, Cebola, Milho[123]] .
+	].
+	
+	repeat this Batata << 4 [ 
+		write this [1, "pipoca"].
+		write all this ["aipim", Cebola, Cenoura[2], 1, 2, "pure", Bababa, 1, Cebola, BatataSuica[123]] .
+	].
+]
+
+DESCRIPTION "Teste Teste Teste"
