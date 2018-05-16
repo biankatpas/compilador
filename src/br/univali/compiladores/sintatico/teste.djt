@@ -12,8 +12,7 @@ declaration constant and variable [
 		Fruit is integer. Banana[12] is integer . Laranja, Uva[2] is logic. Melancia, Pitaya, Cereja is string .
 ## comentando no meio do codigo $$
 	as constant 
-		Vegetal is integer = 1 . Cebola is integer = 2 . Cebola, Cenoura is logic = 1 . Abacate, Chuchu, Repolho is string = "refogado" .
-]
+		Vegetal is integer = 1 . Cebola is integer = 2 . Cebola, Cenoura is logic = 1 . Abacate, Chuchu, Repolho is string = "refogado" . ]
 
 
 body [
@@ -23,6 +22,8 @@ body [
 	read this [Batata, Abacaxi] .
 	read this [Melancia, Papaya] .
 	designate this  Batata to 2 + 3 .
+	designate this Polenta to (202 + "sabonete"  - (true * 2) **) .
+
 	## comentando no meio do codigo $$
 	write all this [Laranja, Cenoura[2]] .
 	write all this [Cebola, Cenoura] .

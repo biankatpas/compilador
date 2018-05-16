@@ -32,12 +32,12 @@ public class Parser {
             } catch(Exception e){
                 output.add(new Message(e.toString(), true));
             } finally{
-                output.add(new Message("Erros Lexicos encontrados: " + lexicalParser.token_source.countLexError, false));
+                /*output.add(new Message("Erros Lexicos encontrados: " + lexicalParser.token_source.countLexError, false));
                 output.add(new Message("Erros Sintaticos encontrados: " + lexicalParser.contParseError, false));
 
                 if(lexicalParser.token_source.countLexError == 0 && contParseError == 0){
                     output.add(new Message("Arquivo analisado com sucesso!", false));
-                }
+                }*/
             }
             
             List<Message> auxList = new ArrayList<Message>(output);
