@@ -20,6 +20,7 @@ public class MainScreen extends javax.swing.JFrame
         initComponents();
         TextLineNumber LinesCounter = new TextLineNumber(jtaEdit);
         jspEdit.setRowHeaderView(LinesCounter);
+        LinePainter LinesPainter = new LinePainter(jtaEdit);
     }
 
     /**
