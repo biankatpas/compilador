@@ -470,17 +470,24 @@ public class ScreenController {
         return -1;
     }
 
-    public void setFeedback(JLabel lb, boolean status, int error) {
+    public void setFeedback(JLabel lb, JLabel lbErr, boolean status, int error, int errorLex, int errorSint) {
+        lbErr.setText("");
         if (!status) {
             lb.setText("Compilado com sucesso...");
             lb.setForeground(Color.black);
         } else {
             lb.setText("Contem " + error + " erro(s)...");
             lb.setForeground(Color.RED);
+            if (errorLex > 0){
+                lbErr.setText("Erros Lexicos: "+errorLex);
+            }
+            else if (errorSint > 0){
+                lbErr.setText("Erros Sintaticos: "+errorSint);
+            }
         }
     }
 
-    public void compile(JEditorPane jtaEdit, JTextArea jtaMessage, JLabel lb) {
+    public void compile(JEditorPane jtaEdit, JTextArea jtaMessage, JLabel lbErr, JLabel lbErr2) {
         Parser p = new Parser();
         int sint_error_counter = 0, lex_error_counter = 0;
         if (!jtaEdit.getText().equals("")) {
@@ -522,10 +529,8 @@ public class ScreenController {
                     }
                 }
             }
-            output += ("\n\nErros Lexicos encontrados: "+lex_error_counter);
-            output += ("\nErros Sintaticos encontrados: "+sint_error_counter);
             jtaMessage.setText(output);
-            setFeedback(lb, (sint_error_counter + lex_error_counter) > 0, (sint_error_counter + lex_error_counter));
+            setFeedback(lbErr, lbErr2, (sint_error_counter + lex_error_counter) > 0, (sint_error_counter + lex_error_counter), lex_error_counter, sint_error_counter);
         } else {
             JOptionPane.showMessageDialog(null, "Um arquivo vazio não pode ser compilado.");
         }
