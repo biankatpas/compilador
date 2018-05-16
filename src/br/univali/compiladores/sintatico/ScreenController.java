@@ -69,7 +69,9 @@ public class ScreenController
 
         } else
         {
-            if (isEdited(jtaEdit, fileName) == true)
+//            System.out.println(fileName);
+//            System.out.println(filePath);
+            if (isEdited(jtaEdit, filePath) == true)
             {
                 Object[] options
                         =
@@ -81,12 +83,14 @@ public class ScreenController
                 {//save file
                     save(fileName, filePath, jtaEdit, jf);
                     fileName = "sem nome.djt";
+                    filePath = ("");
                     jtaEdit.setText("");
                     jtaMessage.setText("");
                     jf.setTitle("Compilador - [sem nome.djt]");
                 } else if (op == 1) //dont save file
                 {
                     fileName = "sem nome.djt";
+                    filePath = ("");
                     jtaEdit.setText("");
                     jtaMessage.setText("");
                     jf.setTitle("Compilador - [sem nome.djt]");
@@ -94,12 +98,13 @@ public class ScreenController
             } else
             {
                 fileName = "sem nome.djt";
+                filePath = ("");
                 jtaEdit.setText("");
                 jtaMessage.setText("");
                 jf.setTitle("Compilador - [sem nome.djt]");
             }
         }
-        return fileName;
+         return fileName;
     }
 
     public String save(String fileName, String filePath, JEditorPane jta, JFrame jf)
@@ -287,7 +292,7 @@ public class ScreenController
         FileNameExtensionFilter djt = new FileNameExtensionFilter("DJT (*.djt)", "djt");
         FileFilter defaultFilter = fc.getFileFilter();
         dir = getPath(filePath);
-//        System.out.println(dir);
+        System.out.println(dir);
         fc.setSelectedFile(new File(dir));
         fc.setFileFilter(djt);
 

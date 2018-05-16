@@ -413,6 +413,7 @@ public class MainScreen extends javax.swing.JFrame
 
     private void jmiNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNewActionPerformed
         fileName = control.newFile(jtaEdit, jtaMessage, this, fileName, filePath);
+        filePath = "";
     }//GEN-LAST:event_jmiNewActionPerformed
 
     private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
