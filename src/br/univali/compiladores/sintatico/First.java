@@ -11,16 +11,36 @@ package br.univali.compiladores.sintatico;
 public class First
 {
 
-    static public final RecoverySet begin_program = new RecoverySet();
-    static public final RecoverySet program_body = new RecoverySet();
     static public final RecoverySet program = new RecoverySet();
-    static public final RecoverySet cmd = new RecoverySet();
-    static public final RecoverySet type = new RecoverySet();
+    static public final RecoverySet body = new RecoverySet();
+    static public final RecoverySet end_of_file = new RecoverySet();
+    static public final RecoverySet lista_comandos = new RecoverySet();
+    static public final RecoverySet comando_selecao_ = new RecoverySet();
+
 
     static
     {
+
+
+        body.add(Parser.BODY);
+
+
+        lista_comandos.add(Parser.DESIGNATE);
+        lista_comandos.add(Parser.READ);
+        lista_comandos.add(Parser.WRITE);
+        lista_comandos.add(Parser.AVALIATE);
+        lista_comandos.add(Parser.REPEAT);
+
+
+        end_of_file.add(Parser.EOF);
+
+
+        comando_selecao_.add(Parser.TRUE);
+        comando_selecao_.add(Parser.UNTRUE);
+
+
 //        type.add(ParserConstants.INT);
-        type.add(ParserConstants.REAL);
+//        type.add(langX.REAL);
 //        type.add(ParserConstants.CHAR);
 //        type.add(ParserConstants.BOOLEAN);
 

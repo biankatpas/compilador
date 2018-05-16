@@ -12,15 +12,16 @@ import java.io.StringReader;
 public class Parser {
 	int contParseError = 0;
 	boolean debugRecovery = true;
-        final static List<Integer> errorLexList = new ArrayList<Integer>();
+        final static List<Message> errorLexList = new ArrayList<Message>();
         final static List<Message> output = new ArrayList<Message>();
 
         public Parser() {
-            errorLexList.add(ParserConstants.IDENTIFICADOR_INVALIDO);
-            errorLexList.add(ParserConstants.SIMBOLO_INVALIDO);
-            errorLexList.add(ParserConstants.CONSTANTE_NUM_INTEIRA_INVALIDA);
-            errorLexList.add(ParserConstants.CONSTANTE_NUM_REAL_INVALIDA);
-            errorLexList.add(ParserConstants.CONSTANTE_LITERAL_INVALIDA);
+            //errorLexList.add(ParserConstants.IDENTIFICADOR_INVALIDO);
+            //errorLexList.add(ParserConstants.SIMBOLO_INVALIDO);
+            //errorLexList.add(ParserConstants.CONSTANTE_NUM_INTEIRA_INVALIDA);
+            //errorLexList.add(ParserConstants.CONSTANTE_NUM_REAL_INVALIDA);
+            //errorLexList.add(ParserConstants.CONSTANTE_LITERAL_INVALIDA);
+            //errorLexList.add(ParserConstants.COMENTARIO_BLOCO_INVALIDO);
         };
 
         public List<Message> lexicalAnalizer(String code){
@@ -28,17 +29,44 @@ public class Parser {
 
             try{
                 lexicalParser = new Parser(new StringReader(code));
-                lexicalParser.program();
+                lexicalParser.program_lexico();
+            } catch(Exception e){
+                errorLexList.add(new Message(e.toString(), true));
+            } finally{
+                /*
+                errorLexList.add(new Message("Erros Lexicos encontrados: " + lexicalParser.token_source.countLexError, false));
+                errorLexList.add(new Message("Erros Sintaticos encontrados: " + lexicalParser.contParseError, false));
+
+                if(lexicalParser.token_source.countLexError == 0 && contParseError == 0){
+                    errorLexList.add(new Message("Arquivo analisado com sucesso!", false));
+                }
+                */
+            }
+                        
+            List<Message> auxList = new ArrayList<Message>(errorLexList);
+            errorLexList.clear();
+            return auxList;
+        }
+        
+            public List<Message> sintaticalAnalizer(String code){
+            Parser lexicalParser = new Parser();
+
+            try{
+                lexicalParser = new Parser(new StringReader(code));
+                lexicalParser.program_sintatico();
             } catch(Exception e){
                 output.add(new Message(e.toString(), true));
             } finally{
-                /*output.add(new Message("Erros Lexicos encontrados: " + lexicalParser.token_source.countLexError, false));
+                /*
+                output.add(new Message("Erros Lexicos encontrados: " + lexicalParser.token_source.countLexError, false));
                 output.add(new Message("Erros Sintaticos encontrados: " + lexicalParser.contParseError, false));
 
                 if(lexicalParser.token_source.countLexError == 0 && contParseError == 0){
                     output.add(new Message("Arquivo analisado com sucesso!", false));
-                }*/
+                }
+                */
             }
+            
             
             List<Message> auxList = new ArrayList<Message>(output);
             output.clear();
@@ -117,7 +145,83 @@ TOKEN_MGR_DECLS : {
     }   
 }
 
-void program() : {} {
+JAVACODE int program_lexico() {
+	Token t;
+        String tokenType = "";
+        Message m;
+
+	do {
+		t = getNextToken();
+		Token st = t;
+		while ( st.specialToken != null) {
+                    st = st.specialToken;
+		}
+                
+
+		do {
+                switch (t.kind) {
+                    case ParserConstants.IDENTIFICADOR_INVALIDO:
+                        m = new Message("Error "+ st.kind+": Identificador Invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true);
+                        if (!errorLexList.contains(m)){
+                            errorLexList.add(m);
+                        }
+                        break;
+                     case ParserConstants.SIMBOLO_INVALIDO:
+                        m = new Message("Error "+ st.kind+": Simbolo invalido em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true);
+                        if (!errorLexList.contains(m)){
+                            errorLexList.add(m);
+                        }
+                        break;    
+                    case ParserConstants.CONSTANTE_NUM_INTEIRA_INVALIDA:
+                        m = new Message("Error "+ st.kind+": Constante numerica inteira invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true);
+                        if (!errorLexList.contains(m)){
+                            errorLexList.add(m);
+                        }
+                        break;
+                    case ParserConstants.CONSTANTE_NUM_REAL_INVALIDA:
+                        m = new Message("Error "+ st.kind+": Constante numerica real invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true);
+                        if (!errorLexList.contains(m)){
+                            errorLexList.add(m);
+                        }
+                        break;
+                    case ParserConstants.CONSTANTE_LITERAL_INVALIDA:
+                        m = new Message("Error "+ st.kind+": Constante literal invalida em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true);
+                        if (!errorLexList.contains(m)){
+                            errorLexList.add(m);
+                        }
+                        break;
+                    //case ParserConstants.COMENTARIO_BLOCO:
+                      //  break;
+                    //case ParserConstants.COMENTARIO_BLOCO_INVALIDO:
+                      //  errorLexList.add(new Message("Error "+ st.kind+": Comentario de bloco nao finalizado em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
+                        //break;
+                    default:
+                       // if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.AVALIATE) {
+                          //  tokenType = "<PALAVRAS_RESERVADAS>";
+                        //} else if (t.kind >= ParserConstants.OPENBRACKET && t.kind <= ParserConstants.CLOSEPARENTHESIS) {
+                          //  tokenType = "<SIMBOLOS_ESPECIAIS>";
+                        //} else {
+                       //     tokenType = im(st.kind);
+                       // }
+
+                       // String outputString = "Line: " + st.beginLine + "\u005ctColumn: " + st.beginColumn + "\u005ct" + st.image + " \u005ct" + tokenType + "\u005ct" + t.kind;
+
+                        /* Filtro para não tratar EOF */
+                       // if (t.kind != ParserConstants.EOF) {
+                       //     errorLexList.add(new Message(outputString, false));
+                       // }
+                        break;
+
+                }
+                st = st.next;
+
+            } while (st != t.next);
+
+        } while (t.kind != ParserConstants.EOF);
+    return output.size();    
+}
+
+void program_sintatico() : {} {
     try {
         [ begin_program() ]<EOF>
     } catch (ParseException e) {
