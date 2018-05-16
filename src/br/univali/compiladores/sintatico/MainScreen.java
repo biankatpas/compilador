@@ -187,6 +187,7 @@ public class MainScreen extends javax.swing.JFrame
         });
         jtbToolBar.add(btAbout);
 
+        jSplitPanel.setDividerLocation(500);
         jSplitPanel.setDividerSize(20);
         jSplitPanel.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPanel.setOneTouchExpandable(true);
@@ -213,11 +214,11 @@ public class MainScreen extends javax.swing.JFrame
         );
         jpEditLayout.setVerticalGroup(
             jpEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 303, Short.MAX_VALUE)
+            .addGap(0, 499, Short.MAX_VALUE)
             .addGroup(jpEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jpEditLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jspEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                    .addComponent(jspEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -245,11 +246,11 @@ public class MainScreen extends javax.swing.JFrame
         );
         jpMessageLayout.setVerticalGroup(
             jpMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 384, Short.MAX_VALUE)
+            .addGap(0, 190, Short.MAX_VALUE)
             .addGroup(jpMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMessageLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jspMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .addComponent(jspMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
