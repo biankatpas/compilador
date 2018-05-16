@@ -1,5 +1,6 @@
 package br.univali.compiladores.sintatico;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ public class MainScreen extends javax.swing.JFrame
         TextLineNumber LinesCounter = new TextLineNumber(jtaEdit);
         jspEdit.setRowHeaderView(LinesCounter);
         LinePainter LinesPainter = new LinePainter(jtaEdit);
+        LinesPainter.setColor(Color.lightGray);
     }
 
     /**
