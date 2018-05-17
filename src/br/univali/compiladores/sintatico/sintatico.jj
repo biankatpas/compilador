@@ -204,12 +204,14 @@ void begin_program(RecoverySet r):
     RecoverySet h = new RecoverySet(BODY);
     RecoverySet g = new RecoverySet(DECLARATION);
     RecoverySet i = g.union(h);
+    RecoverySet l = new RecoverySet(DESCRIPTION);
+    
 }
 {
     try{
         header(i)
         declarations(h)
-        body(r)
+        body(r.union(l))
         description(r)
     } catch (ParseException e) {
         consumeUntil(r, e, "begin_program");

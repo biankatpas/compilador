@@ -5,8 +5,6 @@
         <group>
             <file>file:/home/biankatpas/Dropbox/Workspace/compilador/src/br/univali/compiladores/sintatico/sintatico_exemplo.jj</file>
             <file>file:/home/biankatpas/Dropbox/Workspace/compilador/src/br/univali/compiladores/sintatico/First.java</file>
-            <file>file:/home/biankatpas/Dropbox/Workspace/compilador/src/br/univali/compiladores/sintatico/lexico.jj</file>
-            <file>file:/home/biankatpas/Dropbox/Workspace/compilador/src/br/univali/compiladores/sintatico/Parser.java</file>
             <file>file:/home/biankatpas/Dropbox/Workspace/compilador/src/br/univali/compiladores/sintatico/TextLineNumber.java</file>
             <file>file:/home/biankatpas/Dropbox/Workspace/compilador/src/br/univali/compiladores/sintatico/MainScreen.java</file>
             <file>file:/home/biankatpas/Dropbox/Workspace/compilador/src/br/univali/compiladores/sintatico/Message.java</file>
