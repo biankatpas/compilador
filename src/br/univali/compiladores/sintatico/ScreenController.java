@@ -505,26 +505,13 @@ public class ScreenController {
                 }
             } else {
                 List<Message> sintaticalOutput = p.sintaticalAnalizer(jtaEdit.getText());
-                List<Message> gambiarraOutput = new ArrayList<>();
-                List<String> gambiarraMessages = new ArrayList<>();
                 sint_error_counter = sintaticalOutput.size();
                 if (sint_error_counter > 0) {
-                    for (int i = 0; i < sint_error_counter; i++) {
-                        String[] m = sintaticalOutput.get(i).getMessage().split("Estava");
-                        String m2 = m[0];
-//                        System.out.println(m2);
-                        if (!gambiarraMessages.contains(m2)) {
-                            gambiarraMessages.add(m2);
-//                            System.out.println(m2);
-                            gambiarraOutput.add(sintaticalOutput.get(i));
-                        } 
-                    }
-                    sint_error_counter = gambiarraOutput.size();
-                    for (int i = 0; i < gambiarraOutput.size(); i++) {
-                        if (gambiarraOutput.get(i).isError()) {
-                            output += gambiarraOutput.get(i).getMessage() + "\n";
+                    for (int i = 0; i < sintaticalOutput.size(); i++) {
+                        if (sintaticalOutput.get(i).isError()) {
+                            output += sintaticalOutput.get(i).getMessage() + "\n";
                         } else {
-                            output += gambiarraOutput.get(i).getMessage() + "\n";
+                            output += sintaticalOutput.get(i).getMessage() + "\n";
                         }
                     }
                 }
