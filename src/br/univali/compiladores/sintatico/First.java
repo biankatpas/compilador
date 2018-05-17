@@ -11,16 +11,20 @@ package br.univali.compiladores.sintatico;
 public class First
 {
 
-    static public final RecoverySet program = new RecoverySet();
+   static public final RecoverySet programa_ = new RecoverySet();
     static public final RecoverySet body = new RecoverySet();
     static public final RecoverySet end_of_file = new RecoverySet();
     static public final RecoverySet lista_comandos = new RecoverySet();
     static public final RecoverySet comando_selecao_ = new RecoverySet();
+    static public final RecoverySet declaracao_de_tipo_enumerado_ = new RecoverySet();
 
 
     static
     {
 
+
+        programa_.add(Parser.DECLARATION);
+        programa_.add(Parser.BODY);
 
         body.add(Parser.BODY);
 
@@ -28,8 +32,8 @@ public class First
         lista_comandos.add(Parser.DESIGNATE);
         lista_comandos.add(Parser.READ);
         lista_comandos.add(Parser.WRITE);
-        lista_comandos.add(Parser.AVALIATE);
         lista_comandos.add(Parser.REPEAT);
+        lista_comandos.add(Parser.AVALIATE);
 
 
         end_of_file.add(Parser.EOF);
@@ -38,18 +42,8 @@ public class First
         comando_selecao_.add(Parser.TRUE);
         comando_selecao_.add(Parser.UNTRUE);
 
+        declaracao_de_tipo_enumerado_.add(Parser.DECLARATION);
 
-//        type.add(ParserConstants.INT);
-//        type.add(langX.REAL);
-//        type.add(ParserConstants.CHAR);
-//        type.add(ParserConstants.BOOLEAN);
-
-//        cmd.add(ParserConstants.SET);
-//        cmd.add(ParserConstants.PUT);
-//        cmd.add(ParserConstants.GET);
-//        cmd.add(ParserConstants.INSPECT);
-//        cmd.add(ParserConstants.WHILE);
-//        cmd.add(ParserConstants.LOOP);
 
     }
 }

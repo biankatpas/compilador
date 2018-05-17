@@ -1,7 +1,8 @@
 do this Herbivore []
 // teste linha
 declaration type [
-	Food is Potato, Banana, Apple, Rice, Been .
+	Food is Potato, Banana, Apple, Rice, Been 
+	Comida is Potato, Banana, Apple, Rice, Been .
 ]
 
 ## comentando no meio do codigo 
@@ -9,10 +10,12 @@ em duas linhas $$
 
 declaration constant and variable [
 	as  variable 
-		Fruit is integer. Banana[12] is integer . Laranja, Uva[2] is logic. Melancia, Pitaya, Cereja is string .
-## comentando no meio do codigo $$
+		Fruit is integer Banana[12] is integer  Laranja, Uva[2] is logic Melancia, Pitaya Cereja is string .
+	## comentando no meio do codigo $$
 	as constant 
-		Vegetal is integer = 1 . Cebola is integer = 2 . Cebola, Cenoura is logic = 1 . Abacate, Chuchu, Repolho is string = "refogado" . ]
+		Vegetal is integer = 1  Cebola is integer = 2  Cebola, Cenoura is logic = 1  Abacate, Chuchu, Repolho is string = "refogado" . 
+
+]
 
 
 body [

@@ -16,12 +16,7 @@ public class Parser {
         final static List<Message> output = new ArrayList<Message>();
 
         public Parser() {
-            //errorLexList.add(ParserConstants.IDENTIFICADOR_INVALIDO);
-            //errorLexList.add(ParserConstants.SIMBOLO_INVALIDO);
-            //errorLexList.add(ParserConstants.CONSTANTE_NUM_INTEIRA_INVALIDA);
-            //errorLexList.add(ParserConstants.CONSTANTE_NUM_REAL_INVALIDA);
-            //errorLexList.add(ParserConstants.CONSTANTE_LITERAL_INVALIDA);
-            //errorLexList.add(ParserConstants.COMENTARIO_BLOCO_INVALIDO);
+
         };
 
         public List<Message> lexicalAnalizer(String code){
@@ -32,16 +27,7 @@ public class Parser {
                 lexicalParser.program_lexico();
             } catch(Exception e){
                 errorLexList.add(new Message(e.toString(), true));
-            } finally{
-                /*
-                errorLexList.add(new Message("Erros Lexicos encontrados: " + lexicalParser.token_source.countLexError, false));
-                errorLexList.add(new Message("Erros Sintaticos encontrados: " + lexicalParser.contParseError, false));
-
-                if(lexicalParser.token_source.countLexError == 0 && contParseError == 0){
-                    errorLexList.add(new Message("Arquivo analisado com sucesso!", false));
-                }
-                */
-            }
+            } 
                         
             List<Message> auxList = new ArrayList<Message>(errorLexList);
             errorLexList.clear();
@@ -56,17 +42,7 @@ public class Parser {
                 lexicalParser.program_sintatico();
             } catch(Exception e){
                 output.add(new Message(e.toString(), true));
-            } finally{
-                /*
-                output.add(new Message("Erros Lexicos encontrados: " + lexicalParser.token_source.countLexError, false));
-                output.add(new Message("Erros Sintaticos encontrados: " + lexicalParser.contParseError, false));
-
-                if(lexicalParser.token_source.countLexError == 0 && contParseError == 0){
-                    output.add(new Message("Arquivo analisado com sucesso!", false));
-                }
-                */
             }
-            
             
             List<Message> auxList = new ArrayList<Message>(output);
             output.clear();
@@ -190,26 +166,7 @@ JAVACODE int program_lexico() {
                             errorLexList.add(m);
                         }
                         break;
-                    //case ParserConstants.COMENTARIO_BLOCO:
-                      //  break;
-                    //case ParserConstants.COMENTARIO_BLOCO_INVALIDO:
-                      //  errorLexList.add(new Message("Error "+ st.kind+": Comentario de bloco nao finalizado em linha " + jj_input_stream.getBeginLine() + ", coluna " + jj_input_stream.getBeginColumn() + ".", true));
-                        //break;
                     default:
-                       // if (t.kind >= ParserConstants.DO && t.kind <= ParserConstants.AVALIATE) {
-                          //  tokenType = "<PALAVRAS_RESERVADAS>";
-                        //} else if (t.kind >= ParserConstants.OPENBRACKET && t.kind <= ParserConstants.CLOSEPARENTHESIS) {
-                          //  tokenType = "<SIMBOLOS_ESPECIAIS>";
-                        //} else {
-                       //     tokenType = im(st.kind);
-                       // }
-
-                       // String outputString = "Line: " + st.beginLine + "\u005ctColumn: " + st.beginColumn + "\u005ct" + st.image + " \u005ct" + tokenType + "\u005ct" + t.kind;
-
-                        /* Filtro para não tratar EOF */
-                       // if (t.kind != ParserConstants.EOF) {
-                       //     errorLexList.add(new Message(outputString, false));
-                       // }
                         break;
 
                 }
@@ -221,10 +178,13 @@ JAVACODE int program_lexico() {
     return output.size();    
 }
 
-void program_sintatico() : {} {
+void program_sintatico() : {
+    RecoverySet r = new RecoverySet(EOF);
+} {
     try {
-        [ begin_program() ]<EOF>
+        [ begin_program(r) ]<EOF>
     } catch (ParseException e) {
+        consumeUntil(r, e, "program_sintatico");
         output.add(new Message("Erro: forma geral do programa.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
@@ -239,71 +199,79 @@ void value() : {}
 	<CONSTANTE_NUM_INTEIRA> | <CONSTANTE_NUM_REAL> | <CONSTANTE_LITERAL>
 }
 
-void begin_program() throws ParseException: 
+void begin_program(RecoverySet r): 
 {
-    RecoverySet g = new RecoverySet(EOF);
+    RecoverySet h = new RecoverySet(BODY);
+    RecoverySet g = new RecoverySet(DECLARATION);
+    RecoverySet i = g.union(h);
 }
 {
     try{
-       (<DO> <THIS> <IDENTIFICADOR> <OPENBRACKET>  <CLOSEBRACKET> declarations() body(g) description())
+        header(i)
+        declarations(h)
+        body(r)
+        description(r)
     } catch (ParseException e) {
+        consumeUntil(r, e, "begin_program");
         output.add(new Message("Erro: forma geral do programa.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
+void header(RecoverySet r) : {} {
+    try {
+        <DO> <THIS> <IDENTIFICADOR> <OPENBRACKET> <CLOSEBRACKET>
+    } catch (ParseException e) {
+        consumeUntil(r, e, "header");
+        output.add(new Message("Erro: forma geral do programa.\n"+ErrorMessage.getErrorMessage(e), true));
+    }
+}
 
-
-void description() throws ParseException:
+void description(RecoverySet r):
 {}
 {
     try {
          ( <DESCRIPTION> <CONSTANTE_LITERAL>)? 
     } catch (ParseException e) {
+        consumeUntil(r, e, "description");
         output.add(new Message("Erro: description comentario.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void declarations() throws ParseException:
+void declarations(RecoverySet r):
 {}
 {
     try {
-        ( <DECLARATION> declarations_() ) ?
+        ( <DECLARATION> declarations_(r) ) ?
     } catch (ParseException e) {
+        consumeUntil(r, e, "declarations");
         output.add(new Message("Erro: declarations.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void declarations_() throws ParseException:
+void declarations_(RecoverySet r):
 {}
 {
     try{
         (declaracao_tipo_enumerado() declaracao_tipo_enumerado_()) | declaracao_constantes_variaveis()
     } catch (ParseException e) {
+        consumeUntil(r, e, "declarations_");
         output.add(new Message("Erro: declarations.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void declaracao_tipo_enumerado() throws ParseException:
+void declaracao_tipo_enumerado():
 {}
 {
-    try {
-        <TYPE> <OPENBRACKET> identificadores_constantes() <DOT> <CLOSEBRACKET>
-    } catch (ParseException e) {
-        output.add(new Message("Erro: declaracao tipo enumerado.\n"+ErrorMessage.getErrorMessage(e), true));
-    }
+    <TYPE> <OPENBRACKET> identificadores_constantes() <DOT> <CLOSEBRACKET>
 }
 
-void declaracao_tipo_enumerado_() throws ParseException:
+void declaracao_tipo_enumerado_():
 {}
 {
-    try {
-        ( <DECLARATION> declaracao_constantes_variaveis() )?
-    } catch (ParseException e) {
-        output.add(new Message("Erro: declaracao tipo enumerado.\n"+ErrorMessage.getErrorMessage(e), true));
-    }
+    ( <DECLARATION> declaracao_constantes_variaveis() )?
 }
 
-void identificadores_constantes() throws ParseException:
+void identificadores_constantes():
 {}
 {
     try {
@@ -313,7 +281,7 @@ void identificadores_constantes() throws ParseException:
     }
 }
 
-void identificadores_constantes_() throws ParseException:
+void identificadores_constantes_():
 {}
 {
     try {
@@ -323,7 +291,7 @@ void identificadores_constantes_() throws ParseException:
     }
 }
 
-void constante() throws ParseException:
+void constante():
 {}
 {
     try {
@@ -333,7 +301,7 @@ void constante() throws ParseException:
     }
 }
 
-void lista_identificadores_constante() throws ParseException:
+void lista_identificadores_constante():
 {}
 {
     try {
@@ -343,7 +311,7 @@ void lista_identificadores_constante() throws ParseException:
     }
 }
 
-void lista_identificadores_constante_() throws ParseException:
+void lista_identificadores_constante_():
 {}
 {
     try {
@@ -353,7 +321,7 @@ void lista_identificadores_constante_() throws ParseException:
     }
 }
 
-void lista_identificadores_constante__() throws ParseException:
+void lista_identificadores_constante__():
 {}
 {
     try {
@@ -363,17 +331,13 @@ void lista_identificadores_constante__() throws ParseException:
     }
 }
 
-void declaracao_constantes_variaveis() throws ParseException:
+void declaracao_constantes_variaveis():
 {}
 {
-    try {
-        <CONSTANT> <AND> <VARIABLE> <OPENBRACKET> constantes_variaveis() <CLOSEBRACKET>
-    } catch (ParseException e) {
-        output.add(new Message("Erro: declaracao_constantes_variaveis.\n"+ErrorMessage.getErrorMessage(e), true));
-    }
+    <CONSTANT> <AND> <VARIABLE> <OPENBRACKET> constantes_variaveis() <CLOSEBRACKET>
 }
 
-void constantes_variaveis() throws ParseException:
+void constantes_variaveis():
 {}
 {
     try {
@@ -383,7 +347,7 @@ void constantes_variaveis() throws ParseException:
     }
 }
 
-void constantes_variaveis_() throws ParseException:
+void constantes_variaveis_():
 {}
 {
     try {
@@ -393,7 +357,7 @@ void constantes_variaveis_() throws ParseException:
     }
 }
 
-void constante_() throws ParseException:
+void constante_():
 {}
 {
     try {
@@ -403,7 +367,7 @@ void constante_() throws ParseException:
     }
 }
 
-void variavel_() throws ParseException:
+void variavel_():
 {}
 {
     try {
@@ -413,17 +377,17 @@ void variavel_() throws ParseException:
     }
 }
 
-void bloco_constante() throws ParseException:
+void bloco_constante():
 {}
 {
     try {
-        <CONSTANT> declaracao_constante() bloco_constante_()
+        <CONSTANT> declaracao_constante() bloco_constante_() <DOT>
     } catch (ParseException e) {
         output.add(new Message("Erro: bloco_constante.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void bloco_constante_() throws ParseException:
+void bloco_constante_():
 {}
 {
     try {
@@ -433,27 +397,27 @@ void bloco_constante_() throws ParseException:
     }
 }
 
-void declaracao_constante() throws ParseException:
+void declaracao_constante():
 {}
 {
     try {
-        lista_identificadores_constante() <IS> type() <ASSIGNMENT> value() <DOT>
+        lista_identificadores_constante() <IS> type() <ASSIGNMENT> value() 
     } catch (ParseException e) {
         output.add(new Message("Erro: declaracao_constante.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void bloco_variavel() throws ParseException:
+void bloco_variavel():
 {}
 {
     try {
-        <VARIABLE> declaracao_variavel() bloco_variavel_()
+        <VARIABLE> declaracao_variavel() bloco_variavel_() <DOT>
     } catch (ParseException e) {
         output.add(new Message("Erro: bloco_variavel.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void bloco_variavel_() throws ParseException:
+void bloco_variavel_():
 {}
 {
     try {
@@ -463,17 +427,17 @@ void bloco_variavel_() throws ParseException:
     }
 }
 
-void declaracao_variavel() throws ParseException:
+void declaracao_variavel():
 {}
 {
     try {
-        lista_identificadores_variavel() <IS> type() <DOT>
+        lista_identificadores_variavel() <IS> type()
     } catch (ParseException e) {
         output.add(new Message("Erro: declaracao_variavel.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void lista_identificadores_variavel() throws ParseException:
+void lista_identificadores_variavel():
 {}
 {
     try {
@@ -483,7 +447,7 @@ void lista_identificadores_variavel() throws ParseException:
     }
 }
 
-void lista_identificadores_variavel_() throws ParseException:
+void lista_identificadores_variavel_():
 {}
 {
     try {
@@ -496,7 +460,7 @@ void lista_identificadores_variavel_() throws ParseException:
     }
 }
 
-void lista_identificadores_variavel__() throws ParseException:
+void lista_identificadores_variavel__():
 {}
 {
     try {
@@ -506,68 +470,82 @@ void lista_identificadores_variavel__() throws ParseException:
     }
 }
 
-void body(RecoverySet g) throws ParseException:
-{}
+void body(RecoverySet r):
+{
+     RecoverySet g = new RecoverySet(OPENBRACKET);
+}
 {
     try {
         <BODY> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET>
     } catch (ParseException e) {
+        consumeUntil(r, e, "body");    
         output.add(new Message("Erro: body.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void lista_comandos(RecoverySet g) throws ParseException:
-{}
+void lista_comandos(RecoverySet r):
+{
+    RecoverySet g = First.lista_comandos;
+}
 {
     try {
         (comando_atribuicao(g) | comando_entrada_dados(g) | comando_saida_dados(g) | comando_selecao(g) |  comando_repeticao(g) )+
   } catch (ParseException e) {
+        consumeUntil(r, e, "lista_comandos");
         output.add(new Message("Erro: lista_comandos.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void comando_atribuicao(RecoverySet g) throws ParseException:
-{}
+void comando_atribuicao(RecoverySet r):
+{
+    RecoverySet g = new RecoverySet(TO);
+    RecoverySet h = new RecoverySet(DOT);
+}
 {
     try {
-        <DESIGNATE> <THIS> lista_identificadores_variavel() <TO> expression(g) <DOT>
+        <DESIGNATE> <THIS> lista_identificadores_variavel() <TO> expression(h) <DOT>
     } catch (ParseException e) {
-        consumeUntil(g, e, "comando_atribuicao");
+         consumeUntil(r, e, "comando_atribuicao");
         output.add(new Message("Erro: comando_atribuicao.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void comando_entrada_dados(RecoverySet g) throws ParseException:
+void comando_entrada_dados(RecoverySet r):
 {}
 {
     try {
         <READ> <THIS> <OPENBRACKET> lista_identificadores_variavel() <CLOSEBRACKET> <DOT>
     } catch (ParseException e) {
+        consumeUntil(r, e, "comando_entrada_dados");
         output.add(new Message("Erro: comando_entrada_dados.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void comando_saida_dados(RecoverySet g) throws ParseException:
-{}
+void comando_saida_dados(RecoverySet r):
+{
+     RecoverySet g = new RecoverySet(DOT);
+}
 {
     try {
-        <WRITE> comando_saida_dados_() <DOT>
+        <WRITE> comando_saida_dados_(g) <DOT>
     } catch (ParseException e) {
+         consumeUntil(r, e, "comando_saida_dados");
         output.add(new Message("Erro: comando_saida_dados.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void comando_saida_dados_() throws ParseException:
+void comando_saida_dados_(RecoverySet r):
 {}
 {
     try {
         (<ALL> comando_saida_dados__()) | comando_saida_dados__()
   } catch (ParseException e) {
+        consumeUntil(r, e, "comando_saida_dados_");
         output.add(new Message("Erro: comando_saida_dados.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void comando_saida_dados__() throws ParseException:
+void comando_saida_dados__():
 {}
 {
     try {
@@ -588,52 +566,64 @@ void lista_identificadores_constantes_() : {} {
     (<COMMA> lista_identificadores_constantes())?
 }
 
-void comando_selecao(RecoverySet g) throws ParseException:
+void comando_selecao(RecoverySet r):
+{
+    RecoverySet g = new RecoverySet(DOT);
+}
+{
+    try {
+        <AVALIATE> <THIS> expression(First.comando_selecao_) comando_selecao_(g) <DOT>
+    } catch (ParseException e) {
+        consumeUntil(r, e, "comando_selecao");
+        output.add(new Message("Erro: comando_selecao.\n"+ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void comando_selecao_(RecoverySet r):
 {}
 {
     try {
-        <AVALIATE> <THIS> expression(g) comando_selecao_(g) <DOT>
+        selecao_true() | selecao_untrue()
+    } catch (ParseException e) {
+        consumeUntil(r, e, "comando_selecao_");
+        output.add(new Message("Erro: comando_selecao.\n"+ErrorMessage.getErrorMessage(e), true));
+    }
+}
+
+void selecao_true():
+{
+    RecoverySet g = new RecoverySet(CLOSEBRACKET);
+}
+{
+    try {
+        <TRUE> <RESULT> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> (selecao_untrue())?
     } catch (ParseException e) {
         output.add(new Message("Erro: comando_selecao.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void comando_selecao_(RecoverySet g) throws ParseException:
-{}
+void selecao_untrue():
+{
+    RecoverySet g = new RecoverySet(CLOSEBRACKET);
+}
 {
     try {
-        selecao_true(g) | selecao_untrue(g)
+        <UNTRUE> <RESULT> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> (selecao_true())?
     } catch (ParseException e) {
         output.add(new Message("Erro: comando_selecao.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
 
-void selecao_true(RecoverySet g) throws ParseException:
-{}
+void comando_repeticao(RecoverySet r) :
 {
-    try {
-        <TRUE> <RESULT> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> (selecao_untrue(g))?
-    } catch (ParseException e) {
-        output.add(new Message("Erro: comando_selecao.\n"+ErrorMessage.getErrorMessage(e), true));
-    }
+    RecoverySet g = new RecoverySet(OPENBRACKET);
+    RecoverySet h = new RecoverySet(CLOSEBRACKET);
 }
-
-void selecao_untrue(RecoverySet g) throws ParseException:
-{}
 {
     try {
-        <UNTRUE> <RESULT> <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> (selecao_true(g))?
-    } catch (ParseException e) {
-        output.add(new Message("Erro: comando_selecao.\n"+ErrorMessage.getErrorMessage(e), true));
-    }
-}
-
-void comando_repeticao(RecoverySet g) throws ParseException:
-{}
-{
-    try {
-        <REPEAT> <THIS> expression(g) <OPENBRACKET> lista_comandos(g) <CLOSEBRACKET> <DOT>
+        <REPEAT> <THIS> expression(g) <OPENBRACKET> lista_comandos(h) <CLOSEBRACKET> <DOT>
   } catch (ParseException e) {
+        consumeUntil(r, e, "comando_repeticao");
         output.add(new Message("Erro: comando_repeticao.\n"+ErrorMessage.getErrorMessage(e), true));
     }
 }
